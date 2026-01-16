@@ -352,47 +352,108 @@
     </div>
 
     <script>
-        // Demo Data
-        const demoData = {
-            contacts: [
-                { id: 'c001', name: "Mike's Sports Bar", businesses: ['vodka', 'beer'], type: 'business', score: 85, note: 'Great relationship - carries both brands.' },
-                { id: 'c002', name: 'Dr. Sarah Chen', businesses: ['financial'], type: 'individual', aum: 450000, score: 92, note: 'High-value client. Quarterly reviews.' },
-                { id: 'c003', name: 'Downtown Distributors', businesses: ['vodka'], type: 'distributor', score: 45, note: 'Struggling with vodka placement.' },
-                { id: 'c004', name: 'The Craft House', businesses: ['beer'], type: 'business', score: 78, note: 'New beer account. Excited about brand.' },
-                { id: 'c005', name: 'Jim Patterson', businesses: ['financial', 'vodka'], type: 'individual', aum: 125000, score: 70, note: 'Financial client who owns a bar.' }
-            ],
-            alerts: [
-                { priority: 'high', business: 'vodka', message: '5 accounts haven\'t ordered in 60+ days', action: 'Schedule re-engagement calls' },
-                { priority: 'high', business: 'financial', message: '4 portfolio reviews due this month', action: 'Send calendar invites' },
-                { priority: 'medium', business: 'beer', message: '2 proposals pending response > 7 days', action: 'Follow up' },
-                { priority: 'low', business: 'all', message: '$3,420 in commissions ready to collect', action: 'Submit invoice' }
-            ],
-            insights: [
-                { icon: '🔗', text: '7 contacts overlap between businesses - cross-sell potential' },
-                { icon: '📈', text: 'Beer brand growing 22% MoM - focus new accounts here' },
-                { icon: '⚠️', text: 'Vodka struggling - consider promotional pricing or events' },
-                { icon: '🤝', text: '3 financial clients own bars/restaurants - warm intros for beverage' }
-            ],
-            shurzResponses: {
-                price: { line: "I hear you. But what is the cost of NOT solving this problem today?", ctx: "Reframes price to value. Let silence work for you." },
-                competitor: { line: "Respect. Who did you choose? ... Cool. When that doesn't work out, I'll be here.", ctx: "Plants doubt while staying professional." },
-                ghosted: { line: "Should I assume you've moved on, or just busy? Either way is cool.", ctx: "The 'permission to leave' technique - creates urgency." },
-                vodka_slow: { line: "When's your slowest night? I'll come do a free tasting and work the crowd.", ctx: "Offers immediate value without asking for anything." },
-                no_budget: { line: "What if I showed you how this pays for itself in 90 days?", ctx: "ROI play - shifts from cost to investment." },
-                need_time: { line: "Totally get it. What specifically do you need to figure out? Maybe I can help.", ctx: "Uncovers the real objection hiding behind 'need time'." },
-                bad_timing: { line: "When WOULD be good timing? I'll put it in my calendar right now.", ctx: "Locks in a future commitment." }
-            }
-        };
-
+        // LDS Data Store
+        let ldsSchema = null;
+        let ldsData = null;
         let currentFilter = 'all';
 
+        // Shurz responses (static)
+        const shurzResponses = {
+            price: { line: "I hear you. But what is the cost of NOT solving this problem today?", ctx: "Reframes price to value. Let silence work for you." },
+            competitor: { line: "Respect. Who did you choose? ... Cool. When that doesn't work out, I'll be here.", ctx: "Plants doubt while staying professional." },
+            ghosted: { line: "Should I assume you've moved on, or just busy? Either way is cool.", ctx: "The 'permission to leave' technique - creates urgency." },
+            vodka_slow: { line: "When's your slowest night? I'll come do a free tasting and work the crowd.", ctx: "Offers immediate value without asking for anything." },
+            no_budget: { line: "What if I showed you how this pays for itself in 90 days?", ctx: "ROI play - shifts from cost to investment." },
+            need_time: { line: "Totally get it. What specifically do you need to figure out? Maybe I can help.", ctx: "Uncovers the real objection hiding behind 'need time'." },
+            bad_timing: { line: "When WOULD be good timing? I'll put it in my calendar right now.", ctx: "Locks in a future commitment." }
+        };
+
+        // Load LDS Schema and Data
+        async function loadLDSData() {
+            try {
+                // Load schema
+                const schemaRes = await fetch('src/data/lds/schema.lds.json');
+                ldsSchema = await schemaRes.json();
+                console.log('[LDS] Schema loaded:', ldsSchema.name, 'v' + ldsSchema.version);
+
+                // Load demo data
+                const dataRes = await fetch('public/data/scherzer_demo.json');
+                ldsData = await dataRes.json();
+                console.log('[LDS] Data loaded:', ldsData.demo_id);
+
+                // Update UI with schema-driven colors
+                updateBusinessColors();
+
+                return true;
+            } catch (err) {
+                console.error('[LDS] Failed to load:', err);
+                // Fallback to inline data if fetch fails
+                loadFallbackData();
+                return false;
+            }
+        }
+
+        function loadFallbackData() {
+            console.log('[LDS] Using fallback inline data');
+            ldsData = {
+                sample_contacts: [
+                    { id: 'c001', name: "Mike's Sports Bar", businesses: ['vodka', 'beer'], type: 'business', score: 85, note: 'Great relationship - carries both brands.' },
+                    { id: 'c002', name: 'Dr. Sarah Chen', businesses: ['financial'], type: 'individual', aum: 450000, score: 92, note: 'High-value client. Quarterly reviews.' },
+                    { id: 'c003', name: 'Downtown Distributors', businesses: ['vodka'], type: 'distributor', score: 45, note: 'Struggling with vodka placement.' },
+                    { id: 'c004', name: 'The Craft House', businesses: ['beer'], type: 'business', score: 78, note: 'New beer account. Excited about brand.' },
+                    { id: 'c005', name: 'Jim Patterson', businesses: ['financial', 'vodka'], type: 'individual', aum: 125000, score: 70, note: 'Financial client who owns a bar.' }
+                ],
+                alerts: [
+                    { priority: 'high', business: 'vodka', message: '5 accounts haven\'t ordered in 60+ days', action: 'Schedule re-engagement calls' },
+                    { priority: 'high', business: 'financial', message: '4 portfolio reviews due this month', action: 'Send calendar invites' },
+                    { priority: 'medium', business: 'beer', message: '2 proposals pending response > 7 days', action: 'Follow up' },
+                    { priority: 'low', business: 'all', message: '$3,420 in commissions ready to collect', action: 'Submit invoice' }
+                ],
+                insights: [
+                    '7 contacts overlap between businesses - cross-sell potential',
+                    'Beer brand growing 22% MoM - focus new accounts here',
+                    'Vodka struggling - consider promotional pricing or events',
+                    '3 financial clients own bars/restaurants - warm intros for beverage'
+                ],
+                unified_metrics: { total_monthly_revenue: 45685, pending_commissions: 3420, overdue_followups: 8 },
+                pipeline_summary: { financial: { total_value: 175000 }, vodka: { total_value: 12000 }, beer: { total_value: 8500 } }
+            };
+        }
+
+        function updateBusinessColors() {
+            if (!ldsSchema?.businesses) return;
+            // Schema-driven color application could go here
+            // Colors are defined in schema.lds.json businesses[].color
+        }
+
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            await loadLDSData();
+
             renderAlerts();
             renderContacts();
             renderInsights();
+            updateKPIs();
+
+            console.log('[LDS] Shurzio 5.0 initialized');
         });
+
+        function updateKPIs() {
+            if (!ldsData?.unified_metrics) return;
+            const m = ldsData.unified_metrics;
+            document.getElementById('total-revenue').textContent = '$' + (m.total_monthly_revenue || 45685).toLocaleString();
+            document.getElementById('pending-commission').textContent = '$' + (m.pending_commissions || 3420).toLocaleString();
+            document.getElementById('overdue-tasks').textContent = m.overdue_followups || 8;
+
+            // Pipeline value
+            if (ldsData.pipeline_summary) {
+                const p = ldsData.pipeline_summary;
+                const total = (p.financial?.total_value || 0) + (p.vodka?.total_value || 0) + (p.beer?.total_value || 0);
+                document.getElementById('pipeline-value').textContent = '$' + total.toLocaleString();
+            }
+        }
 
         function setFilter(filter) {
             currentFilter = filter;
@@ -421,7 +482,8 @@
 
         function renderAlerts() {
             const container = document.getElementById('alerts-list');
-            const filtered = demoData.alerts.filter(a =>
+            const alerts = ldsData?.alerts || [];
+            const filtered = alerts.filter(a =>
                 currentFilter === 'all' || a.business === 'all' || a.business === currentFilter
             );
             document.getElementById('alert-count').textContent = `${filtered.length} alerts`;
@@ -444,7 +506,8 @@
 
         function renderContacts() {
             const container = document.getElementById('contacts-list');
-            const filtered = demoData.contacts.filter(c =>
+            const contacts = ldsData?.sample_contacts || [];
+            const filtered = contacts.filter(c =>
                 currentFilter === 'all' || c.businesses.includes(currentFilter)
             );
 
@@ -478,17 +541,23 @@
 
         function renderInsights() {
             const container = document.getElementById('insights-list');
-            container.innerHTML = demoData.insights.map(insight => `
-                <div class="flex items-start gap-3 p-3 rounded-lg bg-white/5">
-                    <span class="text-xl">${insight.icon}</span>
-                    <p class="text-sm">${insight.text}</p>
-                </div>
-            `).join('');
+            const insights = ldsData?.insights || [];
+            const icons = ['🔗', '📈', '⚠️', '🤝', '💡', '🎯'];
+            container.innerHTML = insights.map((insight, i) => {
+                const text = typeof insight === 'string' ? insight : insight.text;
+                const icon = typeof insight === 'object' && insight.icon ? insight.icon : icons[i % icons.length];
+                return `
+                    <div class="flex items-start gap-3 p-3 rounded-lg bg-white/5">
+                        <span class="text-xl">${icon}</span>
+                        <p class="text-sm">${text}</p>
+                    </div>
+                `;
+            }).join('');
         }
 
         function shurzEmUp() {
             const situation = document.getElementById('situation').value;
-            const response = demoData.shurzResponses[situation];
+            const response = shurzResponses[situation];
             document.getElementById('shurz-line').textContent = response.line;
             document.getElementById('shurz-context').textContent = response.ctx;
             document.getElementById('shurz-result').classList.remove('hidden');
