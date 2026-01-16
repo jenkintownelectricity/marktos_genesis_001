@@ -1,0 +1,128 @@
+{
+  "batch_id": "DIV07-CAR-TPO-SAMPLE-01",
+  "taxonomy_depth": 20,
+  "version": "1.0.0",
+  "meta": {
+    "manufacturer": "Carlisle SynTec",
+    "product_family": "Sure-Weld TPO",
+    "trade": "Roofing",
+    "masterformat": "07 53 00",
+    "standard": "ASTM D6878",
+    "generated": "2026-01-16"
+  },
+  "taxonomy_key": {
+    "L01_GEO": "Region (NA=North America, EU=Europe)",
+    "L02_IND": "Industry (AEC=Architecture/Engineering/Construction)",
+    "L03_CLS": "Classification (07=Thermal & Moisture Protection)",
+    "L04_CDE": "MasterFormat Code (075300=TPO Membrane Roofing)",
+    "L05_MFG": "Manufacturer (CAR=Carlisle)",
+    "L06_DIV": "Brand/Line (SUR=Sure-Weld)",
+    "L07_FAM": "Material Family (TPO=Thermoplastic Polyolefin)",
+    "L08_SYS": "System Type (ADH=Adhered, MEC=Mechanical, BAL=Ballasted)",
+    "L09_SUB": "Substrate (CON=Concrete, STL=Steel Deck, WOD=Wood)",
+    "L10_LYR": "Assembly Layer (05=Membrane/Cap Sheet)",
+    "L11_THK": "Thickness (045=45mil, 060=60mil, 080=80mil)",
+    "L12_WID": "Roll Width (10FT, 12FT)",
+    "L13_COL": "Color (WHT=White, GRY=Gray, TAN=Tan)",
+    "L14_FIX": "Attachment (LVA=Low VOC Adhesive, SCR=Fasteners, NON=None)",
+    "L15_WRN": "Warranty (NDL20=20yr No Dollar Limit, MAT20=20yr Material)",
+    "L16_PER": "Performance Type (UPL=Wind Uplift)",
+    "L17_VAL": "Performance Value (90PSF, 60PSF, NA)",
+    "L18_TMP": "Install Temp Min (40F, 20F, 00F, NA)",
+    "L19_ACC": "Accessory (FLS=Flashing, NON=None)",
+    "L20_SRC": "Source Page Reference"
+  },
+  "dna_sequences": [
+    {
+      "id": "NA-AEC-07-075300-CAR-SUR-TPO-ADH-CON-05-060-10FT-WHT-LVA-NDL20-UPL-90PSF-40F-NON-PG12",
+      "data": {
+        "trade": "Roofing",
+        "system": "Sure-Weld TPO Adhered",
+        "substrate": "Structural Concrete",
+        "layer": "Membrane (Cap Sheet)",
+        "thickness_mil": 60,
+        "thickness_mm": 1.52,
+        "roll_width_ft": 10,
+        "color": "White",
+        "attachment": "Low VOC Bonding Adhesive",
+        "warranty": "20 Year No Dollar Limit",
+        "performance_type": "Wind Uplift",
+        "uplift_rating_psf": 90,
+        "install_temp_min_f": 40,
+        "accessory": "None",
+        "notes": "Low-VOC Bonding Adhesive | 20yr NDL Warranty"
+      },
+      "meta": {
+        "manufacturer": "Carlisle SynTec",
+        "product_name": "Sure-Weld TPO",
+        "source_page": "PG12"
+      }
+    },
+    {
+      "id": "NA-AEC-07-075300-CAR-SUR-TPO-MEC-STL-05-060-12FT-GRY-SCR-MAT20-UPL-60PSF-00F-NON-PG14",
+      "data": {
+        "trade": "Roofing",
+        "system": "Sure-Weld TPO Mechanically Fastened",
+        "substrate": "Steel Deck",
+        "layer": "Membrane (Cap Sheet)",
+        "thickness_mil": 60,
+        "thickness_mm": 1.52,
+        "roll_width_ft": 12,
+        "color": "Gray",
+        "attachment": "Screw Fasteners / Induction Welded",
+        "warranty": "20 Year Material Only",
+        "performance_type": "Wind Uplift",
+        "uplift_rating_psf": 60,
+        "install_temp_min_f": 0,
+        "accessory": "None",
+        "notes": "Induction Welded or Screw Fastened | Standard Warranty"
+      },
+      "meta": {
+        "manufacturer": "Carlisle SynTec",
+        "product_name": "Sure-Weld TPO",
+        "source_page": "PG14"
+      }
+    },
+    {
+      "id": "NA-AEC-07-075300-CAR-SUR-TPO-BAL-CON-05-045-10FT-WHT-NON-NDL15-UPL-NA-NA-NON-PG18",
+      "data": {
+        "trade": "Roofing",
+        "system": "Sure-Weld TPO Ballasted",
+        "substrate": "Concrete Deck",
+        "layer": "Membrane (Cap Sheet)",
+        "thickness_mil": 45,
+        "thickness_mm": 1.14,
+        "roll_width_ft": 10,
+        "color": "White",
+        "attachment": "Ballast (Gravity Held)",
+        "warranty": "15 Year No Dollar Limit",
+        "performance_type": "Wind Uplift",
+        "uplift_rating_psf": null,
+        "install_temp_min_f": null,
+        "accessory": "None",
+        "notes": "10-12 lbs/sqft ballast required"
+      },
+      "meta": {
+        "manufacturer": "Carlisle SynTec",
+        "product_name": "Sure-Weld TPO",
+        "source_page": "PG18"
+      }
+    }
+  ],
+  "summary": {
+    "total_dna_sequences": 3,
+    "systems": {
+      "Adhered": 1,
+      "Mechanically Fastened": 1,
+      "Ballasted": 1
+    },
+    "substrates": {
+      "Concrete": 2,
+      "Steel Deck": 1
+    },
+    "thicknesses": {
+      "45mil": 1,
+      "60mil": 2
+    }
+  }
+}
