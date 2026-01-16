@@ -1,0 +1,145 @@
+{
+  "demo_id": "SCHERZER-DEMO-001",
+  "generated": "2026-01-16",
+  "businesses": {
+    "financial": {
+      "name": "Scherzer Financial Advisory",
+      "status": "active",
+      "metrics": {
+        "total_aum": 2450000,
+        "active_clients": 18,
+        "avg_fee_pct": 1.25,
+        "annual_revenue": 30625,
+        "clients_needing_review": 4
+      }
+    },
+    "vodka": {
+      "name": "Premium Vodka Brand",
+      "status": "struggling",
+      "metrics": {
+        "active_accounts": 12,
+        "monthly_cases": 45,
+        "avg_case_price": 180,
+        "monthly_revenue": 8100,
+        "stale_accounts": 5,
+        "territory": "Philadelphia Metro"
+      }
+    },
+    "beer": {
+      "name": "New Craft Beer Brand",
+      "status": "growing",
+      "metrics": {
+        "active_accounts": 8,
+        "monthly_kegs": 24,
+        "avg_keg_price": 165,
+        "monthly_revenue": 3960,
+        "leads_in_pipeline": 15,
+        "territory": "Philadelphia Metro"
+      }
+    }
+  },
+  "unified_metrics": {
+    "total_contacts": 52,
+    "cross_business_contacts": 7,
+    "total_monthly_revenue": 45685,
+    "pending_commissions": 3420,
+    "overdue_followups": 8,
+    "deals_closing_this_month": 4
+  },
+  "sample_contacts": [
+    {
+      "id": "c001",
+      "name": "Mike's Sports Bar",
+      "businesses": ["vodka", "beer"],
+      "type": "business",
+      "score": 85,
+      "note": "Great relationship - carries both brands. Owner interested in investment advice."
+    },
+    {
+      "id": "c002",
+      "name": "Dr. Sarah Chen",
+      "businesses": ["financial"],
+      "type": "individual",
+      "aum": 450000,
+      "score": 92,
+      "note": "High-value client. Quarterly reviews. Referred 2 new clients this year."
+    },
+    {
+      "id": "c003",
+      "name": "Downtown Distributors",
+      "businesses": ["vodka"],
+      "type": "distributor",
+      "score": 45,
+      "note": "Struggling with vodka placement. Need strategy meeting."
+    },
+    {
+      "id": "c004",
+      "name": "The Craft House",
+      "businesses": ["beer"],
+      "type": "business",
+      "score": 78,
+      "note": "New beer account. Excited about the brand. Potential for vodka too."
+    },
+    {
+      "id": "c005",
+      "name": "Jim Patterson",
+      "businesses": ["financial", "vodka"],
+      "type": "individual",
+      "aum": 125000,
+      "score": 70,
+      "note": "Financial client who also owns a bar. Cross-sell opportunity."
+    }
+  ],
+  "pipeline_summary": {
+    "financial": {
+      "leads": 3,
+      "qualified": 2,
+      "proposal": 1,
+      "total_value": 175000
+    },
+    "vodka": {
+      "leads": 5,
+      "qualified": 2,
+      "proposal": 0,
+      "total_value": 12000
+    },
+    "beer": {
+      "leads": 8,
+      "qualified": 4,
+      "proposal": 2,
+      "total_value": 8500
+    }
+  },
+  "alerts": [
+    {
+      "priority": "high",
+      "business": "vodka",
+      "message": "5 accounts haven't ordered in 60+ days",
+      "action": "Schedule re-engagement calls"
+    },
+    {
+      "priority": "high",
+      "business": "financial",
+      "message": "4 portfolio reviews due this month",
+      "action": "Send calendar invites"
+    },
+    {
+      "priority": "medium",
+      "business": "beer",
+      "message": "2 proposals pending response > 7 days",
+      "action": "Follow up"
+    },
+    {
+      "priority": "low",
+      "business": "all",
+      "message": "$3,420 in commissions ready to collect",
+      "action": "Submit invoice"
+    }
+  ],
+  "insights": [
+    "7 contacts overlap between businesses - cross-sell potential",
+    "Beer brand growing 22% MoM - focus new accounts here",
+    "Vodka struggling - consider promotional pricing or events",
+    "3 financial clients own bars/restaurants - warm intros for beverage brands"
+  ]
+}
