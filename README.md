@@ -159,5 +159,133 @@ cat shurzio5/src/data/lds/schema.lds.json
 
 ---
 
+## Shurzio 5.0 - Complete Deployment Guide
+
+### Quick Start (No Build Required)
+```bash
+cd shurzio5
+python -m http.server 8080
+# Open http://localhost:8080
+```
+
+### Windows PowerShell
+```powershell
+cd D:\APP_CENTRAL\fire_proof_assistant\shurzio5
+python -m http.server 8080
+```
+
+### Features Checklist
+| Feature | Function | Status |
+|---------|----------|--------|
+| LDS Data Loading | `loadLDSData()` | ✅ |
+| Business Filter | `setFilter()` | ✅ |
+| Alerts System | `renderAlerts()`, `dismissAlert()` | ✅ |
+| KPI Dashboard | `updateKPIs()`, `showKPIDetail()` | ✅ |
+| Business Cards | `showBusinessDetail()` | ✅ |
+| Contact CRUD | `addContact()`, `showContactDetail()` | ✅ |
+| Deal Pipeline | `addDeal()`, `renderPipeline()` | ✅ |
+| AI Insights | `renderInsights()`, `showInsightDetail()` | ✅ |
+| Shurz 'Em Up | `shurzEmUp()` | ✅ |
+| Settings | `showSettings()` | ✅ |
+| Modal System | `showModal()`, `closeModal()` | ✅ |
+| Toast Notifications | `showToast()` | ✅ |
+
+### Data Files
+- `shurzio5/src/data/lds/schema.lds.json` - LDS Schema
+- `shurzio5/public/data/scherzer_demo.json` - Production Data
+
+---
+
+## Roofio P2 Parser - Deployment Guide
+
+### Quick Start
+```bash
+cd roofio/src/core/parser
+python tiered_parser.py
+```
+
+### P2 Patterns (Zero AI Cost)
+- RETAINAGE, CONTRACT_SUM, CHANGE_ORDER
+- MANUFACTURER, OWNER_NAME, PRODUCT_NAME
+- WEATHER, TEMP_HIGH, TEMP_LOW, CREW_COUNT
+- BOND_NUMBER, POLICY_NUMBER, SURETY_COMPANY
+- PROJECT_ADDRESS, HAZARD_CLASS, PPE_REQUIRED
+
+### Document Types Supported
+- Daily Logs, Bonds, Insurance, Specifications
+- Assembly Letters, MSDS, Contracts, Change Orders
+
+---
+
+## LEGAL NOTICES
+
+### TRADEMARK LICENSE GRANT
+
+**SHURZIO 5.0™ Trademark License**
+
+Valid Kernel hereby grants **Adam Scherzer of Scherzer Financial** ("Licensee")
+a perpetual, worldwide, royalty-free, non-exclusive license to use the trademark
+"SHURZIO 5.0" and "5.0" branding in connection with:
+
+- Multi-business CRM software
+- Sales intelligence tools
+- Client management applications
+- Derivative works based on the Shurzio platform
+
+This license is granted for the Licensee's personal and commercial use.
+
+**Effective Date:** January 16, 2026
+**Grantor:** Valid Kernel
+**Licensee:** Adam Scherzer of Scherzer Financial
+
+---
+
+### INTELLECTUAL PROPERTY NOTICE
+
+**© 2026 Valid Kernel. All Rights Reserved.**
+
+The following remain the **sole and exclusive property of Valid Kernel**:
+
+1. **Source Code** - All code, scripts, and algorithms in this repository
+2. **Architecture** - LDS.json pattern, data structures, and system design
+3. **Command Protocol** - L0-P2 protocol, command order structures
+4. **Trade Secrets** - Business logic, extraction patterns, AI prompts
+5. **Documentation** - Technical specifications, API documentation
+6. **Branding** - Logos, names (except as licensed above), visual design
+
+**CONFIDENTIALITY:** Company secrets, proprietary code patterns,
+command structures, and operational protocols contained herein are
+confidential information of Valid Kernel.
+
+**RESERVATION OF RIGHTS:** All rights not expressly granted in the
+Trademark License above are reserved by Valid Kernel.
+
+---
+
+### HANDOFF DATA
+
+**Repository:** `fire_proof_assistant`
+**Branch:** `claude/implement-feature-mkgs6l4kfsu5awx6-aux3c`
+**Commit:** `5dcda03` (Fix testData reference bug in addDeal function)
+
+**Deliverables:**
+| Item | Location | Lines |
+|------|----------|-------|
+| Shurzio 5.0 App | `shurzio5/index.html` | 784 |
+| P2 Parser | `roofio/src/core/parser/tiered_parser.py` | 310 |
+| LDS Schema | `shurzio5/src/data/lds/schema.lds.json` | - |
+| Demo Data | `shurzio5/public/data/scherzer_demo.json` | 145 |
+
+**Technology Stack:**
+- Frontend: HTML5, Tailwind CSS (CDN), Vanilla JavaScript
+- Backend: Python 3.x (parser), Static file server
+- Data: LDS.json architecture, IndexedDB (optional)
+- Deployment: Zero-build, runs from file:// or any HTTP server
+
+**Contact:** @jenkintownelectricity | l0human.com
+
+---
+
 *Built with Claude Code + LDS.json architecture*
-*@jenkintownelectricity | l0human.com*
+*Intellectual Property of Valid Kernel*
+*Shurzio 5.0™ licensed to Adam Scherzer*
