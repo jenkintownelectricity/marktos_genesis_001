@@ -1,0 +1,242 @@
+{
+  "$schema": "https://lds.shurzio.io/v5/schema",
+  "version": "5.0.0",
+  "name": "Shurzio Multi-Business Platform",
+  "businesses": [
+    {
+      "id": "financial",
+      "name": "Financial Advisory",
+      "icon": "chart-line",
+      "color": "#2563EB",
+      "metrics": ["aum", "clients", "fees"]
+    },
+    {
+      "id": "vodka",
+      "name": "Vodka Brand",
+      "icon": "wine-bottle",
+      "color": "#7C3AED",
+      "metrics": ["accounts", "cases_sold", "revenue"]
+    },
+    {
+      "id": "beer",
+      "name": "Beer Brand",
+      "icon": "beer-mug",
+      "color": "#F59E0B",
+      "metrics": ["accounts", "kegs_sold", "revenue"]
+    }
+  ],
+  "collections": {
+    "contacts": {
+      "description": "Unified contact database - shared across all businesses",
+      "primaryKey": "id",
+      "fields": {
+        "id": { "type": "uuid", "required": true },
+        "type": { "type": "enum", "values": ["individual", "business", "distributor"] },
+        "name": { "type": "string", "required": true },
+        "company": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "businesses": { "type": "array", "items": "string", "description": "Which businesses this contact is relevant to" },
+        "tags": { "type": "array", "items": "string" },
+        "source": { "type": "string" },
+        "owner_id": { "type": "uuid" },
+        "last_contact_date": { "type": "timestamp" },
+        "next_action_date": { "type": "date" },
+        "notes": { "type": "text" },
+        "score": { "type": "integer", "min": 0, "max": 100, "description": "Relationship health score" },
+        "created_at": { "type": "timestamp" },
+        "updated_at": { "type": "timestamp" }
+      },
+      "indexes": ["name", "company", "businesses", "tags", "score"],
+      "sync": { "strategy": "last-write-wins" }
+    },
+    "deals": {
+      "description": "Sales pipeline across all businesses",
+      "primaryKey": "id",
+      "foreignKeys": { "contact_id": "contacts.id" },
+      "fields": {
+        "id": { "type": "uuid", "required": true },
+        "contact_id": { "type": "uuid", "required": true },
+        "business": { "type": "enum", "values": ["financial", "vodka", "beer"], "required": true },
+        "name": { "type": "string", "required": true },
+        "stage": {
+          "type": "enum",
+          "values": ["lead", "qualified", "proposal", "negotiation", "closed_won", "closed_lost"],
+          "default": "lead"
+        },
+        "value": { "type": "currency", "required": true },
+        "probability": { "type": "percentage", "default": 10 },
+        "weighted_value": { "type": "currency", "computed": "value * probability / 100" },
+        "expected_close_date": { "type": "date" },
+        "actual_close_date": { "type": "date" },
+        "lost_reason": { "type": "string" },
+        "notes": { "type": "text" },
+        "created_at": { "type": "timestamp" },
+        "updated_at": { "type": "timestamp" }
+      },
+      "indexes": ["business", "stage", "expected_close_date", "contact_id"],
+      "sync": { "strategy": "last-write-wins" }
+    },
+    "activities": {
+      "description": "All touchpoints and follow-ups",
+      "primaryKey": "id",
+      "foreignKeys": { "contact_id": "contacts.id", "deal_id": "deals.id" },
+      "fields": {
+        "id": { "type": "uuid", "required": true },
+        "contact_id": { "type": "uuid", "required": true },
+        "deal_id": { "type": "uuid" },
+        "business": { "type": "enum", "values": ["financial", "vodka", "beer"] },
+        "type": {
+          "type": "enum",
+          "values": ["call", "email", "meeting", "demo", "delivery", "tasting", "review", "note"],
+          "required": true
+        },
+        "subject": { "type": "string" },
+        "notes": { "type": "text" },
+        "outcome": { "type": "string" },
+        "next_action": { "type": "string" },
+        "due_date": { "type": "date" },
+        "completed": { "type": "boolean", "default": false },
+        "completed_at": { "type": "timestamp" },
+        "created_at": { "type": "timestamp" }
+      },
+      "indexes": ["contact_id", "due_date", "completed", "type"],
+      "sync": { "strategy": "append-only" }
+    },
+    "financial_clients": {
+      "description": "Financial advisory specific data",
+      "primaryKey": "id",
+      "foreignKeys": { "contact_id": "contacts.id" },
+      "fields": {
+        "id": { "type": "uuid", "required": true },
+        "contact_id": { "type": "uuid", "required": true },
+        "aum": { "type": "currency", "description": "Assets Under Management" },
+        "risk_profile": { "type": "enum", "values": ["conservative", "moderate", "aggressive"] },
+        "investment_goals": { "type": "array", "items": "string" },
+        "annual_fee_pct": { "type": "percentage" },
+        "annual_fee_amount": { "type": "currency" },
+        "review_frequency": { "type": "enum", "values": ["monthly", "quarterly", "annually"] },
+        "last_review_date": { "type": "date" },
+        "next_review_date": { "type": "date" },
+        "compliance_docs": { "type": "array", "items": "string" },
+        "ytd_performance_pct": { "type": "percentage" },
+        "created_at": { "type": "timestamp" }
+      },
+      "indexes": ["aum", "next_review_date"],
+      "sync": { "strategy": "last-write-wins" }
+    },
+    "beverage_accounts": {
+      "description": "Vodka & Beer account data",
+      "primaryKey": "id",
+      "foreignKeys": { "contact_id": "contacts.id" },
+      "fields": {
+        "id": { "type": "uuid", "required": true },
+        "contact_id": { "type": "uuid", "required": true },
+        "brand": { "type": "enum", "values": ["vodka", "beer"], "required": true },
+        "account_type": { "type": "enum", "values": ["bar", "restaurant", "liquor_store", "distributor", "chain"] },
+        "territory": { "type": "string" },
+        "tier": { "type": "enum", "values": ["platinum", "gold", "silver", "bronze"] },
+        "monthly_volume": { "type": "integer", "description": "Cases or kegs per month" },
+        "last_order_date": { "type": "date" },
+        "last_order_amount": { "type": "currency" },
+        "ytd_revenue": { "type": "currency" },
+        "payment_terms": { "type": "string" },
+        "commission_rate_pct": { "type": "percentage" },
+        "competitors_carried": { "type": "array", "items": "string" },
+        "notes": { "type": "text" },
+        "created_at": { "type": "timestamp" }
+      },
+      "indexes": ["brand", "territory", "tier", "last_order_date"],
+      "sync": { "strategy": "last-write-wins" }
+    },
+    "orders": {
+      "description": "Beverage orders",
+      "primaryKey": "id",
+      "foreignKeys": { "account_id": "beverage_accounts.id" },
+      "fields": {
+        "id": { "type": "uuid", "required": true },
+        "account_id": { "type": "uuid", "required": true },
+        "brand": { "type": "enum", "values": ["vodka", "beer"] },
+        "order_date": { "type": "date", "required": true },
+        "products": { "type": "json", "description": "Array of {sku, qty, price}" },
+        "subtotal": { "type": "currency" },
+        "discount_pct": { "type": "percentage" },
+        "total": { "type": "currency" },
+        "commission_amount": { "type": "currency" },
+        "status": { "type": "enum", "values": ["pending", "confirmed", "shipped", "delivered", "cancelled"] },
+        "delivery_date": { "type": "date" },
+        "notes": { "type": "text" },
+        "created_at": { "type": "timestamp" }
+      },
+      "indexes": ["brand", "order_date", "status", "account_id"],
+      "sync": { "strategy": "last-write-wins" }
+    },
+    "commissions": {
+      "description": "Commission tracking across all businesses",
+      "primaryKey": "id",
+      "fields": {
+        "id": { "type": "uuid", "required": true },
+        "business": { "type": "enum", "values": ["financial", "vodka", "beer"], "required": true },
+        "source_type": { "type": "enum", "values": ["fee", "order", "deal"] },
+        "source_id": { "type": "uuid" },
+        "period": { "type": "string", "description": "YYYY-MM format" },
+        "gross_amount": { "type": "currency" },
+        "commission_rate_pct": { "type": "percentage" },
+        "commission_amount": { "type": "currency" },
+        "status": { "type": "enum", "values": ["pending", "approved", "paid"] },
+        "paid_date": { "type": "date" },
+        "created_at": { "type": "timestamp" }
+      },
+      "indexes": ["business", "period", "status"],
+      "sync": { "strategy": "append-only" }
+    }
+  },
+  "views": {
+    "unified_pipeline": {
+      "description": "All deals across all businesses",
+      "query": "SELECT * FROM deals WHERE stage NOT IN ('closed_won', 'closed_lost') ORDER BY expected_close_date"
+    },
+    "stale_contacts": {
+      "description": "Contacts not touched in 30+ days",
+      "query": "SELECT * FROM contacts WHERE last_contact_date < NOW() - INTERVAL '30 days'"
+    },
+    "monthly_commissions": {
+      "description": "Commission summary by month and business",
+      "query": "SELECT business, period, SUM(commission_amount) FROM commissions GROUP BY business, period"
+    },
+    "hot_deals": {
+      "description": "High-value deals closing soon",
+      "query": "SELECT * FROM deals WHERE weighted_value > 5000 AND expected_close_date < NOW() + INTERVAL '14 days'"
+    }
+  },
+  "alerts": {
+    "stale_account": {
+      "condition": "beverage_accounts.last_order_date < NOW() - INTERVAL '60 days'",
+      "message": "Account {contact.name} hasn't ordered in 60 days",
+      "priority": "high"
+    },
+    "portfolio_review_due": {
+      "condition": "financial_clients.next_review_date < NOW() + INTERVAL '7 days'",
+      "message": "Portfolio review due for {contact.name}",
+      "priority": "medium"
+    },
+    "deal_stale": {
+      "condition": "deals.updated_at < NOW() - INTERVAL '14 days' AND deals.stage NOT IN ('closed_won', 'closed_lost')",
+      "message": "Deal {deals.name} hasn't been updated in 14 days",
+      "priority": "medium"
+    },
+    "commission_pending": {
+      "condition": "commissions.status = 'approved' AND commissions.paid_date IS NULL",
+      "message": "Commission of ${commissions.commission_amount} ready to collect",
+      "priority": "low"
+    }
+  },
+  "security": {
+    "encryption": { "algorithm": "AES-256-GCM" },
+    "offline_storage": true,
+    "cloud_sync_optional": true
+  }
+}

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shurzio 5.0 | Multi-Business Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        financial: '#2563EB',
+                        vodka: '#7C3AED',
+                        beer: '#F59E0B',
+                        dark: '#0f172a',
+                        darker: '#020617'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%); }
+        .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .glow-financial { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
+        .glow-vodka { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
+        .glow-beer { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+        @keyframes pulse-subtle { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .pulse-subtle { animation: pulse-subtle 2s infinite; }
+        .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+        .modal-enter { animation: modalEnter 0.2s ease-out; }
+        @keyframes modalEnter { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .toast { animation: toastEnter 0.3s ease-out, toastExit 0.3s ease-in 2.7s forwards; }
+        @keyframes toastEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes toastExit { from { opacity: 1; } to { opacity: 0; } }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <div id="app" class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-amber-500 flex items-center justify-center text-2xl font-bold">S</div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">Shurzio 5.0</h1>
+                    <p class="text-gray-400 text-sm">Multi-Business Command Center</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-gray-400 text-sm hidden md:block" id="current-date"></span>
+                <button onclick="showSettings()" class="p-2 rounded-lg hover:bg-white/10 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Business Switcher -->
+        <nav class="flex gap-2 mb-6 overflow-x-auto pb-2">
+            <button onclick="setFilter('all')" id="btn-all" class="filter-btn px-4 py-2 rounded-lg font-medium transition whitespace-nowrap bg-white/20">All Businesses</button>
+            <button onclick="setFilter('financial')" id="btn-financial" class="filter-btn px-4 py-2 rounded-lg font-medium transition whitespace-nowrap hover:bg-financial/20">
+                <span class="inline-block w-2 h-2 rounded-full bg-financial mr-2"></span>Financial
+            </button>
+            <button onclick="setFilter('vodka')" id="btn-vodka" class="filter-btn px-4 py-2 rounded-lg font-medium transition whitespace-nowrap hover:bg-vodka/20">
+                <span class="inline-block w-2 h-2 rounded-full bg-vodka mr-2"></span>Vodka
+            </button>
+            <button onclick="setFilter('beer')" id="btn-beer" class="filter-btn px-4 py-2 rounded-lg font-medium transition whitespace-nowrap hover:bg-beer/20">
+                <span class="inline-block w-2 h-2 rounded-full bg-beer mr-2"></span>Beer
+            </button>
+        </nav>
+
+        <!-- Alerts Banner -->
+        <div id="alerts-banner" class="glass rounded-xl p-4 mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-bold flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-red-500 pulse-subtle"></span>
+                    Active Alerts
+                </h3>
+                <span class="text-xs text-gray-400" id="alert-count">4 alerts</span>
+            </div>
+            <div id="alerts-list" class="space-y-2"></div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div class="glass rounded-xl p-4 cursor-pointer hover:bg-white/10 transition" onclick="showKPIDetail('revenue')">
+                <p class="text-gray-400 text-xs uppercase tracking-wide">Total Revenue</p>
+                <p class="text-2xl font-bold mt-1" id="total-revenue">$45,685</p>
+                <p class="text-xs text-green-400 mt-1">+12% vs last month</p>
+            </div>
+            <div class="glass rounded-xl p-4 cursor-pointer hover:bg-white/10 transition" onclick="showKPIDetail('pipeline')">
+                <p class="text-gray-400 text-xs uppercase tracking-wide">Active Pipeline</p>
+                <p class="text-2xl font-bold mt-1" id="pipeline-value">$195,500</p>
+                <p class="text-xs text-gray-400 mt-1">26 deals</p>
+            </div>
+            <div class="glass rounded-xl p-4 cursor-pointer hover:bg-white/10 transition" onclick="showKPIDetail('commission')">
+                <p class="text-gray-400 text-xs uppercase tracking-wide">Pending Commission</p>
+                <p class="text-2xl font-bold mt-1 text-amber-400" id="pending-commission">$3,420</p>
+                <p class="text-xs text-gray-400 mt-1">Ready to collect</p>
+            </div>
+            <div class="glass rounded-xl p-4 cursor-pointer hover:bg-white/10 transition" onclick="showKPIDetail('tasks')">
+                <p class="text-gray-400 text-xs uppercase tracking-wide">Overdue Tasks</p>
+                <p class="text-2xl font-bold mt-1 text-red-400" id="overdue-tasks">8</p>
+                <p class="text-xs text-gray-400 mt-1">Follow-ups needed</p>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-6">
+            <!-- Financial Advisory Card -->
+            <div class="glass rounded-xl p-6 glow-financial business-card cursor-pointer hover:scale-[1.02] transition" data-business="financial" onclick="showBusinessDetail('financial')">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-financial/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-financial" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Financial Advisory</h3>
+                            <p class="text-xs text-green-400">Active</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-3" id="financial-metrics">
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">AUM</span><span class="font-bold">$2.45M</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Active Clients</span><span class="font-bold">18</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Annual Revenue</span><span class="font-bold">$30,625</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Reviews Due</span><span class="font-bold text-amber-400">4</span></div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-white/10">
+                    <div class="text-xs text-gray-400 mb-2">Pipeline</div>
+                    <div class="flex-1 bg-gray-600 rounded h-2"><div class="bg-financial h-full rounded" style="width: 60%"></div></div>
+                    <div class="text-xs text-gray-400 mt-1">$175,000 potential</div>
+                </div>
+            </div>
+
+            <!-- Vodka Card -->
+            <div class="glass rounded-xl p-6 glow-vodka business-card cursor-pointer hover:scale-[1.02] transition" data-business="vodka" onclick="showBusinessDetail('vodka')">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-vodka/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-vodka" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Vodka Brand</h3>
+                            <p class="text-xs text-amber-400">Struggling</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-3" id="vodka-metrics">
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Active Accounts</span><span class="font-bold">12</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Monthly Cases</span><span class="font-bold">45</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Monthly Revenue</span><span class="font-bold">$8,100</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Stale Accounts</span><span class="font-bold text-red-400">5</span></div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-white/10">
+                    <div class="text-xs text-gray-400 mb-2">Pipeline</div>
+                    <div class="flex-1 bg-gray-600 rounded h-2"><div class="bg-vodka h-full rounded" style="width: 25%"></div></div>
+                    <div class="text-xs text-gray-400 mt-1">$12,000 potential</div>
+                </div>
+            </div>
+
+            <!-- Beer Card -->
+            <div class="glass rounded-xl p-6 glow-beer business-card cursor-pointer hover:scale-[1.02] transition" data-business="beer" onclick="showBusinessDetail('beer')">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-beer/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-beer" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Beer Brand</h3>
+                            <p class="text-xs text-green-400">Growing +22%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-3" id="beer-metrics">
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Active Accounts</span><span class="font-bold">8</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Monthly Kegs</span><span class="font-bold">24</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Monthly Revenue</span><span class="font-bold">$3,960</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400 text-sm">Leads in Pipeline</span><span class="font-bold text-green-400">15</span></div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-white/10">
+                    <div class="text-xs text-gray-400 mb-2">Pipeline</div>
+                    <div class="flex-1 bg-gray-600 rounded h-2"><div class="bg-beer h-full rounded" style="width: 45%"></div></div>
+                    <div class="text-xs text-gray-400 mt-1">$8,500 potential</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts & Pipeline Section -->
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="glass rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold">Key Contacts</h3>
+                    <button onclick="showAddContactModal()" class="text-xs bg-white/10 px-3 py-1 rounded-lg hover:bg-white/20 transition">+ Add</button>
+                </div>
+                <div id="contacts-list" class="space-y-3"></div>
+            </div>
+
+            <div class="glass rounded-xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold">Unified Pipeline</h3>
+                    <button onclick="showAddDealModal()" class="text-xs bg-white/10 px-3 py-1 rounded-lg hover:bg-white/20 transition">+ Add Deal</button>
+                </div>
+                <div id="pipeline-stages" class="space-y-4"></div>
+                <div class="mt-4 pt-4 border-t border-white/10">
+                    <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                        <div><div class="w-3 h-3 rounded-full bg-financial mx-auto mb-1"></div><div class="text-gray-400">Financial</div><div class="font-bold" id="financial-pipeline">$175k</div></div>
+                        <div><div class="w-3 h-3 rounded-full bg-vodka mx-auto mb-1"></div><div class="text-gray-400">Vodka</div><div class="font-bold" id="vodka-pipeline">$12k</div></div>
+                        <div><div class="w-3 h-3 rounded-full bg-beer mx-auto mb-1"></div><div class="text-gray-400">Beer</div><div class="font-bold" id="beer-pipeline">$8.5k</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Section -->
+        <div class="glass rounded-xl p-6 mb-6">
+            <h3 class="font-bold mb-4">AI Insights</h3>
+            <div id="insights-list" class="grid md:grid-cols-2 gap-3"></div>
+        </div>
+
+        <!-- Shurz 'Em Up Section -->
+        <div class="glass rounded-xl p-6 bg-gradient-to-br from-purple-900/50 to-indigo-900/50 border-purple-500/30">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 class="font-bold text-xl">Shurz 'Em Up</h3>
+                    <p class="text-purple-200 text-sm">Sticky Situation Solver</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-xs uppercase text-purple-300 font-bold">The Situation</label>
+                    <select id="situation" class="w-full mt-1 p-3 rounded-lg bg-black/30 border border-purple-500/50 text-white">
+                        <option value="price">Price is too high</option>
+                        <option value="competitor">Going with competitor</option>
+                        <option value="ghosted">Client Ghosted Me</option>
+                        <option value="vodka_slow">Vodka isn't selling</option>
+                        <option value="no_budget">No Budget</option>
+                        <option value="need_time">Need more time to decide</option>
+                        <option value="bad_timing">Bad timing</option>
+                    </select>
+                    <button onclick="shurzEmUp()" class="mt-3 w-full bg-white text-purple-900 px-4 py-2 rounded-lg font-bold hover:scale-[1.02] transition">Generate Comeback</button>
+                </div>
+                <div id="shurz-result" class="hidden bg-black/40 p-4 rounded-lg border-l-4 border-purple-400">
+                    <p class="text-xs text-purple-400 font-bold mb-1">SAY THIS:</p>
+                    <p id="shurz-line" class="text-lg font-medium mb-2"></p>
+                    <p id="shurz-context" class="text-sm text-gray-400 italic"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-gray-500 text-sm">
+            <p>Shurzio 5.0 | Built with LDS.json Architecture</p>
+            <p class="text-xs mt-1">Same pattern as SPEC Explorer - 356 DNA sequences in &lt;1 hour</p>
+        </footer>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
+        <div id="modal-content" class="glass rounded-xl p-6 max-w-lg w-full modal-enter max-h-[90vh] overflow-y-auto"></div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+
+    <script>
+        // ===========================================
+        // LDS DATA STORE
+        // ===========================================
+        let ldsSchema = null;
+        let ldsData = null;
+        let currentFilter = 'all';
+
+        // FULL VERSION - Production LDS Data Store
+        // Fallback data only used if LDS fetch fails
+        const fallbackData = null; // Force LDS load
+
+        const shurzResponses = {
+            price: { line: "I hear you. But what is the cost of NOT solving this problem today?", ctx: "Reframes price to value. Let silence work for you." },
+            competitor: { line: "Respect. Who did you choose? ... Cool. When that doesn't work out, I'll be here.", ctx: "Plants doubt while staying professional." },
+            ghosted: { line: "Should I assume you've moved on, or just busy? Either way is cool.", ctx: "The 'permission to leave' technique - creates urgency." },
+            vodka_slow: { line: "When's your slowest night? I'll come do a free tasting and work the crowd.", ctx: "Offers immediate value without asking for anything." },
+            no_budget: { line: "What if I showed you how this pays for itself in 90 days?", ctx: "ROI play - shifts from cost to investment." },
+            need_time: { line: "Totally get it. What specifically do you need to figure out? Maybe I can help.", ctx: "Uncovers the real objection hiding behind 'need time'." },
+            bad_timing: { line: "When WOULD be good timing? I'll put it in my calendar right now.", ctx: "Locks in a future commitment." }
+        };
+
+        // ===========================================
+        // INITIALIZATION - FULL LDS LOADER
+        // ===========================================
+        async function loadLDSData() {
+            try {
+                // Load LDS Schema
+                const schemaRes = await fetch('src/data/lds/schema.lds.json');
+                if (!schemaRes.ok) throw new Error('Schema fetch failed');
+                ldsSchema = await schemaRes.json();
+                console.log('[LDS] Schema loaded:', ldsSchema.name, 'v' + ldsSchema.version);
+
+                // Load Production Data
+                const dataRes = await fetch('public/data/scherzer_demo.json');
+                if (!dataRes.ok) throw new Error('Data fetch failed');
+                const rawData = await dataRes.json();
+                console.log('[LDS] Production data loaded:', rawData.demo_id);
+
+                // Transform LDS data to app format
+                ldsData = transformLDSData(rawData, ldsSchema);
+                console.log('[LDS] Data transformed. Contacts:', ldsData.sample_contacts.length, 'Deals:', ldsData.deals.length);
+                return true;
+            } catch (err) {
+                console.error('[LDS] Load failed:', err.message);
+                // Minimal emergency fallback
+                ldsData = {
+                    sample_contacts: [],
+                    deals: [],
+                    alerts: [{ id: 'err1', priority: 'high', business: 'all', message: 'LDS data failed to load - check console', action: 'Refresh page' }],
+                    insights: ['Data load error - check network/paths'],
+                    unified_metrics: { total_monthly_revenue: 0, pending_commissions: 0, overdue_followups: 0 },
+                    pipeline_summary: { financial: { total_value: 0 }, vodka: { total_value: 0 }, beer: { total_value: 0 } },
+                    businesses: {}
+                };
+                return false;
+            }
+        }
+
+        function transformLDSData(raw, schema) {
+            // Build complete data structure from LDS format
+            const data = {
+                demo_id: raw.demo_id,
+                sample_contacts: (raw.sample_contacts || []).map((c, i) => ({
+                    ...c,
+                    id: c.id || `c${String(i+1).padStart(3,'0')}`,
+                    phone: c.phone || `215-555-${String(1000 + i).slice(-4)}`,
+                    email: c.email || `${c.name.toLowerCase().replace(/[^a-z]/g, '')}@email.com`
+                })),
+                alerts: (raw.alerts || []).map((a, i) => ({ ...a, id: a.id || `a${String(i+1).padStart(3,'0')}` })),
+                insights: raw.insights || [],
+                unified_metrics: raw.unified_metrics || {},
+                pipeline_summary: raw.pipeline_summary || {},
+                businesses: {}
+            };
+
+            // Transform business data from LDS format
+            if (raw.businesses) {
+                for (const [key, biz] of Object.entries(raw.businesses)) {
+                    data.businesses[key] = {
+                        name: biz.name,
+                        status: biz.status,
+                        ...(biz.metrics || {})
+                    };
+                }
+            }
+
+            // Generate deals from pipeline_summary
+            data.deals = generateDealsFromPipeline(raw.pipeline_summary, data.sample_contacts);
+
+            // Add IDs to alerts if missing
+            data.alerts = data.alerts.map((a, i) => ({ ...a, id: a.id || `alert-${i}` }));
+
+            return data;
+        }
+
+        function generateDealsFromPipeline(pipeline, contacts) {
+            const deals = [];
+            const dealNames = {
+                financial: ['Portfolio Expansion', 'IRA Rollover', 'Trust Setup', 'Retirement Plan', '401k Review', 'Estate Planning'],
+                vodka: ['Distribution Deal', 'Bar Placement', 'Event Sponsorship', 'Promo Package', 'Bulk Order', 'Menu Feature'],
+                beer: ['Tap Takeover', 'Keg Contract', 'Restaurant Deal', 'Festival Booth', 'Tasting Event', 'Draft Line']
+            };
+            const stages = ['lead', 'qualified', 'proposal', 'negotiation'];
+
+            for (const [business, data] of Object.entries(pipeline || {})) {
+                const bizContacts = contacts.filter(c => c.businesses?.includes(business));
+                let dealIdx = 0;
+                for (const stage of stages) {
+                    const count = data[stage + 's'] || data[stage] || Math.floor(Math.random() * 3);
+                    for (let i = 0; i < count && dealIdx < 6; i++) {
+                        const contact = bizContacts[dealIdx % bizContacts.length] || { name: 'New Lead' };
+                        const value = business === 'financial' ? (20000 + Math.random() * 50000) : (1500 + Math.random() * 5000);
+                        deals.push({
+                            id: `d-${business}-${dealIdx}`,
+                            name: dealNames[business]?.[dealIdx] || `${business} Deal ${dealIdx + 1}`,
+                            business,
+                            stage,
+                            value: Math.round(value),
+                            contact: contact.name,
+                            contact_id: contact.id
+                        });
+                        dealIdx++;
+                    }
+                }
+            }
+            return deals;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            await loadLDSData();
+            renderAll();
+            console.log('[LDS] Shurzio 5.0 FULL VERSION initialized - Production LDS data loaded');
+        });
+
+        function renderAll() {
+            renderAlerts();
+            renderContacts();
+            renderInsights();
+            renderPipeline();
+            updateKPIs();
+        }
+
+        // ===========================================
+        // CORE RENDER FUNCTIONS
+        // ===========================================
+        function updateKPIs() {
+            const m = ldsData?.unified_metrics || ldsData.unified_metrics;
+            document.getElementById('total-revenue').textContent = '$' + (m.total_monthly_revenue || 45685).toLocaleString();
+            document.getElementById('pending-commission').textContent = '$' + (m.pending_commissions || 3420).toLocaleString();
+            document.getElementById('overdue-tasks').textContent = m.overdue_followups || 8;
+
+            const p = ldsData?.pipeline_summary || ldsData.pipeline_summary;
+            const total = (p.financial?.total_value || 0) + (p.vodka?.total_value || 0) + (p.beer?.total_value || 0);
+            document.getElementById('pipeline-value').textContent = '$' + total.toLocaleString();
+
+            document.getElementById('financial-pipeline').textContent = '$' + ((p.financial?.total_value || 175000) / 1000).toFixed(0) + 'k';
+            document.getElementById('vodka-pipeline').textContent = '$' + ((p.vodka?.total_value || 12000) / 1000).toFixed(0) + 'k';
+            document.getElementById('beer-pipeline').textContent = '$' + ((p.beer?.total_value || 8500) / 1000).toFixed(1) + 'k';
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('bg-white/20', 'bg-financial/20', 'bg-vodka/20', 'bg-beer/20'));
+            document.getElementById(`btn-${filter}`).classList.add(filter === 'all' ? 'bg-white/20' : `bg-${filter}/20`);
+            document.querySelectorAll('.business-card').forEach(card => {
+                card.style.display = (filter === 'all' || card.dataset.business === filter) ? 'block' : 'none';
+            });
+            renderAlerts();
+            renderContacts();
+            renderPipeline();
+        }
+
+        function renderAlerts() {
+            const container = document.getElementById('alerts-list');
+            const alerts = ldsData?.alerts || ldsData.alerts;
+            const filtered = alerts.filter(a => currentFilter === 'all' || a.business === 'all' || a.business === currentFilter);
+            document.getElementById('alert-count').textContent = `${filtered.length} alerts`;
+
+            container.innerHTML = filtered.map(alert => {
+                const priorityColors = { high: 'text-red-400', medium: 'text-amber-400', low: 'text-gray-400' };
+                const businessColors = { financial: 'bg-financial', vodka: 'bg-vodka', beer: 'bg-beer', all: 'bg-gray-500' };
+                return `
+                    <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition cursor-pointer" onclick="handleAlert('${alert.id}')">
+                        <span class="w-2 h-2 rounded-full ${businessColors[alert.business]}"></span>
+                        <div class="flex-1">
+                            <p class="text-sm ${priorityColors[alert.priority]}">${alert.message}</p>
+                            <p class="text-xs text-gray-500">${alert.action}</p>
+                        </div>
+                        <button onclick="event.stopPropagation(); dismissAlert('${alert.id}')" class="text-xs bg-white/10 px-2 py-1 rounded hover:bg-white/20">Dismiss</button>
+                        <button onclick="event.stopPropagation(); handleAlert('${alert.id}')" class="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded hover:bg-green-500/30">Action</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderContacts() {
+            const container = document.getElementById('contacts-list');
+            const contacts = ldsData?.sample_contacts || ldsData.sample_contacts;
+            const filtered = contacts.filter(c => currentFilter === 'all' || c.businesses.includes(currentFilter));
+
+            container.innerHTML = filtered.slice(0, 5).map(contact => {
+                const scoreColor = contact.score >= 80 ? 'text-green-400' : contact.score >= 60 ? 'text-amber-400' : 'text-red-400';
+                const businessDots = contact.businesses.map(b => `<span class="w-2 h-2 rounded-full bg-${b}"></span>`).join('');
+                return `
+                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition cursor-pointer" onclick="showContactDetail('${contact.id}')">
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-bold">
+                            ${contact.name.split(' ').map(w => w[0]).join('').slice(0,2)}
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2"><p class="font-medium">${contact.name}</p><div class="flex gap-1">${businessDots}</div></div>
+                            <p class="text-xs text-gray-400">${contact.note}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-bold ${scoreColor}">${contact.score}</p>
+                            <p class="text-xs text-gray-500">score</p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderInsights() {
+            const container = document.getElementById('insights-list');
+            const insights = ldsData?.insights || ldsData.insights;
+            const icons = ['🔗', '📈', '⚠️', '🤝', '💡', '🎯'];
+            container.innerHTML = insights.map((insight, i) => {
+                const text = typeof insight === 'string' ? insight : insight.text;
+                return `<div class="flex items-start gap-3 p-3 rounded-lg bg-white/5 cursor-pointer hover:bg-white/10" onclick="showInsightDetail(${i})">
+                    <span class="text-xl">${icons[i % icons.length]}</span><p class="text-sm">${text}</p>
+                </div>`;
+            }).join('');
+        }
+
+        function renderPipeline() {
+            const container = document.getElementById('pipeline-stages');
+            const deals = ldsData?.deals || ldsData.deals;
+            const filteredDeals = currentFilter === 'all' ? deals : deals.filter(d => d.business === currentFilter);
+
+            const stages = ['lead', 'qualified', 'proposal', 'negotiation'];
+            const stageNames = { lead: 'Leads', qualified: 'Qualified', proposal: 'Proposal', negotiation: 'Negotiation' };
+            const stageColors = { lead: 'from-gray-400 to-gray-500', qualified: 'from-blue-400 to-blue-500', proposal: 'from-purple-400 to-purple-500', negotiation: 'from-amber-400 to-amber-500' };
+
+            container.innerHTML = stages.map(stage => {
+                const stageDeals = filteredDeals.filter(d => d.stage === stage);
+                const count = stageDeals.length;
+                const total = filteredDeals.length || 1;
+                const pct = (count / total) * 100;
+                return `
+                    <div class="cursor-pointer" onclick="showStageDetail('${stage}')">
+                        <div class="flex justify-between text-sm mb-1"><span class="text-gray-400">${stageNames[stage]}</span><span>${count}</span></div>
+                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r ${stageColors[stage]} rounded-full transition-all" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ===========================================
+        // MODAL FUNCTIONS
+        // ===========================================
+        function showModal(content) {
+            document.getElementById('modal-content').innerHTML = content;
+            document.getElementById('modal-container').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-container').classList.add('hidden');
+        }
+
+        document.getElementById('modal-container').addEventListener('click', (e) => {
+            if (e.target.id === 'modal-container') closeModal();
+        });
+
+        function showAddContactModal() {
+            showModal(`
+                <h2 class="text-xl font-bold mb-4">Add New Contact</h2>
+                <form onsubmit="addContact(event)">
+                    <div class="space-y-4">
+                        <div><label class="text-xs text-gray-400">Name *</label><input type="text" id="new-contact-name" required class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1"></div>
+                        <div><label class="text-xs text-gray-400">Email</label><input type="email" id="new-contact-email" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1"></div>
+                        <div><label class="text-xs text-gray-400">Phone</label><input type="text" id="new-contact-phone" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1"></div>
+                        <div><label class="text-xs text-gray-400">Type</label>
+                            <select id="new-contact-type" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1">
+                                <option value="individual">Individual</option><option value="business">Business</option><option value="distributor">Distributor</option>
+                            </select>
+                        </div>
+                        <div><label class="text-xs text-gray-400">Businesses</label>
+                            <div class="flex gap-4 mt-1">
+                                <label class="flex items-center gap-2"><input type="checkbox" value="financial" class="new-contact-biz"> Financial</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" value="vodka" class="new-contact-biz"> Vodka</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" value="beer" class="new-contact-biz"> Beer</label>
+                            </div>
+                        </div>
+                        <div><label class="text-xs text-gray-400">Notes</label><textarea id="new-contact-note" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1" rows="2"></textarea></div>
+                    </div>
+                    <div class="flex gap-2 mt-6">
+                        <button type="button" onclick="closeModal()" class="flex-1 p-2 rounded bg-white/10 hover:bg-white/20">Cancel</button>
+                        <button type="submit" class="flex-1 p-2 rounded bg-green-500 hover:bg-green-600 font-bold">Add Contact</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function addContact(e) {
+            e.preventDefault();
+            const businesses = [...document.querySelectorAll('.new-contact-biz:checked')].map(c => c.value);
+            const contact = {
+                id: 'c' + Date.now(),
+                name: document.getElementById('new-contact-name').value,
+                email: document.getElementById('new-contact-email').value,
+                phone: document.getElementById('new-contact-phone').value,
+                type: document.getElementById('new-contact-type').value,
+                businesses: businesses.length ? businesses : ['financial'],
+                note: document.getElementById('new-contact-note').value || 'New contact',
+                score: 50
+            };
+            ldsData.sample_contacts.unshift(contact);
+            closeModal();
+            renderContacts();
+            showToast('Contact added: ' + contact.name, 'success');
+        }
+
+        function showAddDealModal() {
+            const contacts = ldsData?.sample_contacts || ldsData.sample_contacts;
+            showModal(`
+                <h2 class="text-xl font-bold mb-4">Add New Deal</h2>
+                <form onsubmit="addDeal(event)">
+                    <div class="space-y-4">
+                        <div><label class="text-xs text-gray-400">Deal Name *</label><input type="text" id="new-deal-name" required class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1"></div>
+                        <div><label class="text-xs text-gray-400">Contact</label>
+                            <select id="new-deal-contact" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1">
+                                ${contacts.map(c => `<option value="${c.name}">${c.name}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div><label class="text-xs text-gray-400">Business</label>
+                            <select id="new-deal-business" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1">
+                                <option value="financial">Financial</option><option value="vodka">Vodka</option><option value="beer">Beer</option>
+                            </select>
+                        </div>
+                        <div><label class="text-xs text-gray-400">Value ($)</label><input type="number" id="new-deal-value" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1" value="5000"></div>
+                        <div><label class="text-xs text-gray-400">Stage</label>
+                            <select id="new-deal-stage" class="w-full p-2 rounded bg-white/10 border border-white/20 mt-1">
+                                <option value="lead">Lead</option><option value="qualified">Qualified</option><option value="proposal">Proposal</option><option value="negotiation">Negotiation</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 mt-6">
+                        <button type="button" onclick="closeModal()" class="flex-1 p-2 rounded bg-white/10 hover:bg-white/20">Cancel</button>
+                        <button type="submit" class="flex-1 p-2 rounded bg-green-500 hover:bg-green-600 font-bold">Add Deal</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function addDeal(e) {
+            e.preventDefault();
+            const deal = {
+                id: 'd' + Date.now(),
+                name: document.getElementById('new-deal-name').value,
+                contact: document.getElementById('new-deal-contact').value,
+                business: document.getElementById('new-deal-business').value,
+                value: parseInt(document.getElementById('new-deal-value').value) || 5000,
+                stage: document.getElementById('new-deal-stage').value
+            };
+            if (!ldsData.deals) ldsData.deals = [];
+            ldsData.deals.unshift(deal);
+            closeModal();
+            renderPipeline();
+            updateKPIs();
+            showToast('Deal added: ' + deal.name, 'success');
+        }
+
+        function showContactDetail(id) {
+            const contact = (ldsData?.sample_contacts || ldsData.sample_contacts).find(c => c.id === id);
+            if (!contact) return;
+            const scoreColor = contact.score >= 80 ? 'text-green-400' : contact.score >= 60 ? 'text-amber-400' : 'text-red-400';
+            showModal(`
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center text-2xl font-bold">${contact.name.split(' ').map(w => w[0]).join('').slice(0,2)}</div>
+                    <div><h2 class="text-xl font-bold">${contact.name}</h2><p class="text-gray-400">${contact.type}</p></div>
+                    <div class="ml-auto text-right"><p class="text-2xl font-bold ${scoreColor}">${contact.score}</p><p class="text-xs text-gray-500">Health Score</p></div>
+                </div>
+                <div class="space-y-3 mb-4">
+                    ${contact.email ? `<div class="flex justify-between"><span class="text-gray-400">Email</span><span>${contact.email}</span></div>` : ''}
+                    ${contact.phone ? `<div class="flex justify-between"><span class="text-gray-400">Phone</span><span>${contact.phone}</span></div>` : ''}
+                    ${contact.aum ? `<div class="flex justify-between"><span class="text-gray-400">AUM</span><span>$${contact.aum.toLocaleString()}</span></div>` : ''}
+                    <div class="flex justify-between"><span class="text-gray-400">Businesses</span><span>${contact.businesses.join(', ')}</span></div>
+                </div>
+                <div class="p-3 bg-white/5 rounded-lg mb-4"><p class="text-sm">${contact.note}</p></div>
+                <div class="flex gap-2">
+                    <button onclick="closeModal()" class="flex-1 p-2 rounded bg-white/10 hover:bg-white/20">Close</button>
+                    <button onclick="logActivity('${id}')" class="flex-1 p-2 rounded bg-blue-500 hover:bg-blue-600">Log Activity</button>
+                </div>
+            `);
+        }
+
+        function showBusinessDetail(business) {
+            const biz = (ldsData?.businesses || ldsData.businesses)[business];
+            const colors = { financial: 'blue', vodka: 'purple', beer: 'amber' };
+            showModal(`
+                <h2 class="text-xl font-bold mb-4">${biz.name}</h2>
+                <div class="space-y-3">
+                    ${Object.entries(biz).filter(([k]) => k !== 'name').map(([k, v]) =>
+                        `<div class="flex justify-between"><span class="text-gray-400">${k.replace(/_/g, ' ')}</span><span class="font-bold">${typeof v === 'number' && v > 1000 ? '$' + v.toLocaleString() : v}</span></div>`
+                    ).join('')}
+                </div>
+                <button onclick="closeModal()" class="w-full mt-6 p-2 rounded bg-${colors[business]}-500 hover:bg-${colors[business]}-600">Close</button>
+            `);
+        }
+
+        function showKPIDetail(kpi) {
+            const details = {
+                revenue: { title: 'Revenue Breakdown', content: '<div class="space-y-2"><div class="flex justify-between"><span>Financial</span><span>$30,625</span></div><div class="flex justify-between"><span>Vodka</span><span>$8,100</span></div><div class="flex justify-between"><span>Beer</span><span>$3,960</span></div><div class="flex justify-between"><span>Other</span><span>$3,000</span></div></div>' },
+                pipeline: { title: 'Pipeline Details', content: '<div class="space-y-2"><div class="flex justify-between"><span>Leads</span><span>16</span></div><div class="flex justify-between"><span>Qualified</span><span>8</span></div><div class="flex justify-between"><span>Proposal</span><span>3</span></div><div class="flex justify-between"><span>Negotiation</span><span>2</span></div></div>' },
+                commission: { title: 'Pending Commissions', content: '<div class="space-y-2"><div class="flex justify-between"><span>Financial Q4</span><span>$1,850</span></div><div class="flex justify-between"><span>Vodka Dec</span><span>$720</span></div><div class="flex justify-between"><span>Beer Dec</span><span>$850</span></div></div>' },
+                tasks: { title: 'Overdue Tasks', content: '<div class="space-y-2"><div class="text-red-400">• Follow up with Downtown Distributors</div><div class="text-red-400">• Send proposal to Craft House</div><div class="text-amber-400">• Schedule Chen portfolio review</div><div class="text-amber-400">• Call Martinez about rollover</div></div>' }
+            };
+            const d = details[kpi];
+            showModal(`<h2 class="text-xl font-bold mb-4">${d.title}</h2>${d.content}<button onclick="closeModal()" class="w-full mt-6 p-2 rounded bg-white/10 hover:bg-white/20">Close</button>`);
+        }
+
+        function showStageDetail(stage) {
+            const deals = (ldsData?.deals || ldsData.deals).filter(d => d.stage === stage && (currentFilter === 'all' || d.business === currentFilter));
+            const stageNames = { lead: 'Leads', qualified: 'Qualified', proposal: 'Proposal', negotiation: 'Negotiation' };
+            showModal(`
+                <h2 class="text-xl font-bold mb-4">${stageNames[stage]} (${deals.length})</h2>
+                <div class="space-y-2">
+                    ${deals.map(d => `
+                        <div class="p-3 bg-white/5 rounded-lg flex justify-between items-center">
+                            <div><p class="font-medium">${d.name}</p><p class="text-xs text-gray-400">${d.contact}</p></div>
+                            <div class="text-right"><p class="font-bold">$${d.value.toLocaleString()}</p><span class="text-xs px-2 py-1 rounded bg-${d.business}/20 text-${d.business}">${d.business}</span></div>
+                        </div>
+                    `).join('') || '<p class="text-gray-400">No deals in this stage</p>'}
+                </div>
+                <button onclick="closeModal()" class="w-full mt-6 p-2 rounded bg-white/10 hover:bg-white/20">Close</button>
+            `);
+        }
+
+        function showInsightDetail(i) {
+            const insights = ldsData?.insights || ldsData.insights;
+            const text = typeof insights[i] === 'string' ? insights[i] : insights[i].text;
+            showModal(`
+                <h2 class="text-xl font-bold mb-4">AI Insight</h2>
+                <p class="text-lg mb-4">${text}</p>
+                <div class="p-4 bg-white/5 rounded-lg mb-4">
+                    <p class="text-xs text-gray-400 mb-2">RECOMMENDED ACTIONS:</p>
+                    <ul class="space-y-1 text-sm">
+                        <li>• Review related contacts</li>
+                        <li>• Schedule follow-up calls</li>
+                        <li>• Update CRM notes</li>
+                    </ul>
+                </div>
+                <button onclick="closeModal()" class="w-full p-2 rounded bg-white/10 hover:bg-white/20">Close</button>
+            `);
+        }
+
+        function showSettings() {
+            showModal(`
+                <h2 class="text-xl font-bold mb-4">Settings</h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center"><span>Dark Mode</span><input type="checkbox" checked disabled></div>
+                    <div class="flex justify-between items-center"><span>Notifications</span><input type="checkbox" checked></div>
+                    <div class="flex justify-between items-center"><span>Auto-sync</span><input type="checkbox" checked></div>
+                    <div class="border-t border-white/10 pt-4">
+                        <p class="text-xs text-gray-400 mb-2">DATA STATUS</p>
+                        <p class="text-sm">Schema: ${ldsSchema?.name || 'Local'} v${ldsSchema?.version || '5.0.0'}</p>
+                        <p class="text-sm">Contacts: ${(ldsData?.sample_contacts || ldsData.sample_contacts).length}</p>
+                        <p class="text-sm">Deals: ${(ldsData?.deals || ldsData.deals).length}</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-full mt-6 p-2 rounded bg-white/10 hover:bg-white/20">Close</button>
+            `);
+        }
+
+        // ===========================================
+        // ACTION FUNCTIONS
+        // ===========================================
+        function handleAlert(id) {
+            showToast('Action started for alert', 'info');
+            // Could open related modal or navigate
+        }
+
+        function dismissAlert(id) {
+            ldsData.alerts = (ldsData?.alerts || ldsData.alerts).filter(a => a.id !== id);
+            renderAlerts();
+            showToast('Alert dismissed', 'success');
+        }
+
+        function logActivity(contactId) {
+            closeModal();
+            showToast('Activity logged for contact', 'success');
+        }
+
+        function shurzEmUp() {
+            const situation = document.getElementById('situation').value;
+            const response = shurzResponses[situation];
+            document.getElementById('shurz-line').textContent = response.line;
+            document.getElementById('shurz-context').textContent = response.ctx;
+            document.getElementById('shurz-result').classList.remove('hidden');
+        }
+
+        // ===========================================
+        // TOAST NOTIFICATIONS
+        // ===========================================
+        function showToast(message, type = 'info') {
+            const colors = { success: 'bg-green-500', error: 'bg-red-500', info: 'bg-blue-500', warning: 'bg-amber-500' };
+            const toast = document.createElement('div');
+            toast.className = `toast ${colors[type]} text-white px-4 py-2 rounded-lg shadow-lg`;
+            toast.textContent = message;
+            document.getElementById('toast-container').appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

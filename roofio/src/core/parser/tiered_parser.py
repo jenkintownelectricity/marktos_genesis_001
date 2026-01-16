@@ -109,6 +109,54 @@ class P2Patterns:
     # Retainage: 10% retainage
     RETAINAGE = r'(\d+\.?\d*)\s*%\s*(?:retainage|retention)'
 
+    # =========================================================================
+    # ADDITIONAL P2 PATTERNS - Reduce AI Token Usage
+    # =========================================================================
+
+    # Manufacturer names - common construction manufacturers
+    MANUFACTURER = r'(?:manufacturer|mfr\.?|mfg\.?|by)\s*[:\s]*([A-Z][A-Za-z\s&\-\.]+(?:Inc\.?|LLC|Corp\.?|Co\.?)?)'
+
+    # Owner/Company name - typically after "Owner:" or "Project Owner:"
+    OWNER_NAME = r'(?:owner|project\s*owner|client)\s*[:\s]*([A-Z][A-Za-z\s&\-\.,]+(?:Inc\.?|LLC|Corp\.?|Co\.?|LP)?)'
+
+    # Product name - after "Product:" or product specifications
+    PRODUCT_NAME = r'(?:product(?:\s*name)?|material)\s*[:\s]*([A-Z][A-Za-z0-9\s\-\.]+)'
+
+    # Weather conditions - for daily logs
+    WEATHER = r'(?:weather|conditions?)\s*[:\s]*((?:sunny|cloudy|overcast|rain(?:y|ing)?|snow(?:y|ing)?|clear|partly\s*cloudy|fog(?:gy)?|windy|stormy|fair)(?:\s*(?:and|with|,)\s*(?:sunny|cloudy|overcast|rain(?:y|ing)?|snow(?:y|ing)?|clear|partly\s*cloudy|fog(?:gy)?|windy|stormy|fair))*)'
+
+    # Temperature - high/low temps for daily logs
+    TEMPERATURE = r'(\d{1,3})\s*°?\s*[FfCc]?'
+    TEMP_HIGH = r'(?:high|max(?:imum)?)\s*(?:temp(?:erature)?)?[:\s]*(\d{1,3})\s*°?\s*[FfCc]?'
+    TEMP_LOW = r'(?:low|min(?:imum)?)\s*(?:temp(?:erature)?)?[:\s]*(\d{1,3})\s*°?\s*[FfCc]?'
+
+    # Crew count - for daily logs
+    CREW_COUNT = r'(?:crew\s*(?:size|count)?|workers?|men|personnel)\s*[:\s]*(\d+)'
+
+    # Bond number - for bond documents
+    BOND_NUMBER = r'(?:bond\s*(?:no\.?|number|#))\s*[:\s]*([A-Z0-9\-]+)'
+
+    # Policy number - for insurance documents
+    POLICY_NUMBER = r'(?:policy\s*(?:no\.?|number|#))\s*[:\s]*([A-Z0-9\-]+)'
+
+    # Surety company - for bond documents
+    SURETY_COMPANY = r'(?:surety|bonding\s*company|guarantor)\s*[:\s]*([A-Z][A-Za-z\s&\-\.]+(?:Inc\.?|LLC|Corp\.?|Co\.?)?)'
+
+    # Insurance carrier - for insurance documents
+    CARRIER = r'(?:carrier|insurer|underwriter|insurance\s*company)\s*[:\s]*([A-Z][A-Za-z\s&\-\.]+(?:Inc\.?|LLC|Corp\.?|Co\.?)?)'
+
+    # Insulation type - for scope documents
+    INSULATION_TYPE = r'(?:insulation(?:\s*type)?)\s*[:\s]*(polyiso(?:cyanurate)?|EPS|XPS|mineral\s*wool|fiberglass|spray\s*foam|rigid\s*board)'
+
+    # Project address - street address patterns
+    PROJECT_ADDRESS = r'(?:project\s*(?:address|location)|job\s*(?:site|address)|located\s*at)\s*[:\s]*(\d+\s+[A-Za-z0-9\s,\.]+(?:Street|St\.?|Avenue|Ave\.?|Road|Rd\.?|Boulevard|Blvd\.?|Drive|Dr\.?|Lane|Ln\.?|Way|Court|Ct\.?)(?:\s*,\s*[A-Za-z\s]+,?\s*[A-Z]{2}\s*\d{5})?)'
+
+    # Hazard classification - for MSDS
+    HAZARD_CLASS = r'(?:hazard\s*class(?:ification)?|GHS\s*class)\s*[:\s]*([A-Za-z0-9\s\-]+(?:Flammable|Corrosive|Toxic|Irritant|Oxidizer)?)'
+
+    # PPE required - for MSDS
+    PPE_REQUIRED = r'(?:PPE|personal\s*protective\s*equipment|protection)\s*[:\s]*([A-Za-z,\s]+(?:gloves?|goggles?|respirator|mask|boots?|suit))'
+
 
 class P2Extractor:
     """Python-based extractor - FREE and FAST."""
@@ -293,24 +341,242 @@ class P2Extractor:
             )
         return None
 
+    # =========================================================================
+    # NEW P2 EXTRACTORS - Reduce AI Token Usage
+    # =========================================================================
+
+    def extract_manufacturer(self, text: str) -> Optional[ExtractedField]:
+        """Extract manufacturer name."""
+        match = re.search(P2Patterns.MANUFACTURER, text, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            if len(value) > 2:  # Avoid false positives
+                return ExtractedField(
+                    name="manufacturer",
+                    value=value,
+                    confidence=0.80,
+                    parse_tier=ParseTier.P2_PYTHON
+                )
+        return None
+
+    def extract_owner_name(self, text: str) -> Optional[ExtractedField]:
+        """Extract owner/client name."""
+        match = re.search(P2Patterns.OWNER_NAME, text, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            if len(value) > 2:
+                return ExtractedField(
+                    name="owner_name",
+                    value=value,
+                    confidence=0.80,
+                    parse_tier=ParseTier.P2_PYTHON
+                )
+        return None
+
+    def extract_product_name(self, text: str) -> Optional[ExtractedField]:
+        """Extract product name."""
+        match = re.search(P2Patterns.PRODUCT_NAME, text, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            if len(value) > 2:
+                return ExtractedField(
+                    name="product_name",
+                    value=value,
+                    confidence=0.75,
+                    parse_tier=ParseTier.P2_PYTHON
+                )
+        return None
+
+    def extract_weather(self, text: str) -> Optional[ExtractedField]:
+        """Extract weather conditions for daily logs."""
+        match = re.search(P2Patterns.WEATHER, text, re.IGNORECASE)
+        if match:
+            return ExtractedField(
+                name="weather",
+                value=match.group(1).strip().title(),
+                confidence=0.90,
+                parse_tier=ParseTier.P2_PYTHON
+            )
+        return None
+
+    def extract_temperatures(self, text: str) -> list[ExtractedField]:
+        """Extract temperature high/low for daily logs."""
+        fields = []
+
+        # High temperature
+        match = re.search(P2Patterns.TEMP_HIGH, text, re.IGNORECASE)
+        if match:
+            temp = int(match.group(1))
+            if -50 <= temp <= 150:  # Reasonable temperature range
+                fields.append(ExtractedField(
+                    name="temperature_high",
+                    value=temp,
+                    confidence=0.85,
+                    parse_tier=ParseTier.P2_PYTHON
+                ))
+
+        # Low temperature
+        match = re.search(P2Patterns.TEMP_LOW, text, re.IGNORECASE)
+        if match:
+            temp = int(match.group(1))
+            if -50 <= temp <= 150:
+                fields.append(ExtractedField(
+                    name="temperature_low",
+                    value=temp,
+                    confidence=0.85,
+                    parse_tier=ParseTier.P2_PYTHON
+                ))
+
+        return fields
+
+    def extract_crew_count(self, text: str) -> Optional[ExtractedField]:
+        """Extract crew count for daily logs."""
+        match = re.search(P2Patterns.CREW_COUNT, text, re.IGNORECASE)
+        if match:
+            count = int(match.group(1))
+            if 1 <= count <= 500:  # Reasonable crew size
+                return ExtractedField(
+                    name="crew_count",
+                    value=count,
+                    confidence=0.85,
+                    parse_tier=ParseTier.P2_PYTHON
+                )
+        return None
+
+    def extract_bond_info(self, text: str) -> list[ExtractedField]:
+        """Extract bond-related fields."""
+        fields = []
+
+        # Bond number
+        match = re.search(P2Patterns.BOND_NUMBER, text, re.IGNORECASE)
+        if match:
+            fields.append(ExtractedField(
+                name="bond_number",
+                value=match.group(1).strip(),
+                confidence=0.90,
+                parse_tier=ParseTier.P2_PYTHON
+            ))
+
+        # Surety company
+        match = re.search(P2Patterns.SURETY_COMPANY, text, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            if len(value) > 2:
+                fields.append(ExtractedField(
+                    name="surety_company",
+                    value=value,
+                    confidence=0.80,
+                    parse_tier=ParseTier.P2_PYTHON
+                ))
+
+        return fields
+
+    def extract_insurance_info(self, text: str) -> list[ExtractedField]:
+        """Extract insurance-related fields."""
+        fields = []
+
+        # Policy number
+        match = re.search(P2Patterns.POLICY_NUMBER, text, re.IGNORECASE)
+        if match:
+            fields.append(ExtractedField(
+                name="policy_number",
+                value=match.group(1).strip(),
+                confidence=0.90,
+                parse_tier=ParseTier.P2_PYTHON
+            ))
+
+        # Carrier
+        match = re.search(P2Patterns.CARRIER, text, re.IGNORECASE)
+        if match:
+            value = match.group(1).strip()
+            if len(value) > 2:
+                fields.append(ExtractedField(
+                    name="carrier",
+                    value=value,
+                    confidence=0.80,
+                    parse_tier=ParseTier.P2_PYTHON
+                ))
+
+        return fields
+
+    def extract_insulation_type(self, text: str) -> Optional[ExtractedField]:
+        """Extract insulation type."""
+        match = re.search(P2Patterns.INSULATION_TYPE, text, re.IGNORECASE)
+        if match:
+            return ExtractedField(
+                name="insulation_type",
+                value=match.group(1).strip().title(),
+                confidence=0.90,
+                parse_tier=ParseTier.P2_PYTHON
+            )
+        return None
+
+    def extract_project_address(self, text: str) -> Optional[ExtractedField]:
+        """Extract project address."""
+        match = re.search(P2Patterns.PROJECT_ADDRESS, text, re.IGNORECASE)
+        if match:
+            return ExtractedField(
+                name="project_address",
+                value=match.group(1).strip(),
+                confidence=0.75,
+                parse_tier=ParseTier.P2_PYTHON
+            )
+        return None
+
+    def extract_msds_info(self, text: str) -> list[ExtractedField]:
+        """Extract MSDS/SDS-related fields."""
+        fields = []
+
+        # Hazard classification
+        match = re.search(P2Patterns.HAZARD_CLASS, text, re.IGNORECASE)
+        if match:
+            fields.append(ExtractedField(
+                name="hazard_classification",
+                value=match.group(1).strip(),
+                confidence=0.80,
+                parse_tier=ParseTier.P2_PYTHON
+            ))
+
+        # PPE required
+        match = re.search(P2Patterns.PPE_REQUIRED, text, re.IGNORECASE)
+        if match:
+            ppe_list = [p.strip() for p in match.group(1).split(',')]
+            fields.append(ExtractedField(
+                name="ppe_required",
+                value=ppe_list,
+                confidence=0.80,
+                parse_tier=ParseTier.P2_PYTHON
+            ))
+
+        return fields
+
     def extract_all(self, text: str, doc_type: str) -> list[ExtractedField]:
         """Run all applicable extractors based on document type."""
         fields = []
 
-        # Universal extractors
+        # Universal extractors - apply to all document types
         extractors = [
             self.extract_currency,
             self.extract_dates,
         ]
 
         # Document-specific extractors
-        if doc_type in ["scope", "contract"]:
+        if doc_type == "contract":
+            extractors.extend([
+                self.extract_square_footage,
+                self.extract_retainage,
+                self.extract_owner_name,
+                self.extract_project_address,
+            ])
+
+        if doc_type == "scope":
             extractors.extend([
                 self.extract_square_footage,
                 self.extract_r_value,
                 self.extract_roof_type,
                 self.extract_warranty,
                 self.extract_retainage,
+                self.extract_insulation_type,
             ])
 
         if doc_type == "change_order":
@@ -318,6 +584,36 @@ class P2Extractor:
 
         if doc_type == "pay_application":
             extractors.append(self.extract_pay_app_number)
+
+        if doc_type == "daily_log":
+            extractors.extend([
+                self.extract_weather,
+                self.extract_temperatures,
+                self.extract_crew_count,
+            ])
+
+        if doc_type == "bond":
+            extractors.extend([
+                self.extract_bond_info,
+            ])
+
+        if doc_type == "insurance":
+            extractors.extend([
+                self.extract_insurance_info,
+            ])
+
+        if doc_type in ["specification", "submittal", "assembly_letter"]:
+            extractors.extend([
+                self.extract_manufacturer,
+                self.extract_product_name,
+            ])
+
+        if doc_type == "msds":
+            extractors.extend([
+                self.extract_manufacturer,
+                self.extract_product_name,
+                self.extract_msds_info,
+            ])
 
         # Run extractors
         for extractor in extractors:
@@ -420,12 +716,18 @@ class TieredParser:
 
     # Required fields per document type
     REQUIRED_FIELDS = {
-        "contract": ["contract_sum", "contract_date", "retainage_percent"],
-        "scope": ["total_square_footage", "roof_type", "insulation_r_value", "warranty_years"],
+        "contract": ["contract_sum", "contract_date", "retainage_percent", "owner_name", "project_address"],
+        "scope": ["total_square_footage", "roof_type", "insulation_r_value", "warranty_years", "insulation_type"],
         "change_order": ["co_number", "amount", "description"],
         "pay_application": ["application_number", "total_completed_stored", "current_payment_due"],
         "drawing": ["drawing_number", "revision", "scale"],
         "submittal": ["submittal_number", "status", "manufacturer"],
+        "daily_log": ["date", "weather", "crew_count"],
+        "bond": ["bond_number", "surety_company", "bond_amount"],
+        "insurance": ["policy_number", "carrier", "coverage_amount"],
+        "specification": ["section_number", "manufacturer", "product_name"],
+        "assembly_letter": ["manufacturer", "system_name"],
+        "msds": ["product_name", "manufacturer", "hazard_classification"],
     }
 
     def __init__(self, ai_provider: str = "claude"):
