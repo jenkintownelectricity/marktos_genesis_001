@@ -1,0 +1,3288 @@
+{
+  "batch_id": "ISOVER-STL-COMPLETE",
+  "taxonomy_depth": 20,
+  "generated": "2026-01-16",
+  "source_document": "ISOVER_FireProtect_HandBook_EN.pdf",
+  "meta": {
+    "system": "ISOVER FireProtect 150",
+    "product_code": "MW-EN14303-T5-CS(10)20-ST(+)700-WS1-CL10",
+    "substrate": "Structural Steel",
+    "material": "Stone Wool",
+    "density_kg_m3": {
+      "20-25mm": 165,
+      "30mm+": 150
+    },
+    "fixing_methods": [
+      "Fire Screws (SCR)",
+      "Stud-welded Pins (PIN)"
+    ],
+    "compliance": "EN 13381-4:2013",
+    "classification": "EN 13501-2:2016",
+    "reaction_to_fire": "A1",
+    "max_service_temp_C": 700,
+    "max_section_factor": 645
+  },
+  "taxonomy_key": {
+    "L00_GEO": "EU",
+    "L01_IND": "AEC",
+    "L02_CLS": "23",
+    "L03_CDE": "078100",
+    "L04_MFG": "SGO",
+    "L05_DIV": "ISO",
+    "L06_FAM": "FP",
+    "L07_SYS": "150",
+    "L08_MAT": "SW",
+    "L09_SUB": "STL",
+    "L10_ELE": "GEN",
+    "L11_PRF": "I",
+    "L12_EXP": "4S|3S",
+    "L13_FIX": "MEC",
+    "L14_CRT": "EN13381",
+    "L15_RAT": "R30|R45|R60|R90|R120|R180",
+    "L16_TMP": "450C-700C",
+    "L17_THK": "020-100",
+    "L18_ACC": "SCR|PIN",
+    "L19_SRC": "PG08-22"
+  },
+  "dna_sequences": [
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-450C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 450,
+        "thickness_mm": 20,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-500C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 500,
+        "thickness_mm": 20,
+        "max_section_factor": 558
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-525C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 525,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-550C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 550,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-560C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 560,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-600C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 600,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-620C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 620,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-650C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 650,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-700C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 700,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-450C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 450,
+        "thickness_mm": 25,
+        "max_section_factor": 440
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-500C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 500,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-525C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 525,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-550C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 550,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-560C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 560,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-600C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 600,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-620C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 620,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-650C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 650,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-700C-025-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 700,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-450C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 450,
+        "thickness_mm": 30,
+        "max_section_factor": 544
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-500C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 500,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-525C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 525,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-550C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 550,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-560C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 560,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-600C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 600,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-620C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 620,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-650C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 650,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-700C-030-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 700,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-450C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 450,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-500C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 500,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-525C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 525,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-550C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 550,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-560C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 560,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-600C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 600,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-620C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 620,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-650C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 650,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-700C-040-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp_C": 700,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-450C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 450,
+        "thickness_mm": 20,
+        "max_section_factor": 227
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-500C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 500,
+        "thickness_mm": 20,
+        "max_section_factor": 327
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-525C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 525,
+        "thickness_mm": 20,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-550C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 550,
+        "thickness_mm": 20,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-560C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 560,
+        "thickness_mm": 20,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-600C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 600,
+        "thickness_mm": 20,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-620C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 620,
+        "thickness_mm": 20,
+        "max_section_factor": 394
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-650C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 650,
+        "thickness_mm": 20,
+        "max_section_factor": 477
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-700C-020-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 700,
+        "thickness_mm": 20,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-450C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 450,
+        "thickness_mm": 25,
+        "max_section_factor": 269
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-500C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 500,
+        "thickness_mm": 25,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-525C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 525,
+        "thickness_mm": 25,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-550C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 550,
+        "thickness_mm": 25,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-560C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 560,
+        "thickness_mm": 25,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-600C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 600,
+        "thickness_mm": 25,
+        "max_section_factor": 398
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-620C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 620,
+        "thickness_mm": 25,
+        "max_section_factor": 446
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-650C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 650,
+        "thickness_mm": 25,
+        "max_section_factor": 536
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-700C-025-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 700,
+        "thickness_mm": 25,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-450C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 450,
+        "thickness_mm": 30,
+        "max_section_factor": 316
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-500C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 500,
+        "thickness_mm": 30,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-525C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 525,
+        "thickness_mm": 30,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-550C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 550,
+        "thickness_mm": 30,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-560C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 560,
+        "thickness_mm": 30,
+        "max_section_factor": 364
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-600C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 600,
+        "thickness_mm": 30,
+        "max_section_factor": 449
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-620C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 620,
+        "thickness_mm": 30,
+        "max_section_factor": 501
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-650C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 650,
+        "thickness_mm": 30,
+        "max_section_factor": 596
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-700C-030-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 700,
+        "thickness_mm": 30,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-450C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 450,
+        "thickness_mm": 40,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-500C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 500,
+        "thickness_mm": 40,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-525C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 525,
+        "thickness_mm": 40,
+        "max_section_factor": 393
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-550C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 550,
+        "thickness_mm": 40,
+        "max_section_factor": 441
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-560C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 560,
+        "thickness_mm": 40,
+        "max_section_factor": 462
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-600C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 600,
+        "thickness_mm": 40,
+        "max_section_factor": 560
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-620C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 620,
+        "thickness_mm": 40,
+        "max_section_factor": 618
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-650C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 650,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-700C-040-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 700,
+        "thickness_mm": 40,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-450C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 450,
+        "thickness_mm": 50,
+        "max_section_factor": 360
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-500C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 500,
+        "thickness_mm": 50,
+        "max_section_factor": 446
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-525C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 525,
+        "thickness_mm": 50,
+        "max_section_factor": 496
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-550C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 550,
+        "thickness_mm": 50,
+        "max_section_factor": 552
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-560C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 560,
+        "thickness_mm": 50,
+        "max_section_factor": 576
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-600C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 600,
+        "thickness_mm": 50,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-620C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 620,
+        "thickness_mm": 50,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-650C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 650,
+        "thickness_mm": 50,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-700C-050-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 700,
+        "thickness_mm": 50,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-450C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 450,
+        "thickness_mm": 60,
+        "max_section_factor": 465
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-500C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 500,
+        "thickness_mm": 60,
+        "max_section_factor": 565
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-525C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 525,
+        "thickness_mm": 60,
+        "max_section_factor": 622
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-550C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 550,
+        "thickness_mm": 60,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-560C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 560,
+        "thickness_mm": 60,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-600C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 600,
+        "thickness_mm": 60,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-620C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 620,
+        "thickness_mm": 60,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-650C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 650,
+        "thickness_mm": 60,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-700C-060-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 700,
+        "thickness_mm": 60,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-450C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 450,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-500C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 500,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-525C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 525,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-550C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 550,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-560C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 560,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-600C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 600,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-620C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 620,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-650C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 650,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R45-700C-080-SCR-PG08",
+      "data": {
+        "rating": "R45",
+        "crit_temp_C": 700,
+        "thickness_mm": 80,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 20,
+        "max_section_factor": 128
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 20,
+        "max_section_factor": 165
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 20,
+        "max_section_factor": 187
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 20,
+        "max_section_factor": 214
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 20,
+        "max_section_factor": 225
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 20,
+        "max_section_factor": 281
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 20,
+        "max_section_factor": 316
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 20,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 20,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 25,
+        "max_section_factor": 149
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 25,
+        "max_section_factor": 190
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 25,
+        "max_section_factor": 215
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 25,
+        "max_section_factor": 243
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 25,
+        "max_section_factor": 256
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 25,
+        "max_section_factor": 317
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 25,
+        "max_section_factor": 354
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 25,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 25,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 30,
+        "max_section_factor": 171
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 30,
+        "max_section_factor": 216
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 30,
+        "max_section_factor": 243
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 30,
+        "max_section_factor": 274
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 30,
+        "max_section_factor": 288
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 30,
+        "max_section_factor": 353
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 30,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 30,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-030-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 30,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 40,
+        "max_section_factor": 218
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 40,
+        "max_section_factor": 272
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 40,
+        "max_section_factor": 303
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 40,
+        "max_section_factor": 339
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 40,
+        "max_section_factor": 355
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 40,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 40,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 40,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 40,
+        "max_section_factor": 394
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 50,
+        "max_section_factor": 272
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 50,
+        "max_section_factor": 333
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 50,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 50,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 50,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 50,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 50,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 50,
+        "max_section_factor": 389
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-050-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 50,
+        "max_section_factor": 451
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 60,
+        "max_section_factor": 333
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 60,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 60,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 60,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 60,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 60,
+        "max_section_factor": 390
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 60,
+        "max_section_factor": 411
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 60,
+        "max_section_factor": 445
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-060-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 60,
+        "max_section_factor": 507
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 80,
+        "max_section_factor": 362
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 80,
+        "max_section_factor": 411
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 80,
+        "max_section_factor": 436
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 80,
+        "max_section_factor": 461
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 80,
+        "max_section_factor": 471
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 80,
+        "max_section_factor": 512
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 80,
+        "max_section_factor": 532
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 80,
+        "max_section_factor": 564
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-080-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 80,
+        "max_section_factor": 616
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-450C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 450,
+        "thickness_mm": 100,
+        "max_section_factor": 522
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 500,
+        "thickness_mm": 100,
+        "max_section_factor": 568
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-525C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 525,
+        "thickness_mm": 100,
+        "max_section_factor": 590
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-550C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 550,
+        "thickness_mm": 100,
+        "max_section_factor": 610
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-560C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 560,
+        "thickness_mm": 100,
+        "max_section_factor": 619
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 600,
+        "thickness_mm": 100,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-620C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 620,
+        "thickness_mm": 100,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-650C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 650,
+        "thickness_mm": 100,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-700C-100-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp_C": 700,
+        "thickness_mm": 100,
+        "max_section_factor": 645
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 20,
+        "max_section_factor": 69
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 20,
+        "max_section_factor": 83
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 20,
+        "max_section_factor": 91
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 20,
+        "max_section_factor": 99
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 20,
+        "max_section_factor": 103
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 20,
+        "max_section_factor": 118
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 20,
+        "max_section_factor": 127
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 20,
+        "max_section_factor": 141
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-020-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 20,
+        "max_section_factor": 167
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 25,
+        "max_section_factor": 79
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 25,
+        "max_section_factor": 94
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 25,
+        "max_section_factor": 103
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 25,
+        "max_section_factor": 112
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 25,
+        "max_section_factor": 116
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 25,
+        "max_section_factor": 133
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 25,
+        "max_section_factor": 142
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 25,
+        "max_section_factor": 157
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-025-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 25,
+        "max_section_factor": 185
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 30,
+        "max_section_factor": 89
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 30,
+        "max_section_factor": 106
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 30,
+        "max_section_factor": 115
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 30,
+        "max_section_factor": 125
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 30,
+        "max_section_factor": 129
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 30,
+        "max_section_factor": 147
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 30,
+        "max_section_factor": 157
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 30,
+        "max_section_factor": 173
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 30,
+        "max_section_factor": 203
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 40,
+        "max_section_factor": 110
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 40,
+        "max_section_factor": 130
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 40,
+        "max_section_factor": 141
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 40,
+        "max_section_factor": 152
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 40,
+        "max_section_factor": 157
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 40,
+        "max_section_factor": 177
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 40,
+        "max_section_factor": 188
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 40,
+        "max_section_factor": 205
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 40,
+        "max_section_factor": 237
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 50,
+        "max_section_factor": 133
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 50,
+        "max_section_factor": 155
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 50,
+        "max_section_factor": 167
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 50,
+        "max_section_factor": 180
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 50,
+        "max_section_factor": 185
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 50,
+        "max_section_factor": 207
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 50,
+        "max_section_factor": 218
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 50,
+        "max_section_factor": 237
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 50,
+        "max_section_factor": 270
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 60,
+        "max_section_factor": 157
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 60,
+        "max_section_factor": 182
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 60,
+        "max_section_factor": 195
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 60,
+        "max_section_factor": 208
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 60,
+        "max_section_factor": 214
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 60,
+        "max_section_factor": 237
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 60,
+        "max_section_factor": 249
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 60,
+        "max_section_factor": 268
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-060-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 60,
+        "max_section_factor": 301
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 80,
+        "max_section_factor": 211
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 80,
+        "max_section_factor": 239
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 80,
+        "max_section_factor": 254
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 80,
+        "max_section_factor": 268
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 80,
+        "max_section_factor": 274
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 80,
+        "max_section_factor": 298
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 80,
+        "max_section_factor": 310
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 80,
+        "max_section_factor": 329
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-080-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 80,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-450C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 450,
+        "thickness_mm": 100,
+        "max_section_factor": 274
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 500,
+        "thickness_mm": 100,
+        "max_section_factor": 303
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-525C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 525,
+        "thickness_mm": 100,
+        "max_section_factor": 317
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-550C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 550,
+        "thickness_mm": 100,
+        "max_section_factor": 332
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-560C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 560,
+        "thickness_mm": 100,
+        "max_section_factor": 338
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 600,
+        "thickness_mm": 100,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-620C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 620,
+        "thickness_mm": 100,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-650C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 650,
+        "thickness_mm": 100,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-700C-100-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp_C": 700,
+        "thickness_mm": 100,
+        "max_section_factor": 357
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-020-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 20,
+        "max_section_factor": 60
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-020-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 20,
+        "max_section_factor": 65
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-020-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 20,
+        "max_section_factor": 67
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-020-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 20,
+        "max_section_factor": 75
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-020-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 20,
+        "max_section_factor": 79
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-020-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 20,
+        "max_section_factor": 86
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-020-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 20,
+        "max_section_factor": 99
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 25,
+        "max_section_factor": 63
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 25,
+        "max_section_factor": 68
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 25,
+        "max_section_factor": 73
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-560C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 560,
+        "thickness_mm": 25,
+        "max_section_factor": 75
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 25,
+        "max_section_factor": 84
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 25,
+        "max_section_factor": 89
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 25,
+        "max_section_factor": 96
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-025-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 25,
+        "max_section_factor": 110
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-450C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 450,
+        "thickness_mm": 30,
+        "max_section_factor": 60
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 30,
+        "max_section_factor": 70
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 30,
+        "max_section_factor": 76
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 30,
+        "max_section_factor": 81
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-560C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 560,
+        "thickness_mm": 30,
+        "max_section_factor": 84
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 30,
+        "max_section_factor": 93
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 30,
+        "max_section_factor": 98
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 30,
+        "max_section_factor": 106
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-030-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 30,
+        "max_section_factor": 121
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-450C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 450,
+        "thickness_mm": 40,
+        "max_section_factor": 74
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 40,
+        "max_section_factor": 85
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 40,
+        "max_section_factor": 92
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 40,
+        "max_section_factor": 98
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-560C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 560,
+        "thickness_mm": 40,
+        "max_section_factor": 101
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 40,
+        "max_section_factor": 112
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 40,
+        "max_section_factor": 117
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 40,
+        "max_section_factor": 126
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 40,
+        "max_section_factor": 142
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-450C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 450,
+        "thickness_mm": 50,
+        "max_section_factor": 88
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 50,
+        "max_section_factor": 101
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 50,
+        "max_section_factor": 108
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 50,
+        "max_section_factor": 115
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-560C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 560,
+        "thickness_mm": 50,
+        "max_section_factor": 118
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 50,
+        "max_section_factor": 130
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 50,
+        "max_section_factor": 136
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 50,
+        "max_section_factor": 146
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 50,
+        "max_section_factor": 163
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-450C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 450,
+        "thickness_mm": 60,
+        "max_section_factor": 103
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 60,
+        "max_section_factor": 118
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 60,
+        "max_section_factor": 125
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 60,
+        "max_section_factor": 133
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-560C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 560,
+        "thickness_mm": 60,
+        "max_section_factor": 136
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 60,
+        "max_section_factor": 149
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 60,
+        "max_section_factor": 156
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 60,
+        "max_section_factor": 166
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 60,
+        "max_section_factor": 184
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-450C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 450,
+        "thickness_mm": 80,
+        "max_section_factor": 135
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 80,
+        "max_section_factor": 152
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 80,
+        "max_section_factor": 160
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 80,
+        "max_section_factor": 169
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-560C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 560,
+        "thickness_mm": 80,
+        "max_section_factor": 173
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 80,
+        "max_section_factor": 187
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 80,
+        "max_section_factor": 194
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 80,
+        "max_section_factor": 205
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-080-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 80,
+        "max_section_factor": 223
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-450C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 450,
+        "thickness_mm": 100,
+        "max_section_factor": 170
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 500,
+        "thickness_mm": 100,
+        "max_section_factor": 188
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-525C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 525,
+        "thickness_mm": 100,
+        "max_section_factor": 198
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-550C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 550,
+        "thickness_mm": 100,
+        "max_section_factor": 207
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-560C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 560,
+        "thickness_mm": 100,
+        "max_section_factor": 210
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 600,
+        "thickness_mm": 100,
+        "max_section_factor": 225
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-620C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 620,
+        "thickness_mm": 100,
+        "max_section_factor": 232
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-650C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 650,
+        "thickness_mm": 100,
+        "max_section_factor": 243
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-700C-100-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp_C": 700,
+        "thickness_mm": 100,
+        "max_section_factor": 261
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-700C-025-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 700,
+        "thickness_mm": 25,
+        "max_section_factor": 61
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-650C-030-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 650,
+        "thickness_mm": 30,
+        "max_section_factor": 60
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-700C-030-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 700,
+        "thickness_mm": 30,
+        "max_section_factor": 67
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-550C-040-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 550,
+        "thickness_mm": 40,
+        "max_section_factor": 57
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-560C-040-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 560,
+        "thickness_mm": 40,
+        "max_section_factor": 59
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-600C-040-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 600,
+        "thickness_mm": 40,
+        "max_section_factor": 64
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-620C-040-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 620,
+        "thickness_mm": 40,
+        "max_section_factor": 67
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-650C-040-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 650,
+        "thickness_mm": 40,
+        "max_section_factor": 71
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-700C-040-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 700,
+        "thickness_mm": 40,
+        "max_section_factor": 79
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-500C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 500,
+        "thickness_mm": 50,
+        "max_section_factor": 60
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-525C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 525,
+        "thickness_mm": 50,
+        "max_section_factor": 63
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-550C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 550,
+        "thickness_mm": 50,
+        "max_section_factor": 67
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-560C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 560,
+        "thickness_mm": 50,
+        "max_section_factor": 69
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-600C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 600,
+        "thickness_mm": 50,
+        "max_section_factor": 75
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-620C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 620,
+        "thickness_mm": 50,
+        "max_section_factor": 78
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-650C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 650,
+        "thickness_mm": 50,
+        "max_section_factor": 83
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-700C-050-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 700,
+        "thickness_mm": 50,
+        "max_section_factor": 91
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-450C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 450,
+        "thickness_mm": 60,
+        "max_section_factor": 61
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-500C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 500,
+        "thickness_mm": 60,
+        "max_section_factor": 69
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-525C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 525,
+        "thickness_mm": 60,
+        "max_section_factor": 73
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-550C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 550,
+        "thickness_mm": 60,
+        "max_section_factor": 77
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-560C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 560,
+        "thickness_mm": 60,
+        "max_section_factor": 79
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-600C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 600,
+        "thickness_mm": 60,
+        "max_section_factor": 85
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-620C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 620,
+        "thickness_mm": 60,
+        "max_section_factor": 89
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-650C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 650,
+        "thickness_mm": 60,
+        "max_section_factor": 94
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-700C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 700,
+        "thickness_mm": 60,
+        "max_section_factor": 103
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-450C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 450,
+        "thickness_mm": 80,
+        "max_section_factor": 78
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-500C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 500,
+        "thickness_mm": 80,
+        "max_section_factor": 88
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-525C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 525,
+        "thickness_mm": 80,
+        "max_section_factor": 92
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-550C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 550,
+        "thickness_mm": 80,
+        "max_section_factor": 97
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-560C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 560,
+        "thickness_mm": 80,
+        "max_section_factor": 99
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-600C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 600,
+        "thickness_mm": 80,
+        "max_section_factor": 107
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-620C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 620,
+        "thickness_mm": 80,
+        "max_section_factor": 111
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-650C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 650,
+        "thickness_mm": 80,
+        "max_section_factor": 117
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-700C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 700,
+        "thickness_mm": 80,
+        "max_section_factor": 126
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-450C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 450,
+        "thickness_mm": 100,
+        "max_section_factor": 97
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-500C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 500,
+        "thickness_mm": 100,
+        "max_section_factor": 107
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-525C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 525,
+        "thickness_mm": 100,
+        "max_section_factor": 113
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-550C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 550,
+        "thickness_mm": 100,
+        "max_section_factor": 118
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-560C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 560,
+        "thickness_mm": 100,
+        "max_section_factor": 120
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-600C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 600,
+        "thickness_mm": 100,
+        "max_section_factor": 128
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-620C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 620,
+        "thickness_mm": 100,
+        "max_section_factor": 133
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-650C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 650,
+        "thickness_mm": 100,
+        "max_section_factor": 139
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-700C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp_C": 700,
+        "thickness_mm": 100,
+        "max_section_factor": 149
+      }
+    }
+  ],
+  "summary": {
+    "total_dna_sequences": 356,
+    "ratings": {
+      "R30": 36,
+      "R45": 63,
+      "R60": 72,
+      "R90": 72,
+      "R120": 69,
+      "R180": 44
+    },
+    "thickness_range_mm": [
+      20,
+      25,
+      30,
+      40,
+      50,
+      60,
+      80,
+      100
+    ],
+    "critical_temps_C": [
+      450,
+      500,
+      525,
+      550,
+      560,
+      600,
+      620,
+      650,
+      700
+    ],
+    "max_section_factor": 645,
+    "min_section_factor": 57,
+    "source_pages": "8-22"
+  }
+}
