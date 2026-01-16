@@ -1,0 +1,168 @@
+{
+  "batch_id": "ISOVER-STL-BATCH-01",
+  "meta": {
+    "system": "ISOVER FireProtect 150",
+    "substrate": "Structural Steel",
+    "fixing_method": "Fire Screws (SCR) or Welded Pins (PIN)",
+    "compliance": "EN 13381-4:2013",
+    "taxonomy_depth": 20,
+    "source_file": "ISOVER_FireProtect_HandBook_EN.pdf"
+  },
+  "dna_sequences": [
+    {
+      "comment": "--- R30 DATA (Extracted from Page 8) ---",
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-500C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp": "500C",
+        "thickness_mm": 20,
+        "max_section_factor": 558,
+        "note": "Base layer for 30min protection"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R30-600C-020-SCR-PG08",
+      "data": {
+        "rating": "R30",
+        "crit_temp": "600C",
+        "thickness_mm": 20,
+        "max_section_factor": 645,
+        "note": "Higher critical temp allows higher A/V"
+      }
+    },
+    {
+      "comment": "--- R60 DATA (Extracted from Page 8) ---",
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp": "500C",
+        "thickness_mm": 20,
+        "max_section_factor": 165,
+        "note": "Standard 1-hour rating baseline"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-025-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp": "500C",
+        "thickness_mm": 25,
+        "max_section_factor": 190,
+        "note": "Increased thickness for higher A/V"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-500C-040-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp": "500C",
+        "thickness_mm": 40,
+        "max_section_factor": 272,
+        "note": "Heavy duty 1-hour protection"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R60-600C-020-SCR-PG08",
+      "data": {
+        "rating": "R60",
+        "crit_temp": "600C",
+        "thickness_mm": 20,
+        "max_section_factor": 357,
+        "note": "High temp allowance reduces thickness need"
+      }
+    },
+    {
+      "comment": "--- R90 DATA (Extracted from Page 8 & 12) ---",
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-030-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp": "500C",
+        "thickness_mm": 30,
+        "max_section_factor": 106,
+        "note": "Minimum thickness for R90 at 500C"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-500C-050-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp": "500C",
+        "thickness_mm": 50,
+        "max_section_factor": 155,
+        "note": "Mid-range R90 solution"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R90-600C-040-SCR-PG08",
+      "data": {
+        "rating": "R90",
+        "crit_temp": "600C",
+        "thickness_mm": 40,
+        "max_section_factor": 177,
+        "note": "R90 with high critical temp"
+      }
+    },
+    {
+      "comment": "--- R120 DATA (Extracted from Page 8 & 13) ---",
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-040-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp": "500C",
+        "thickness_mm": 40,
+        "max_section_factor": 85,
+        "note": "2-hour rating entry level"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-500C-060-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp": "500C",
+        "thickness_mm": 60,
+        "max_section_factor": 125,
+        "note": "2-hour rating standard"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R120-600C-050-SCR-PG08",
+      "data": {
+        "rating": "R120",
+        "crit_temp": "600C",
+        "thickness_mm": 50,
+        "max_section_factor": 130,
+        "note": "Optimized for high temp steel"
+      }
+    },
+    {
+      "comment": "--- R180 DATA (Extracted from Page 8 & 13) ---",
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-500C-060-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp": "500C",
+        "thickness_mm": 60,
+        "max_section_factor": 61,
+        "note": "3-hour rating, limited A/V"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-600C-080-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp": "600C",
+        "thickness_mm": 80,
+        "max_section_factor": 99,
+        "note": "Heavy 3-hour protection"
+      }
+    },
+    {
+      "id": "EU-AEC-23-078100-SGO-ISO-FP-150-SW-STL-GEN-I-4S-MEC-EN13381-R180-600C-100-SCR-PG08",
+      "data": {
+        "rating": "R180",
+        "crit_temp": "600C",
+        "thickness_mm": 100,
+        "max_section_factor": 128,
+        "note": "Maximum protection thickness"
+      }
+    }
+  ]
+}
