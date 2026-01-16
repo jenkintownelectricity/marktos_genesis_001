@@ -631,7 +631,7 @@
                 value: parseInt(document.getElementById('new-deal-value').value) || 5000,
                 stage: document.getElementById('new-deal-stage').value
             };
-            if (!ldsData.deals) ldsData.deals = testData.deals;
+            if (!ldsData.deals) ldsData.deals = [];
             ldsData.deals.unshift(deal);
             closeModal();
             renderPipeline();
