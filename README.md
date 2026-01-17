@@ -12,7 +12,7 @@
 ║   ██║ ╚═╝ ██║██║  ██║██║  ██║██║  ██╗   ██║   ╚██████╔╝███████║             ║
 ║   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝             ║
 ║                                                                              ║
-║                         GENESIS 001 | KERNEL v1.0.0                          ║
+║                    GENESIS 001 | APP v1.1.0 | KERNEL v1.0.0                   ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -26,13 +26,15 @@
 ## TABLE OF CONTENTS
 
 1. [Quick Start](#quick-start)
-2. [Kernel Specification](#kernel-specification)
-3. [25-Layer Genome Architecture](#25-layer-genome-architecture)
-4. [LDS.json File Type Specification](#ldsjson-file-type-specification)
-5. [ValidKernel OneShot Command™](#validkernel-oneshot-command)
-6. [User Guide](#user-guide)
-7. [API Reference](#api-reference)
-8. [License](#license)
+2. [What's New in v1.1](#whats-new-in-v11)
+3. [Data Tools Guide](#data-tools-guide)
+4. [Kernel Specification](#kernel-specification)
+5. [25-Layer Genome Architecture](#25-layer-genome-architecture)
+6. [LDS.json File Type Specification](#ldsjson-file-type-specification)
+7. [ValidKernel OneShot Command™](#validkernel-oneshot-command)
+8. [User Guide](#user-guide)
+9. [API Reference](#api-reference)
+10. [License](#license)
 
 ---
 
@@ -72,6 +74,162 @@ python -m http.server 8080
 | JavaScript | ES6+ | ES2020+ |
 | Screen | 1024x768 | 1920x1080 |
 | Network | None (offline capable) | Broadband for CDN |
+
+---
+
+## WHAT'S NEW IN v1.1
+
+### Release: January 17, 2026
+
+MARKTOS v1.1 introduces **Data Tools** - a suite of offline-first data management features:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          DATA TOOLS v1.1                                    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  📤 Export LDS.json     One-click backup to downloadable file              │
+│  📥 Import LDS.json     Restore from backup file                           │
+│  💬 Chat Parser         Paste text, auto-extract leads/contacts            │
+│  🔗 Share via Link      Generate shareable URL with embedded data          │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### New Features
+
+| Feature | Description | Offline |
+|---------|-------------|---------|
+| **Export LDS.json** | Download complete backup of campaigns, leads, workflows | ✅ Yes |
+| **Import LDS.json** | Restore data from backup file | ✅ Yes |
+| **Chat Parser** | Paste text (emails, names, companies) to auto-create leads | ✅ Yes |
+| **Share via Link** | Generate URL containing encoded data (no server needed) | ✅ Yes |
+| **localStorage Persistence** | Data automatically saved locally | ✅ Yes |
+| **PWA Support** | Install to home screen on iOS/Android | ✅ Yes |
+
+### Upgrade Notes
+
+- No breaking changes from v1.0
+- Data from v1.0 sessions will be preserved
+- All new features accessible from **Data Tools** sidebar section
+
+---
+
+## DATA TOOLS GUIDE
+
+### Export LDS.json
+
+Create a complete backup of your MARKTOS data.
+
+**How to use:**
+1. Click **📤 Export LDS.json** in the Data Tools sidebar
+2. Review data summary (campaigns, leads, workflows count)
+3. Click **Download Backup**
+4. File saves as `marktos_backup_YYYY-MM-DD.lds.json`
+
+**Export format:**
+```json
+{
+  "$schema": "marktos-lds-v1",
+  "version": "1.1.0",
+  "exported": "2026-01-17T12:00:00.000Z",
+  "kernel": {
+    "name": "ValidKernel",
+    "version": "1.0.0",
+    "trust_level": "L0_GOVERNANCE"
+  },
+  "campaigns": [...],
+  "leads": [...],
+  "workflows": [...]
+}
+```
+
+---
+
+### Import LDS.json
+
+Restore data from a backup file.
+
+**How to use:**
+1. Click **📥 Import LDS.json** in the Data Tools sidebar
+2. Click the upload area or drag-and-drop your `.lds.json` file
+3. Data will be validated and imported
+4. Views refresh automatically
+
+**Supported formats:**
+- MARKTOS LDS.json exports
+- Any JSON with `campaigns`, `leads`, or `workflows` arrays
+
+⚠️ **Warning:** Import replaces current data. Export first if needed.
+
+---
+
+### Chat Parser
+
+Quickly add leads by pasting text from any source (emails, chat logs, spreadsheets).
+
+**How to use:**
+1. Click **💬 Chat Parser** in the Data Tools sidebar
+2. Paste text containing contact information
+3. Click **Parse & Import**
+4. Leads are created and added to your pipeline
+
+**Supported formats:**
+```
+John Doe - Acme Corp
+jane.smith@company.com
+Mike Wilson, TechStartup Inc
+Company: Enterprise Solutions
++1 (555) 123-4567
+```
+
+**Parser detects:**
+- Email addresses
+- Phone numbers
+- Names (First Last format)
+- Companies (after "-" or "," or "Company:")
+
+---
+
+### Share via Link
+
+Generate a URL containing your data - no server required.
+
+**How to use:**
+1. Click **🔗 Share via Link** in the Data Tools sidebar
+2. Click **Generate Link**
+3. Click **Copy** to copy URL to clipboard
+4. Share URL - recipient opens it and data loads automatically
+
+**How it works:**
+- Data is Base64 encoded into the URL
+- Includes up to 10 campaigns and 50 leads
+- Works completely offline
+- No server or database required
+
+**Limitations:**
+- URLs over 2000 characters may not work in all browsers
+- Large datasets should use Export/Import instead
+
+---
+
+### PWA Installation (Mobile)
+
+Install MARKTOS as an app on your phone or tablet.
+
+**iOS (Safari):**
+1. Open MARKTOS in Safari
+2. Tap the Share button
+3. Tap "Add to Home Screen"
+4. Tap "Add"
+
+**Android (Chrome):**
+1. Open MARKTOS in Chrome
+2. Tap the menu (⋮)
+3. Tap "Add to Home screen" or "Install app"
+4. Tap "Add"
+
+**Desktop (Chrome/Edge):**
+1. Look for install icon in address bar
+2. Click "Install"
 
 ---
 

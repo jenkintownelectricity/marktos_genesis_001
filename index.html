@@ -2,8 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MARKTOS | The 25-Layer Marketing Genome</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="application-name" content="MARKTOS">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MARKTOS">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#7C3AED">
+    <meta name="description" content="MARKTOS Genesis 001 - 25-Layer Marketing Genome Platform powered by ValidKernel">
+
+    <!-- PWA Manifest (inline) -->
+    <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22MARKTOS%20Genesis%22%2C%22short_name%22%3A%22MARKTOS%22%2C%22description%22%3A%2225-Layer%20Marketing%20Genome%20Platform%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f0f23%22%2C%22theme_color%22%3A%22%237C3AED%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%25200%2520100%2520100%27%253E%253Crect%2520fill%3D%27%25237C3AED%27%2520width%3D%27100%27%2520height%3D%27100%27%2520rx%3D%2720%27%2F%253E%253Ctext%2520x%3D%2750%27%2520y%3D%2765%27%2520font-size%3D%2750%27%2520text-anchor%3D%27middle%27%2520fill%3D%27white%27%2520font-family%3D%27monospace%27%253EM%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
@@ -90,7 +103,7 @@
                     </div>
                     <div>
                         <div class="mono font-bold text-lg">MARKTOS</div>
-                        <div class="text-xs text-gray-400">25-Layer Genome</div>
+                        <div class="text-xs text-gray-400">v1.1 | 25-Layer Genome</div>
                     </div>
                 </div>
             </div>
@@ -247,13 +260,35 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- DATA TOOLS - v1.1 -->
+                <div class="mt-4 pt-4 border-t border-white/10">
+                    <div class="flex items-center gap-2 mb-3 px-3">
+                        <span class="text-xs text-cyan-400 uppercase tracking-wider font-bold">Data Tools</span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('export-data')">
+                            <span>📤</span><span>Export LDS.json</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('import-data')">
+                            <span>📥</span><span>Import LDS.json</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('chat-parser')">
+                            <span>💬</span><span>Chat Parser</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('share-link')">
+                            <span>🔗</span><span>Share via Link</span>
+                        </div>
+                    </div>
+                </div>
             </nav>
 
             <!-- SIDEBAR FOOTER -->
             <div class="p-4 border-t border-white/10">
                 <div class="text-xs text-gray-500 mono">
-                    <div>VALIDKERNEL</div>
+                    <div>VALIDKERNEL v1.0.0</div>
                     <div>Deterministic Trust</div>
+                    <div class="text-cyan-600 mt-1" id="install-hint" style="display:none;">📱 Tap to install</div>
                 </div>
             </div>
         </aside>
@@ -566,8 +601,11 @@
 
     <script>
         // ═══════════════════════════════════════════════════════════════
-        // MARKTOS KERNEL - ValidKernel Trust Infrastructure
+        // MARKTOS KERNEL v1.1 - ValidKernel Trust Infrastructure
         // ═══════════════════════════════════════════════════════════════
+
+        const MARKTOS_VERSION = '1.1.0';
+        const STORAGE_KEY = 'marktos_data_v1';
 
         // INVARIANT IV.01: Trust Hierarchy
         const TRUST_LEVELS = {
@@ -585,6 +623,272 @@
             analyst: { level: 4, permissions: ['report:*', 'analytics:read'], color: 'text-yellow-400' },
             viewer: { level: 5, permissions: ['read:*'], color: 'text-gray-400' }
         };
+
+        // ═══════════════════════════════════════════════════════════════
+        // PERSISTENCE LAYER (localStorage)
+        // ═══════════════════════════════════════════════════════════════
+
+        function saveData() {
+            try {
+                const exportData = {
+                    version: MARKTOS_VERSION,
+                    exported: new Date().toISOString(),
+                    kernel: 'ValidKernel v1.0.0',
+                    data: data
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(exportData));
+                console.log('[MARKTOS] Data saved to localStorage');
+            } catch (e) {
+                console.warn('[MARKTOS] localStorage save failed:', e.message);
+            }
+        }
+
+        function loadData() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (parsed.data) {
+                        Object.assign(data, parsed.data);
+                        console.log('[MARKTOS] Data loaded from localStorage');
+                        return true;
+                    }
+                }
+            } catch (e) {
+                console.warn('[MARKTOS] localStorage load failed:', e.message);
+            }
+            return false;
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // EXPORT/IMPORT LDS.json
+        // ═══════════════════════════════════════════════════════════════
+
+        function exportLDS() {
+            const exportData = {
+                '$schema': 'marktos-lds-v1',
+                version: MARKTOS_VERSION,
+                exported: new Date().toISOString(),
+                kernel: {
+                    name: 'ValidKernel',
+                    version: '1.0.0',
+                    trust_level: 'L0_GOVERNANCE'
+                },
+                campaigns: data.campaigns,
+                leads: data.leads,
+                workflows: data.workflows,
+                layers: data.layers
+            };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `marktos_backup_${new Date().toISOString().split('T')[0]}.lds.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('LDS.json exported successfully', 'success');
+            closeModal();
+        }
+
+        function importLDS(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const imported = JSON.parse(e.target.result);
+
+                    // Validate schema
+                    if (!imported.campaigns && !imported.leads && !imported.data) {
+                        throw new Error('Invalid LDS.json format');
+                    }
+
+                    // Handle both direct data and nested data formats
+                    const importedData = imported.data || imported;
+
+                    if (importedData.campaigns) data.campaigns = importedData.campaigns;
+                    if (importedData.leads) data.leads = importedData.leads;
+                    if (importedData.workflows) data.workflows = importedData.workflows;
+
+                    saveData();
+                    refreshAllViews();
+                    showToast(`Imported: ${data.campaigns.length} campaigns, ${data.leads.length} leads`, 'success');
+                    closeModal();
+                } catch (err) {
+                    showToast('Import failed: ' + err.message, 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // CHAT PARSER - Parse text into leads/contacts
+        // ═══════════════════════════════════════════════════════════════
+
+        function parseChatText(text) {
+            const leads = [];
+            const lines = text.split('\n').filter(l => l.trim());
+
+            // Pattern matching for common formats
+            const emailRegex = /[\w.-]+@[\w.-]+\.\w+/gi;
+            const phoneRegex = /[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,4}[-\s\.]?[0-9]{1,9}/g;
+            const nameRegex = /^([A-Z][a-z]+\s+[A-Z][a-z]+)/;
+
+            let currentLead = {};
+
+            for (const line of lines) {
+                const trimmed = line.trim();
+
+                // Check for email
+                const emails = trimmed.match(emailRegex);
+                if (emails) {
+                    if (currentLead.email) {
+                        leads.push(currentLead);
+                        currentLead = {};
+                    }
+                    currentLead.email = emails[0];
+                }
+
+                // Check for phone
+                const phones = trimmed.match(phoneRegex);
+                if (phones) {
+                    currentLead.phone = phones[0];
+                }
+
+                // Check for name pattern
+                const nameMatch = trimmed.match(nameRegex);
+                if (nameMatch && !currentLead.name) {
+                    currentLead.name = nameMatch[1];
+                }
+
+                // Check for company indicators
+                if (trimmed.toLowerCase().includes('company:') || trimmed.toLowerCase().includes('org:')) {
+                    currentLead.company = trimmed.split(':')[1]?.trim() || trimmed;
+                }
+
+                // Check for "Name - Company" format
+                if (trimmed.includes(' - ') && !currentLead.name) {
+                    const parts = trimmed.split(' - ');
+                    currentLead.name = parts[0].trim();
+                    currentLead.company = parts[1]?.trim();
+                }
+
+                // Check for "Name, Company" format
+                if (trimmed.includes(', ') && !currentLead.name && !trimmed.includes('@')) {
+                    const parts = trimmed.split(', ');
+                    if (parts[0].split(' ').length <= 3) {
+                        currentLead.name = parts[0].trim();
+                        currentLead.company = parts[1]?.trim();
+                    }
+                }
+            }
+
+            // Don't forget last lead
+            if (Object.keys(currentLead).length > 0) {
+                leads.push(currentLead);
+            }
+
+            return leads;
+        }
+
+        function importFromChat() {
+            const text = document.getElementById('chat-input').value;
+            if (!text.trim()) {
+                showToast('Please paste some text to parse', 'error');
+                return;
+            }
+
+            const parsed = parseChatText(text);
+
+            if (parsed.length === 0) {
+                showToast('No leads found in text. Try formats like:\nJohn Doe - Acme Corp\njohn@acme.com', 'info');
+                return;
+            }
+
+            // Convert to lead format and add to data
+            parsed.forEach(p => {
+                data.leads.push({
+                    id: Date.now() + Math.random(),
+                    name: p.name || 'Unknown',
+                    company: p.company || 'Unknown',
+                    email: p.email || '',
+                    phone: p.phone || '',
+                    value: 0,
+                    stage: 'new',
+                    score: 10
+                });
+            });
+
+            saveData();
+            refreshAllViews();
+            showToast(`Added ${parsed.length} leads from chat`, 'success');
+            closeModal();
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // SHARE VIA LINK - Generate shareable data URL
+        // ═══════════════════════════════════════════════════════════════
+
+        function generateShareLink() {
+            const shareData = {
+                v: MARKTOS_VERSION,
+                c: data.campaigns.slice(0, 10),
+                l: data.leads.slice(0, 50)
+            };
+
+            const compressed = btoa(encodeURIComponent(JSON.stringify(shareData)));
+            const baseUrl = window.location.href.split('?')[0].split('#')[0];
+            const shareUrl = `${baseUrl}?data=${compressed}`;
+
+            document.getElementById('share-url').value = shareUrl;
+            document.getElementById('share-url-container').classList.remove('hidden');
+
+            // Check URL length
+            if (shareUrl.length > 2000) {
+                document.getElementById('share-warning').classList.remove('hidden');
+            }
+        }
+
+        function copyShareLink() {
+            const url = document.getElementById('share-url').value;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Link copied to clipboard!', 'success');
+            }).catch(() => {
+                // Fallback for older browsers
+                document.getElementById('share-url').select();
+                document.execCommand('copy');
+                showToast('Link copied!', 'success');
+            });
+        }
+
+        function loadFromShareLink() {
+            const params = new URLSearchParams(window.location.search);
+            const sharedData = params.get('data');
+
+            if (sharedData) {
+                try {
+                    const decoded = JSON.parse(decodeURIComponent(atob(sharedData)));
+                    if (decoded.c) data.campaigns = decoded.c;
+                    if (decoded.l) data.leads = decoded.l;
+                    saveData();
+                    showToast('Shared data loaded!', 'success');
+                    // Clean URL
+                    window.history.replaceState({}, '', window.location.pathname);
+                } catch (e) {
+                    console.warn('[MARKTOS] Failed to load shared data:', e);
+                }
+            }
+        }
+
+        function refreshAllViews() {
+            renderGenomeGrid();
+            renderCampaigns('campaign-list', 4);
+            renderPipeline('pipeline-stages');
+            renderWorkflows('workflow-grid', 4);
+            renderActivityFeed();
+        }
 
         // DATA STORE
         const data = {
@@ -898,6 +1202,93 @@
                 `;
             }
 
+            // ═══════════════════════════════════════════════════════════════
+            // v1.1 DATA TOOLS MODALS
+            // ═══════════════════════════════════════════════════════════════
+
+            if (type === 'export-data') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">📤 EXPORT LDS.JSON</h2>
+                    <p class="text-gray-400 text-sm mb-6">Download your complete MARKTOS data backup</p>
+                    <div class="glass-dark rounded-lg p-4 mb-6">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div><span class="text-gray-400">Campaigns:</span> <span class="mono text-cyan-400">${data.campaigns.length}</span></div>
+                            <div><span class="text-gray-400">Leads:</span> <span class="mono text-cyan-400">${data.leads.length}</span></div>
+                            <div><span class="text-gray-400">Workflows:</span> <span class="mono text-cyan-400">${data.workflows.length}</span></div>
+                            <div><span class="text-gray-400">Format:</span> <span class="mono text-green-400">LDS.json</span></div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                        <button onclick="exportLDS()" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Download Backup</button>
+                    </div>
+                `;
+            }
+
+            if (type === 'import-data') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">📥 IMPORT LDS.JSON</h2>
+                    <p class="text-gray-400 text-sm mb-6">Restore data from a backup file</p>
+                    <div class="glass-dark rounded-lg p-8 mb-6 text-center border-2 border-dashed border-white/20 hover:border-purple-500 transition cursor-pointer" onclick="document.getElementById('file-input').click()">
+                        <div class="text-4xl mb-3">📁</div>
+                        <div class="text-sm">Click to select LDS.json file</div>
+                        <div class="text-xs text-gray-500 mt-1">or drag and drop</div>
+                        <input type="file" id="file-input" accept=".json,.lds.json" class="hidden" onchange="importLDS(this.files[0])">
+                    </div>
+                    <div class="text-xs text-yellow-500 mb-4">⚠️ This will replace your current data</div>
+                    <button onclick="closeModal()" class="w-full py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                `;
+            }
+
+            if (type === 'chat-parser') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">💬 CHAT PARSER</h2>
+                    <p class="text-gray-400 text-sm mb-4">Paste text to auto-extract leads and contacts</p>
+                    <div class="mb-4">
+                        <textarea id="chat-input" class="w-full h-48 bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500 text-sm" placeholder="Paste contact info here...
+
+Supported formats:
+• John Doe - Acme Corp
+• jane@company.com
+• Name, Company Name
+• Company: TechCorp
+• +1 (555) 123-4567"></textarea>
+                    </div>
+                    <div class="glass-dark rounded-lg p-3 mb-4 text-xs text-gray-400">
+                        <strong class="text-cyan-400">Tip:</strong> The parser detects emails, phone numbers, names, and company names from common formats.
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                        <button onclick="importFromChat()" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Parse & Import</button>
+                    </div>
+                `;
+            }
+
+            if (type === 'share-link') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">🔗 SHARE VIA LINK</h2>
+                    <p class="text-gray-400 text-sm mb-6">Generate a shareable URL containing your data</p>
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm mb-2"><span class="text-gray-400">Includes:</span></div>
+                        <div class="text-xs text-gray-500">• Up to 10 campaigns</div>
+                        <div class="text-xs text-gray-500">• Up to 50 leads</div>
+                        <div class="text-xs text-gray-500">• Encoded in URL (no server needed)</div>
+                    </div>
+                    <div id="share-url-container" class="hidden mb-4">
+                        <label class="block text-xs text-gray-400 uppercase mb-2">Share URL</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="share-url" readonly class="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-xs mono focus:outline-none">
+                            <button onclick="copyShareLink()" class="px-4 py-2 bg-cyan-600 rounded-lg hover:bg-cyan-700 transition text-sm">Copy</button>
+                        </div>
+                    </div>
+                    <div id="share-warning" class="hidden text-xs text-yellow-500 mb-4">⚠️ URL is long and may not work in all browsers/apps</div>
+                    <div class="flex gap-4">
+                        <button onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                        <button onclick="generateShareLink()" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Generate Link</button>
+                    </div>
+                `;
+            }
+
             overlay.classList.remove('hidden');
         }
 
@@ -920,6 +1311,7 @@
             const name = document.getElementById('campaign-name').value;
             const type = document.getElementById('campaign-type').value;
             data.campaigns.unshift({ id: Date.now(), name, type, status: 'draft', sent: 0, opens: 0, clicks: 0 });
+            saveData();
             closeModal();
             renderCampaigns('campaign-list', 4);
             showToast(`Campaign "${name}" created`);
@@ -930,15 +1322,67 @@
         // ═══════════════════════════════════════════════════════════════
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Load saved data first
+            loadData();
+
+            // Check for shared data in URL
+            loadFromShareLink();
+
+            // Render all views
             renderGenomeGrid();
             renderCampaigns('campaign-list', 4);
             renderPipeline('pipeline-stages');
             renderWorkflows('workflow-grid', 4);
             renderActivityFeed();
 
-            console.log('[MARKTOS] Kernel initialized');
+            console.log('[MARKTOS] Kernel v' + MARKTOS_VERSION + ' initialized');
             console.log('[MARKTOS] Trust Level: L0_GOVERNANCE');
             console.log('[MARKTOS] 25-layer genome active');
+            console.log('[MARKTOS] Data Tools: Export, Import, Chat Parser, Share Link');
+
+            // PWA Install Prompt
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                document.getElementById('install-hint').style.display = 'block';
+                document.getElementById('install-hint').onclick = () => {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((result) => {
+                        if (result.outcome === 'accepted') {
+                            showToast('MARKTOS installed!', 'success');
+                        }
+                        deferredPrompt = null;
+                        document.getElementById('install-hint').style.display = 'none';
+                    });
+                };
+            });
+
+            // Register Service Worker for offline support
+            if ('serviceWorker' in navigator) {
+                // Inline service worker via blob
+                const swCode = `
+                    const CACHE_NAME = 'marktos-v${MARKTOS_VERSION}';
+                    self.addEventListener('install', e => self.skipWaiting());
+                    self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+                    self.addEventListener('fetch', e => {
+                        if (e.request.url.includes('cdn.tailwindcss.com') || e.request.url.includes('fonts.googleapis.com')) {
+                            e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {
+                                const clone = res.clone();
+                                caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+                                return res;
+                            })));
+                        }
+                    });
+                `;
+                const swBlob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(swBlob);
+                navigator.serviceWorker.register(swUrl).then(() => {
+                    console.log('[MARKTOS] Service Worker registered');
+                }).catch(() => {
+                    console.log('[MARKTOS] Service Worker not supported in this context');
+                });
+            }
         });
 
         // Close modal on overlay click
