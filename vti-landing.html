@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTI™ - Verifiable Trust Infrastructure | License the Standard</title>
+    <meta name="description" content="License VTI™ (Verifiable Trust Infrastructure) for your software. The deterministic trust standard by ValidKernel.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glow {
+            box-shadow: 0 0 60px rgba(99, 102, 241, 0.15);
+        }
+
+        .trust-ring {
+            background: conic-gradient(from 0deg, #6366f1, #8b5cf6, #06b6d4, #6366f1);
+            padding: 3px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="trust-ring">
+                    <div class="w-10 h-10 bg-slate-950 rounded-full flex items-center justify-center">
+                        <span class="text-lg font-bold">V</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="font-semibold">VTI</span><span class="text-indigo-400">™</span>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm text-slate-400">
+                <a href="#what" class="hover:text-white transition">What is VTI™</a>
+                <a href="#licensing" class="hover:text-white transition">Licensing</a>
+                <a href="#certification" class="hover:text-white transition">Certification</a>
+                <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">Get Licensed</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-sm text-slate-400 mb-8">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                Trademark of ValidKernel.com
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span class="gradient-text">Verifiable Trust</span>
+                <br>Infrastructure
+            </h1>
+
+            <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                The deterministic trust standard for modern software.
+                License VTI™ to build audit-ready, compliance-first applications.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#licensing" class="bg-indigo-600 hover:bg-indigo-700 px-8 py-4 rounded-xl font-medium transition text-lg">
+                    License VTI™
+                </a>
+                <a href="#what" class="glass hover:bg-white/10 px-8 py-4 rounded-xl font-medium transition text-lg">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="py-12 border-y border-slate-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-wrap items-center justify-center gap-12 text-slate-500 text-sm">
+                <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span> Deterministic Boundaries
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span> Audit-Ready Logging
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span> L0-L1-L2 Trust Hierarchy
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-green-400">✓</span> Role-Based Invariants
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is VTI -->
+    <section id="what" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What is VTI™?</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    A software architecture standard that makes trust verifiable, auditable, and enforceable.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass rounded-2xl p-8 glow">
+                    <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center text-2xl mb-6">
+                        🔒
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Trust Hierarchy</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Three-level authority model (L0 → L1 → L2) ensures commands flow downward, never upward. Governance by design.
+                    </p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 glow">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-2xl mb-6">
+                        📜
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Audit Logging</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Every action logged with timestamp, invariant verification, and trust level. Export compliance reports in one click.
+                    </p>
+                </div>
+
+                <div class="glass rounded-2xl p-8 glow">
+                    <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center text-2xl mb-6">
+                        ⚡
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Kernel Invariants</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Four core invariants enforced at runtime: Trust Hierarchy, Check-Then-Act, Deterministic Boundaries, Role-Based Permissions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Invariants -->
+    <section class="py-24 px-6 bg-slate-900/50">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">The Four Invariants</h2>
+                <p class="text-slate-400">
+                    Every VTI™ certified application enforces these core principles.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass rounded-xl p-6 flex items-start gap-4">
+                    <div class="text-2xl font-bold text-indigo-400 font-mono">IV.01</div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Trust Hierarchy</h3>
+                        <p class="text-slate-400 text-sm">Authority flows L0 → L1 → L2, never upward. Lower levels cannot override higher levels.</p>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-6 flex items-start gap-4">
+                    <div class="text-2xl font-bold text-purple-400 font-mono">IV.02</div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Check-Then-Act</h3>
+                        <p class="text-slate-400 text-sm">All operations validate permissions before execution. No action without verification.</p>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-6 flex items-start gap-4">
+                    <div class="text-2xl font-bold text-cyan-400 font-mono">IV.03</div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Deterministic Boundaries</h3>
+                        <p class="text-slate-400 text-sm">System behavior is predictable and reproducible. Same input always produces same output.</p>
+                    </div>
+                </div>
+
+                <div class="glass rounded-xl p-6 flex items-start gap-4">
+                    <div class="text-2xl font-bold text-green-400 font-mono">IV.04</div>
+                    <div>
+                        <h3 class="font-semibold mb-1">Role-Based Permissions</h3>
+                        <p class="text-slate-400 text-sm">Access controlled by role and trust class. Every action is attributable to a verified identity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Licensing Options -->
+    <section id="licensing" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Licensing Options</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    Choose the right VTI™ license for your organization.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Startup -->
+                <div class="glass rounded-2xl p-8 flex flex-col">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold mb-2">Startup</h3>
+                        <p class="text-slate-400 text-sm">For early-stage companies</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$499</span>
+                        <span class="text-slate-400">/year</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-8 flex-1">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> VTI™ trademark usage</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> "Powered by VTI™" badge</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Implementation guide</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Up to 1,000 users</li>
+                        <li class="flex items-center gap-2 text-slate-500"><span>○</span> Certification audit</li>
+                    </ul>
+                    <a href="#contact" class="block text-center glass hover:bg-white/10 py-3 rounded-xl transition">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Business -->
+                <div class="glass rounded-2xl p-8 flex flex-col border-indigo-500/50 glow relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 px-4 py-1 rounded-full text-xs font-medium">
+                        Most Popular
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold mb-2">Business</h3>
+                        <p class="text-slate-400 text-sm">For growing companies</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$2,499</span>
+                        <span class="text-slate-400">/year</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-8 flex-1">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Everything in Startup</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> VTI™ Certified badge</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Annual certification audit</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Unlimited users</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Priority support</li>
+                    </ul>
+                    <a href="#contact" class="block text-center bg-indigo-600 hover:bg-indigo-700 py-3 rounded-xl transition">
+                        Get Licensed
+                    </a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="glass rounded-2xl p-8 flex flex-col">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
+                        <p class="text-slate-400 text-sm">For large organizations</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">Custom</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-300 mb-8 flex-1">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Everything in Business</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Multi-product licensing</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> White-label options</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Custom invariants</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Dedicated support</li>
+                    </ul>
+                    <a href="#contact" class="block text-center glass hover:bg-white/10 py-3 rounded-xl transition">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certification -->
+    <section id="certification" class="py-24 px-6 bg-slate-900/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block glass rounded-2xl p-12 glow">
+                <div class="trust-ring inline-block mb-6">
+                    <div class="w-24 h-24 bg-slate-950 rounded-full flex items-center justify-center">
+                        <span class="text-4xl">✓</span>
+                    </div>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">VTI™ Certified</h2>
+                <p class="text-slate-400 mb-8 max-w-lg mx-auto">
+                    Display the VTI™ Certified badge to show your customers that your software meets the highest standards of verifiable trust.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
+                    <div class="glass px-4 py-2 rounded-lg">Annual audit included</div>
+                    <div class="glass px-4 py-2 rounded-lg">Compliance documentation</div>
+                    <div class="glass px-4 py-2 rounded-lg">Marketing assets</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="py-24 px-6">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to get licensed?</h2>
+            <p class="text-slate-400 mb-10">
+                Join the growing ecosystem of VTI™ certified applications.
+            </p>
+
+            <form class="glass rounded-2xl p-8 text-left space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-2">Name</label>
+                        <input type="text" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500 transition" placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-slate-400 mb-2">Company</label>
+                        <input type="text" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500 transition" placeholder="Company name">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-2">Email</label>
+                    <input type="email" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500 transition" placeholder="you@company.com">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-2">License Type</label>
+                    <select class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500 transition">
+                        <option>Startup ($499/year)</option>
+                        <option>Business ($2,499/year)</option>
+                        <option>Enterprise (Custom)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-2">Message</label>
+                    <textarea class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 focus:outline-none focus:border-indigo-500 transition h-24" placeholder="Tell us about your project..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 py-4 rounded-xl font-medium transition">
+                    Submit Inquiry
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-12 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="trust-ring">
+                    <div class="w-8 h-8 bg-slate-950 rounded-full flex items-center justify-center">
+                        <span class="font-bold">V</span>
+                    </div>
+                </div>
+                <span class="text-slate-400 text-sm">
+                    VTI™ is a trademark of <a href="https://validkernel.com" class="text-white hover:text-indigo-400 transition">ValidKernel.com</a>
+                </span>
+            </div>
+            <div class="flex items-center gap-6 text-sm text-slate-400">
+                <a href="#" class="hover:text-white transition">Terms</a>
+                <a href="#" class="hover:text-white transition">Privacy</a>
+                <a href="#" class="hover:text-white transition">Trademark Policy</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
