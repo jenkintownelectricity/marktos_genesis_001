@@ -273,8 +273,43 @@
         let currentFilter = 'all';
 
         // FULL VERSION - Production LDS Data Store
-        // Fallback data only used if LDS fetch fails
-        const fallbackData = null; // Force LDS load
+        // Inline fallback for file:// protocol (no server required)
+        const inlineData = {
+            demo_id: "SCHERZER-DEMO-001",
+            businesses: {
+                financial: { name: "Scherzer Financial Advisory", status: "active", total_aum: 2450000, active_clients: 18, annual_revenue: 30625, clients_needing_review: 4 },
+                vodka: { name: "Premium Vodka Brand", status: "struggling", active_accounts: 12, monthly_cases: 45, monthly_revenue: 8100, stale_accounts: 5 },
+                beer: { name: "New Craft Beer Brand", status: "growing", active_accounts: 8, monthly_kegs: 24, monthly_revenue: 3960, leads_in_pipeline: 15 }
+            },
+            unified_metrics: { total_contacts: 52, cross_business_contacts: 7, total_monthly_revenue: 45685, pending_commissions: 3420, overdue_followups: 8, deals_closing_this_month: 4 },
+            sample_contacts: [
+                { id: "c001", name: "Mike's Sports Bar", businesses: ["vodka", "beer"], type: "business", score: 85, note: "Great relationship - carries both brands.", phone: "215-555-0101", email: "mike@sportsbar.com" },
+                { id: "c002", name: "Dr. Sarah Chen", businesses: ["financial"], type: "individual", aum: 450000, score: 92, note: "High-value client. Quarterly reviews.", phone: "215-555-0102", email: "sarah.chen@email.com" },
+                { id: "c003", name: "Downtown Distributors", businesses: ["vodka"], type: "distributor", score: 45, note: "Struggling with vodka placement.", phone: "215-555-0103", email: "orders@downtowndist.com" },
+                { id: "c004", name: "The Craft House", businesses: ["beer"], type: "business", score: 78, note: "New beer account. Excited about brand.", phone: "215-555-0104", email: "info@crafthouse.com" },
+                { id: "c005", name: "Jim Patterson", businesses: ["financial", "vodka"], type: "individual", aum: 125000, score: 70, note: "Financial client who owns a bar.", phone: "215-555-0105", email: "jim.p@gmail.com" }
+            ],
+            pipeline_summary: { financial: { leads: 3, qualified: 2, proposal: 1, total_value: 175000 }, vodka: { leads: 5, qualified: 2, proposal: 0, total_value: 12000 }, beer: { leads: 8, qualified: 4, proposal: 2, total_value: 8500 } },
+            alerts: [
+                { id: "a001", priority: "high", business: "vodka", message: "5 accounts haven't ordered in 60+ days", action: "Schedule re-engagement calls" },
+                { id: "a002", priority: "high", business: "financial", message: "4 portfolio reviews due this month", action: "Send calendar invites" },
+                { id: "a003", priority: "medium", business: "beer", message: "2 proposals pending response > 7 days", action: "Follow up" },
+                { id: "a004", priority: "low", business: "all", message: "$3,420 in commissions ready to collect", action: "Submit invoice" }
+            ],
+            insights: [
+                "7 contacts overlap between businesses - cross-sell potential",
+                "Beer brand growing 22% MoM - focus new accounts here",
+                "Vodka struggling - consider promotional pricing or events",
+                "3 financial clients own bars/restaurants - warm intros for beverage"
+            ],
+            deals: [
+                { id: "d001", name: "Chen Family Trust Expansion", business: "financial", stage: "qualified", value: 150000, contact: "Dr. Sarah Chen" },
+                { id: "d002", name: "Patterson IRA Rollover", business: "financial", stage: "proposal", value: 25000, contact: "Jim Patterson" },
+                { id: "d003", name: "Sports Bar Vodka Promo", business: "vodka", stage: "negotiation", value: 5000, contact: "Mike's Sports Bar" },
+                { id: "d004", name: "Craft House Keg Deal", business: "beer", stage: "qualified", value: 3500, contact: "The Craft House" },
+                { id: "d005", name: "Downtown Distribution Contract", business: "vodka", stage: "lead", value: 7000, contact: "Downtown Distributors" }
+            ]
+        };
 
         const shurzResponses = {
             price: { line: "I hear you. But what is the cost of NOT solving this problem today?", ctx: "Reframes price to value. Let silence work for you." },
@@ -308,18 +343,11 @@
                 console.log('[LDS] Data transformed. Contacts:', ldsData.sample_contacts.length, 'Deals:', ldsData.deals.length);
                 return true;
             } catch (err) {
-                console.error('[LDS] Load failed:', err.message);
-                // Minimal emergency fallback
-                ldsData = {
-                    sample_contacts: [],
-                    deals: [],
-                    alerts: [{ id: 'err1', priority: 'high', business: 'all', message: 'LDS data failed to load - check console', action: 'Refresh page' }],
-                    insights: ['Data load error - check network/paths'],
-                    unified_metrics: { total_monthly_revenue: 0, pending_commissions: 0, overdue_followups: 0 },
-                    pipeline_summary: { financial: { total_value: 0 }, vodka: { total_value: 0 }, beer: { total_value: 0 } },
-                    businesses: {}
-                };
-                return false;
+                console.warn('[LDS] Fetch failed, using inline data:', err.message);
+                // Use inline data for file:// or offline mode
+                ldsData = transformLDSData(inlineData, null);
+                console.log('[LDS] Inline data loaded. Contacts:', ldsData.sample_contacts.length);
+                return true;
             }
         }
 
@@ -351,8 +379,8 @@
                 }
             }
 
-            // Generate deals from pipeline_summary
-            data.deals = generateDealsFromPipeline(raw.pipeline_summary, data.sample_contacts);
+            // Use existing deals or generate from pipeline_summary
+            data.deals = raw.deals || generateDealsFromPipeline(raw.pipeline_summary, data.sample_contacts);
 
             // Add IDs to alerts if missing
             data.alerts = data.alerts.map((a, i) => ({ ...a, id: a.id || `alert-${i}` }));
