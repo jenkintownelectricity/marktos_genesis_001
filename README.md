@@ -12,7 +12,8 @@
 ║   ██║ ╚═╝ ██║██║  ██║██║  ██║██║  ██╗   ██║   ╚██████╔╝███████║             ║
 ║   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝             ║
 ║                                                                              ║
-║           GENESIS 001 | APP v1.2.0 | KERNEL v1.0.0 | VTI™ ENABLED            ║
+║        GENESIS 001 | APP v2.0.0 | KERNEL v1.0.0 | VTI™ ENABLED              ║
+║                    ENTERPRISE EDITION - 25 LAYERS ACTIVE                     ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -26,16 +27,18 @@
 ## TABLE OF CONTENTS
 
 1. [Quick Start](#quick-start)
-2. [What's New in v1.2](#whats-new-in-v12)
-3. [VTI™ - Verifiable Trust Infrastructure](#vti---verifiable-trust-infrastructure)
-4. [Data Tools Guide](#data-tools-guide)
-5. [Kernel Specification](#kernel-specification)
-6. [25-Layer Genome Architecture](#25-layer-genome-architecture)
-7. [LDS.json File Type Specification](#ldsjson-file-type-specification)
-8. [ValidKernel OneShot Command™](#validkernel-oneshot-command)
-9. [User Guide](#user-guide)
-10. [API Reference](#api-reference)
-11. [License](#license)
+2. [What's New in v2.0](#whats-new-in-v20)
+3. [Role-Based Access Control (RBAC)](#role-based-access-control-rbac)
+4. [25-Layer Feature Reference](#25-layer-feature-reference)
+5. [VTI™ - Verifiable Trust Infrastructure](#vti---verifiable-trust-infrastructure)
+6. [Data Tools Guide](#data-tools-guide)
+7. [Kernel Specification](#kernel-specification)
+8. [25-Layer Genome Architecture](#25-layer-genome-architecture)
+9. [LDS.json File Type Specification](#ldsjson-file-type-specification)
+10. [ValidKernel OneShot Command™](#validkernel-oneshot-command)
+11. [User Guide](#user-guide)
+12. [API Reference](#api-reference)
+13. [License](#license)
 
 ---
 
@@ -47,10 +50,7 @@ No installation required. Zero dependencies. Zero build step.
 
 ```bash
 # Clone repository
-git clone https://github.com/jenkintownelectricity/fire_proof_assistant.git
-
-# Navigate to MARKTOS
-cd fire_proof_assistant/marktos_genesis_001
+git clone https://github.com/jenkintownelectricity/marktos_genesis_001.git
 
 # Open in browser (Option 1: Direct)
 # Double-click index.html
@@ -78,65 +78,298 @@ python -m http.server 8080
 
 ---
 
-## WHAT'S NEW IN v1.2
+## WHAT'S NEW IN v2.0
 
 ### Release: January 17, 2026
 
-MARKTOS v1.2 introduces **VTI™ (Verifiable Trust Infrastructure)** - making trust visible and verifiable:
+MARKTOS v2.0 **Enterprise Edition** introduces the complete 25-Layer Marketing Genome with full interactive UI:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                 VTI™ - VERIFIABLE TRUST INFRASTRUCTURE                      │
-│                      Trademark of ValidKernel.com                           │
+│                    MARKTOS v2.0 ENTERPRISE EDITION                          │
+│               Complete 25-Layer Marketing Genome Platform                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  🛡️ Trust Score        Real-time score (0-100) based on invariant health   │
-│  📜 Audit Log          Complete action history with verification           │
-│  📊 Compliance Report  One-click export for auditors/stakeholders          │
-│  ↩️ Undo Tracking      Every action logged and traceable                   │
+│  🎯 Full RBAC        7 Job Roles with Trust Class 0-5 access control        │
+│  🧬 25 Active Layers Every layer has interactive UI and features            │
+│  🤖 AI Personalization ML-powered content recommendations                   │
+│  🗺️ Visual Builders   Workflow and Journey visual builders                  │
+│  📊 Revenue Intel     MTD/YTD/Pipeline with deal tracking                   │
+│  🔐 VTI™ Enabled     Verifiable Trust Infrastructure by ValidKernel.com    │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### v1.2 Features
+### v2.0 Features
 
 | Feature | Description | Offline |
 |---------|-------------|---------|
-| **Trust Score** | Real-time 0-100 score based on invariant compliance | ✅ Yes |
-| **Audit Log** | Complete action history with timestamps and verification | ✅ Yes |
-| **Compliance Report** | One-click JSON export for auditors | ✅ Yes |
-| **Session Tracking** | Every session start/action logged | ✅ Yes |
+| **Role-Based Access Control** | 7 job roles with Trust Class 0-5 | ✅ Yes |
+| **All 25 Layers Active** | Full interactive UI for every layer | ✅ Yes |
+| **Visual Workflow Builder** | Drag-drop workflow canvas | ✅ Yes |
+| **Visual Journey Builder** | Journey designer with triggers and branches | ✅ Yes |
+| **AI Personalization** | ML-powered content suggestions | ✅ Yes |
+| **Predictive Lead Scoring** | Behavior-based scoring rules | ✅ Yes |
+| **Real-time Segmentation** | Dynamic audience building | ✅ Yes |
+| **Revenue Intelligence** | MTD/YTD/Pipeline tracking | ✅ Yes |
+| **ABM Features** | Account-based marketing tools | ✅ Yes |
+| **Experiments** | Holdout groups, incrementality testing | ✅ Yes |
+| **Privacy Management** | GDPR, consent, DSAR tools | ✅ Yes |
+| **Governance Controls** | Role editor, feature toggles | ✅ Yes |
 
-### v1.1 Features (included)
+---
 
-MARKTOS v1.1 introduced **Data Tools** - a suite of offline-first data management features:
+## ROLE-BASED ACCESS CONTROL (RBAC)
+
+### Job Roles
+
+| Role | Trust Class | Layer Access | Color |
+|------|-------------|--------------|-------|
+| **Marketing Director** | TC0 | 24/24 (Full) | Purple |
+| **Compliance Officer** | TC1 | 23/24 | Red |
+| **Campaign Manager** | TC2 | 20/24 | Blue |
+| **Sales Rep** | TC2 | 18/24 | Green |
+| **Content Marketer** | TC3 | 15/24 | Cyan |
+| **Data Analyst** | TC4 | 12/24 | Yellow |
+| **Viewer** | TC5 | 8/24 (Read-only) | Gray |
+
+### Trust Class System
+
+| Trust Class | Access Level | Description |
+|-------------|--------------|-------------|
+| TC0 | Full Access | All layers, all features, governance |
+| TC1 | High Access | Compliance, audit, most layers |
+| TC2 | Standard Access | Campaigns, leads, automation |
+| TC3 | Limited Access | Content, personalization |
+| TC4 | Read + Analytics | Reports, dashboards, analytics |
+| TC5 | Read Only | View dashboards only |
+
+### Layer Access by Trust Class
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          DATA TOOLS v1.1                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  📤 Export LDS.json     One-click backup to downloadable file              │
-│  📥 Import LDS.json     Restore from backup file                           │
-│  💬 Chat Parser         Paste text, auto-extract leads/contacts            │
-│  🔗 Share via Link      Generate shareable URL with embedded data          │
-└─────────────────────────────────────────────────────────────────────────────┘
+LAYER ACCESS MATRIX
+═══════════════════════════════════════════════════════════════════════════════
+Layer                 TC0   TC1   TC2   TC3   TC4   TC5
+─────────────────────────────────────────────────────────────────────────────
+Dashboard              ✅    ✅    ✅    ✅    ✅    ✅
+Kernel                 ✅    ✅    ─     ─     ─     ─
+Identity               ✅    ✅    ✅    ─     ─     ─
+Segmentation           ✅    ✅    ✅    ─     ✅    ─
+Data Architecture      ✅    ✅    ─     ─     ✅    ─
+Channels               ✅    ✅    ✅    ✅    ─     ─
+Content Engine         ✅    ─     ✅    ✅    ─     ─
+Personalization        ✅    ─     ✅    ✅    ─     ─
+Campaigns              ✅    ─     ✅    ✅    ─     ─
+Automation             ✅    ─     ✅    ─     ─     ─
+Lead Management        ✅    ─     ✅    ─     ─     ─
+Lead Scoring           ✅    ─     ✅    ─     ✅    ─
+A/B Testing            ✅    ─     ✅    ─     ✅    ─
+Analytics              ✅    ✅    ✅    ─     ✅    ✅
+Compliance             ✅    ✅    ─     ─     ─     ─
+Integrations           ✅    ✅    ✅    ─     ─     ─
+Deliverability         ✅    ✅    ✅    ─     ─     ─
+Audience Intel         ✅    ─     ✅    ─     ✅    ─
+Revenue Intel          ✅    ─     ✅    ─     ✅    ─
+Attribution            ✅    ─     ✅    ─     ✅    ─
+Journeys               ✅    ─     ✅    ─     ─     ─
+ABM                    ✅    ─     ✅    ─     ─     ─
+Experiments            ✅    ─     ✅    ─     ✅    ─
+Real-Time              ✅    ─     ✅    ─     ─     ─
+Privacy                ✅    ✅    ─     ─     ─     ─
+Governance             ✅    ✅    ─     ─     ─     ─
+Economics              ✅    ─     ─     ─     ─     ─
+═══════════════════════════════════════════════════════════════════════════════
 ```
 
-### New Features
+---
 
-| Feature | Description | Offline |
-|---------|-------------|---------|
-| **Export LDS.json** | Download complete backup of campaigns, leads, workflows | ✅ Yes |
-| **Import LDS.json** | Restore data from backup file | ✅ Yes |
-| **Chat Parser** | Paste text (emails, names, companies) to auto-create leads | ✅ Yes |
-| **Share via Link** | Generate URL containing encoded data (no server needed) | ✅ Yes |
-| **localStorage Persistence** | Data automatically saved locally | ✅ Yes |
-| **PWA Support** | Install to home screen on iOS/Android | ✅ Yes |
+## 25-LAYER FEATURE REFERENCE
 
-### Upgrade Notes
+### L0: KERNEL MONITOR - ValidKernel Trust Infrastructure
+- Trust hierarchy enforcement (L0 → L1 → L2)
+- 4 immutable invariants
+- Real-time health monitoring
 
-- No breaking changes from v1.0
-- Data from v1.0 sessions will be preserved
-- All new features accessible from **Data Tools** sidebar section
-- VTI™ features accessible from **VTI™** sidebar section
+### L1: IDENTITY - Contact Genome Management
+- Contact cards with full profile view
+- Merge duplicates (AI-detect & merge)
+- Custom fields (unlimited properties)
+- Activity timeline (all interactions)
+- Contact import (CSV, vCard, LinkedIn)
+
+### L2: SEGMENTATION - Audience Gene Splicing
+- Visual segment builder (drag-drop)
+- Smart segments (auto-update on behavior)
+- Segment templates (VIP, At-Risk, New)
+- Overlap analysis (multi-segment view)
+- Export segment (CSV/LDS.json)
+
+### L3: DATA ARCHITECTURE - Unified Profile Proteins
+- Schema editor (custom objects/fields)
+- Data validation (quality rules)
+- Import/Export (bulk operations)
+- Data mapping (external data)
+- Backup manager (auto-backups)
+
+### L4: CHANNELS - Communication Cells
+- Email configuration
+- SMS configuration
+- Social links
+- Webhooks
+- Channel analytics
+
+### L5: CONTENT ENGINE - Template RNA
+- Visual email builder (drag-drop with preview)
+- Template library
+- Welcome email, Newsletter, CTA buttons
+- Product announcements
+
+### L6: PERSONALIZATION - Dynamic Enzymes
+- Merge tags ({{first_name}}, {{company}}, etc.)
+- Conditional content (segment-based show/hide)
+- Dynamic images
+- AI suggestions (ML-powered by ValidKernel AI)
+- A/B variants
+
+### L7: CAMPAIGNS - Orchestration Organs
+- Campaign creation (broadcast, automation, triggered, recurring)
+- Campaign cards with metrics (sent, open rate, click rate)
+- Status management (active, scheduled, draft)
+
+### L8: AUTOMATION - Workflow Nervous System
+- Visual workflow canvas (drag-drop)
+- Workflow templates:
+  - Welcome Series (5-email onboarding)
+  - Cart Abandonment (recover lost sales)
+  - Lead Nurture (12-week drip)
+  - Re-engagement (win back inactive)
+  - Post-Purchase (cross-sell/upsell)
+  - Event Reminder (webinar sequences)
+
+### L9: LEAD MANAGEMENT - Circulatory System
+- Lead capture form
+- Pipeline stages (New, Contacted, Qualified, Negotiation)
+- Lead cards with score and value
+- Stage progression
+
+### L10: LEAD SCORING - Propensity Scoring Engine
+- Scoring rules (email open, page view, form submit, etc.)
+- Hot/Warm/Cold lead classification
+- Point assignment with decay
+- Predictive scoring
+
+### L11: A/B TESTING - Optimization Immune System
+- Subject line tests
+- Content tests
+- Send time optimization
+- Landing page tests
+- Statistical significance tracking
+
+### L12: ANALYTICS - Intelligence Brain
+- Campaign performance
+- Email metrics
+- Conversion tracking
+- Custom reports
+
+### L13: COMPLIANCE - Regulatory System
+- GDPR compliance tools
+- CAN-SPAM compliance check
+- VTI™ integration
+- Audit trail
+- Unsubscribe management
+- Data retention policies
+
+### L14: INTEGRATIONS - Connective Tissue
+- Salesforce (CRM sync)
+- HubSpot (marketing sync)
+- Zapier (5000+ apps)
+- Google Sheets
+- API keys management
+
+### L15: DELIVERABILITY - Lymphatic System
+- Delivery rate tracking
+- Bounce rate monitoring
+- Spam complaint tracking
+- Sender score (A+ target)
+- Spam check
+- Authentication (SPF/DKIM)
+- Inbox preview
+
+### L16: AUDIENCE INTELLIGENCE - Cognitive System
+- AI-powered insights
+- Engagement trends
+- Churn risk prediction
+- Behavioral analysis
+
+### L17: REVENUE INTELLIGENCE - Metabolic System
+- MTD revenue tracking
+- YTD revenue tracking
+- Pipeline value
+- Deal tracking
+- Revenue forecasting
+
+### L18: ATTRIBUTION - Digestive System
+- Multi-touch attribution
+- Channel attribution
+- Campaign attribution
+- Revenue attribution
+
+### L19: JOURNEY ORCHESTRATION - Choreographic System
+- Visual journey builder (drag-drop)
+- Triggers, waits, and branches
+- Journey cards with metrics:
+  - Enrolled count
+  - Completed count
+  - Conversion rate
+- Journey status (active, paused)
+
+### L20: ACCOUNT-BASED MARKETING - Strategic System
+- Target accounts (12 default)
+- Stakeholder management (45 default)
+- Pipeline value tracking ($2.4M default)
+- Account profiles
+- Account scoring
+- Stakeholder mapping
+- Account plays
+- ABM reports
+
+### L21: EXPERIMENTS - Laboratory System
+- Active experiments tracking
+- Completed experiments
+- Average uplift calculation
+- Confidence level
+- Holdout groups
+- Incrementality testing
+- Multi-variant testing
+- Experiment calendar
+
+### L22: REAL-TIME PROCESSING - Reactive System
+- Live activity stream
+- Email opens, clicks, conversions
+- Real-time triggers
+- Live segments
+- Alerts
+- Live dashboard
+
+### L23: PRIVACY MANAGEMENT - Ethical System
+- Consent center (opt-in tracking)
+- DSAR (Data Subject Access Requests)
+- Anonymization
+- Privacy reports
+- Cookie consent management
+- Encryption (AES-256)
+
+### L24: GOVERNANCE - Administrative System
+- User management
+- Role editor
+- Settings configuration
+- Usage analytics
+- Feature toggles
+- Current role display with trust class
+
+### L25: ECONOMICS - Financial System
+- Revenue tracking
+- Cost analysis
+- ROI calculation
+- Budget management
 
 ---
 
@@ -190,34 +423,6 @@ Each audit entry contains:
 }
 ```
 
-### Action Types Logged
-
-| Action | Description | Invariant |
-|--------|-------------|-----------|
-| `SESSION_START` | New session initialized | IV.01 |
-| `DATA_SAVE` | Data saved to localStorage | IV.03 |
-| `LDS_EXPORT` | LDS.json backup exported | IV.03 |
-| `LDS_IMPORT` | LDS.json backup imported | IV.02 |
-| `CHAT_IMPORT` | Leads imported from chat | IV.02 |
-| `CAMPAIGN_CREATE` | New campaign created | IV.04 |
-| `COMPLIANCE_EXPORT` | Compliance report exported | IV.01 |
-
-### Compliance Report
-
-The compliance report includes:
-
-- Trust Score at time of export
-- All 4 invariant statuses
-- Audit summary (total entries, 24h, 7d)
-- Recent 50 audit entries
-- Data summary (campaigns, leads, workflows)
-
-### Using VTI™
-
-1. **View Trust Score**: Click 🛡️ Trust Score in VTI™ sidebar
-2. **View Audit Log**: Click 📜 Audit Log in VTI™ sidebar
-3. **Export Compliance Report**: Click 📊 Compliance Report in VTI™ sidebar
-
 ---
 
 ## DATA TOOLS GUIDE
@@ -232,25 +437,6 @@ Create a complete backup of your MARKTOS data.
 3. Click **Download Backup**
 4. File saves as `marktos_backup_YYYY-MM-DD.lds.json`
 
-**Export format:**
-```json
-{
-  "$schema": "marktos-lds-v1",
-  "version": "1.1.0",
-  "exported": "2026-01-17T12:00:00.000Z",
-  "kernel": {
-    "name": "ValidKernel",
-    "version": "1.0.0",
-    "trust_level": "L0_GOVERNANCE"
-  },
-  "campaigns": [...],
-  "leads": [...],
-  "workflows": [...]
-}
-```
-
----
-
 ### Import LDS.json
 
 Restore data from a backup file.
@@ -261,23 +447,9 @@ Restore data from a backup file.
 3. Data will be validated and imported
 4. Views refresh automatically
 
-**Supported formats:**
-- MARKTOS LDS.json exports
-- Any JSON with `campaigns`, `leads`, or `workflows` arrays
-
-⚠️ **Warning:** Import replaces current data. Export first if needed.
-
----
-
 ### Chat Parser
 
-Quickly add leads by pasting text from any source (emails, chat logs, spreadsheets).
-
-**How to use:**
-1. Click **💬 Chat Parser** in the Data Tools sidebar
-2. Paste text containing contact information
-3. Click **Parse & Import**
-4. Leads are created and added to your pipeline
+Quickly add leads by pasting text from any source.
 
 **Supported formats:**
 ```
@@ -288,55 +460,18 @@ Company: Enterprise Solutions
 +1 (555) 123-4567
 ```
 
-**Parser detects:**
-- Email addresses
-- Phone numbers
-- Names (First Last format)
-- Companies (after "-" or "," or "Company:")
-
----
-
 ### Share via Link
 
 Generate a URL containing your data - no server required.
 
-**How to use:**
-1. Click **🔗 Share via Link** in the Data Tools sidebar
-2. Click **Generate Link**
-3. Click **Copy** to copy URL to clipboard
-4. Share URL - recipient opens it and data loads automatically
-
-**How it works:**
-- Data is Base64 encoded into the URL
-- Includes up to 10 campaigns and 50 leads
-- Works completely offline
-- No server or database required
-
-**Limitations:**
-- URLs over 2000 characters may not work in all browsers
-- Large datasets should use Export/Import instead
-
----
-
 ### PWA Installation (Mobile)
-
-Install MARKTOS as an app on your phone or tablet.
 
 **iOS (Safari):**
 1. Open MARKTOS in Safari
-2. Tap the Share button
-3. Tap "Add to Home Screen"
-4. Tap "Add"
+2. Tap Share → "Add to Home Screen"
 
 **Android (Chrome):**
-1. Open MARKTOS in Chrome
-2. Tap the menu (⋮)
-3. Tap "Add to Home screen" or "Install app"
-4. Tap "Add"
-
-**Desktop (Chrome/Edge):**
-1. Look for install icon in address bar
-2. Click "Install"
+1. Tap menu (⋮) → "Add to Home screen"
 
 ---
 
@@ -354,109 +489,25 @@ Install MARKTOS as an app on your phone or tablet.
 
 ### Kernel Invariants
 
-The ValidKernel enforces four immutable invariants:
-
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ IV.01: TRUST HIERARCHY                                                      │
-│ ───────────────────────────────────────────────────────────────────────────│
 │ Authority flows: L0 → L1 → L2, NEVER upward.                               │
-│ L0 (Governance) commands are absolute.                                      │
-│ L1 (Kernel) validates and enforces.                                         │
-│ L2 (Proposer) executes within boundaries.                                   │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ IV.02: CHECK-THEN-ACT                                                       │
-│ ───────────────────────────────────────────────────────────────────────────│
 │ Every action is validated before execution.                                 │
-│ No action proceeds without explicit permission check.                       │
-│ Failed checks result in immediate rejection.                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ IV.03: DETERMINISTIC BOUNDARIES                                             │
-│ ───────────────────────────────────────────────────────────────────────────│
-│ Same input MUST produce same output.                                        │
-│ No hidden state. No side effects outside declared scope.                    │
-│ All transformations are traceable and reproducible.                         │
+│ Same input MUST produce same output. No hidden state.                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │ IV.04: ROLE-BASED PERMISSIONS                                               │
-│ ───────────────────────────────────────────────────────────────────────────│
-│ 6 roles with explicit permission matrix.                                    │
-│ Permissions are additive, never subtractive.                                │
-│ Role escalation requires L0 authorization.                                  │
+│ 7 roles with explicit permission matrix. Trust Class 0-5.                   │
 └─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Trust Levels
-
-| Level | Name | Authority | Scope |
-|-------|------|-----------|-------|
-| L0 | GOVERNANCE | Absolute | System-wide policy, kernel updates |
-| L1 | KERNEL | Enforcement | Invariant enforcement, validation |
-| L2 | PROPOSER | Execution | Task execution within boundaries |
-
-### Role Permission Matrix
-
-| Role | Level | Permissions |
-|------|-------|-------------|
-| `super_admin` | 0 | `*` (all permissions) |
-| `admin` | 1 | `campaign:*`, `contact:*`, `settings:read` |
-| `manager` | 2 | `campaign:create`, `campaign:send`, `contact:read` |
-| `editor` | 3 | `campaign:create`, `template:edit` |
-| `analyst` | 4 | `report:*`, `analytics:read` |
-| `viewer` | 5 | `read:*` |
-
-### Kernel Technical Specifications
-
-```
-KERNEL SPEC SHEET
-═══════════════════════════════════════════════════════════════════════════════
-
-IDENTITY
-  Name:              ValidKernel
-  Version:           1.0.0
-  Build:             GENESIS-001
-  Architecture:      Deterministic Trust Infrastructure
-
-RUNTIME
-  Environment:       Browser (ES6+ JavaScript)
-  Dependencies:      0 (zero external runtime dependencies)
-  Build Required:    No
-  Offline Capable:   Yes
-
-INVARIANTS
-  Count:             4
-  Enforcement:       Runtime (continuous)
-  Violation Policy:  Fail-closed (reject on violation)
-
-TRUST HIERARCHY
-  Levels:            3 (L0, L1, L2)
-  Direction:         Top-down only
-  Escalation:        L0 authorization required
-
-PERMISSIONS
-  Model:             Role-Based Access Control (RBAC)
-  Roles:             6
-  Granularity:       Action-level
-
-SECURITY
-  Encryption:        N/A (client-side, no transmission)
-  Data Storage:      Local (browser memory / localStorage)
-  Session:           Stateless
-
-PERFORMANCE
-  Initial Load:      < 100ms
-  Time to Interactive: < 150ms
-  Memory Footprint:  < 10MB
-
-═══════════════════════════════════════════════════════════════════════════════
 ```
 
 ---
 
 ## 25-LAYER GENOME ARCHITECTURE
-
-MARKTOS implements a 25-layer marketing genome architecture:
-
-### Layer Overview
 
 ```
 LAYER GENOME MAP
@@ -503,14 +554,6 @@ PLATFORM (L21-L25)
 ═══════════════════════════════════════════════════════════════════════════════
 ```
 
-### Layer Health Status Codes
-
-| Status | Color | Meaning |
-|--------|-------|---------|
-| `healthy` | Green | Operating within normal parameters |
-| `warning` | Yellow | Degraded performance or attention needed |
-| `critical` | Red | Immediate intervention required |
-
 ---
 
 ## LDS.JSON FILE TYPE SPECIFICATION
@@ -529,117 +572,8 @@ FILE TYPE
   Encoding:          UTF-8
   Version:           1.0.0
 
-STRUCTURE
-  Root:              Object
-  Required Fields:   name, version, collections
-  Optional Fields:   description, author, created, modified
-
-VALIDATION
-  Schema:            JSON Schema Draft 2020-12
-  Strict Mode:       Enabled (unknown properties rejected)
-
 ═══════════════════════════════════════════════════════════════════════════════
 ```
-
-### Schema Structure
-
-```json
-{
-  "name": "string (required)",
-  "version": "string (semver, required)",
-  "description": "string (optional)",
-  "author": "string (optional)",
-  "created": "ISO 8601 datetime (optional)",
-  "modified": "ISO 8601 datetime (optional)",
-  "collections": {
-    "<collection_name>": {
-      "fields": [
-        {
-          "name": "string (required)",
-          "type": "string|number|boolean|date|array|object (required)",
-          "required": "boolean (default: false)",
-          "unique": "boolean (default: false)",
-          "indexed": "boolean (default: false)",
-          "default": "any (optional)",
-          "validation": "regex pattern (optional)"
-        }
-      ],
-      "relationships": [
-        {
-          "type": "one-to-one|one-to-many|many-to-many",
-          "target": "collection_name",
-          "field": "local_field",
-          "targetField": "remote_field"
-        }
-      ]
-    }
-  }
-}
-```
-
-### Example LDS.json File
-
-```json
-{
-  "name": "marktos-marketing-genome",
-  "version": "1.0.0",
-  "description": "Marketing automation data schema",
-  "author": "ValidKernel",
-  "created": "2026-01-16T00:00:00Z",
-  "collections": {
-    "contacts": {
-      "fields": [
-        { "name": "id", "type": "string", "required": true, "unique": true },
-        { "name": "email", "type": "string", "required": true, "indexed": true },
-        { "name": "name", "type": "string", "required": true },
-        { "name": "company", "type": "string" },
-        { "name": "score", "type": "number", "default": 0 },
-        { "name": "stage", "type": "string", "default": "new" },
-        { "name": "created", "type": "date" }
-      ]
-    },
-    "campaigns": {
-      "fields": [
-        { "name": "id", "type": "string", "required": true, "unique": true },
-        { "name": "name", "type": "string", "required": true },
-        { "name": "type", "type": "string", "required": true },
-        { "name": "status", "type": "string", "default": "draft" },
-        { "name": "sent", "type": "number", "default": 0 },
-        { "name": "opens", "type": "number", "default": 0 },
-        { "name": "clicks", "type": "number", "default": 0 }
-      ]
-    },
-    "workflows": {
-      "fields": [
-        { "name": "id", "type": "string", "required": true, "unique": true },
-        { "name": "name", "type": "string", "required": true },
-        { "name": "trigger", "type": "string", "required": true },
-        { "name": "steps", "type": "number", "default": 0 },
-        { "name": "active", "type": "boolean", "default": false }
-      ]
-    }
-  }
-}
-```
-
-### Supported Data Types
-
-| Type | Description | JavaScript Equivalent |
-|------|-------------|----------------------|
-| `string` | Text data | `String` |
-| `number` | Numeric data (integer or float) | `Number` |
-| `boolean` | True/false | `Boolean` |
-| `date` | ISO 8601 datetime | `Date` |
-| `array` | Ordered list | `Array` |
-| `object` | Key-value pairs | `Object` |
-
-### LDS.json Best Practices
-
-1. **Always include version** - Enables schema migration
-2. **Use lowercase collection names** - Consistency across systems
-3. **Index frequently queried fields** - Performance optimization
-4. **Define relationships explicitly** - Clear data model
-5. **Include created/modified timestamps** - Audit trail
 
 ---
 
@@ -658,54 +592,6 @@ A **ValidKernel OneShot Command™** is a single, authoritative instruction that
 3. Produces deterministic, reproducible results
 4. Adheres to all kernel invariants
 
-### Command Structure
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ VALIDKERNEL ONESHOT COMMAND™ STRUCTURE                                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   [AUTHORITY DECLARATION]                                                   │
-│   ├── Trust Level (L0/L1/L2)                                               │
-│   ├── Role Identifier                                                       │
-│   └── Permission Scope                                                      │
-│                                                                             │
-│   [COMMAND BODY]                                                            │
-│   ├── Action Verb (imperative)                                             │
-│   ├── Target Object                                                         │
-│   ├── Parameters                                                            │
-│   └── Constraints                                                           │
-│                                                                             │
-│   [EXECUTION CONTEXT]                                                       │
-│   ├── Environment Variables                                                 │
-│   ├── Resource Limits                                                       │
-│   └── Timeout                                                               │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### Example OneShot Commands
-
-```bash
-# Deploy MARKTOS locally
-ValidKernel OneShot: Deploy marktos_genesis_001 to localhost:8080
-
-# Generate campaign report
-ValidKernel OneShot: Generate Q1 campaign performance report as PDF
-
-# Create automation workflow
-ValidKernel OneShot: Create welcome series workflow with 5 emails
-```
-
-### OneShot Execution Guarantee
-
-When a ValidKernel OneShot Command™ is issued:
-
-- **Atomicity**: Command executes completely or not at all
-- **Consistency**: System state remains valid before and after
-- **Isolation**: No interference with concurrent operations
-- **Durability**: Results persist after command completion
-
 ---
 
 ## USER GUIDE
@@ -723,31 +609,6 @@ The sidebar provides access to all 25 layers organized into 6 categories:
 | Revenue | L17-L20 | Purple |
 | Platform | L21-L25 | Pink |
 
-### Command Center (Dashboard)
-
-The default view displays:
-
-1. **Genome Health Grid** - 25 blocks showing layer status
-2. **Key Metrics** - Contacts, campaigns, emails, pipeline, kernel health
-3. **Active Campaigns** - Currently running campaigns
-4. **Lead Pipeline** - Stage distribution
-5. **Automation Workflows** - Active workflow status
-6. **Real-Time Activity** - Live event feed
-
-### Creating a Campaign
-
-1. Click **+ New Campaign** button
-2. Enter campaign name
-3. Select campaign type (broadcast, automation, triggered, recurring)
-4. Click **Create**
-
-### Managing Leads
-
-1. Navigate to **L9: Lead Capture**
-2. Click **+ Capture Lead**
-3. Enter lead information
-4. Lead appears in pipeline under "New" stage
-
 ### Keyboard Shortcuts
 
 | Key | Action |
@@ -760,90 +621,21 @@ The default view displays:
 
 ---
 
-## API REFERENCE
-
-### Global Objects
-
-```javascript
-// Trust Levels
-TRUST_LEVELS = {
-  L0_GOVERNANCE: 0,
-  L1_KERNEL: 1,
-  L2_PROPOSER: 2
-}
-
-// Role Definitions
-ROLES = {
-  super_admin: { level: 0, permissions: ['*'] },
-  admin: { level: 1, permissions: ['campaign:*', 'contact:*', 'settings:read'] },
-  manager: { level: 2, permissions: ['campaign:create', 'campaign:send', 'contact:read'] },
-  editor: { level: 3, permissions: ['campaign:create', 'template:edit'] },
-  analyst: { level: 4, permissions: ['report:*', 'analytics:read'] },
-  viewer: { level: 5, permissions: ['read:*'] }
-}
-```
-
-### Core Functions
-
-```javascript
-// Navigation
-showLayer(layerId: string): void
-
-// Modals
-showModal(type: string): void
-closeModal(): void
-
-// Notifications
-showToast(message: string, type: 'success'|'error'|'info'): void
-
-// Data Operations
-createCampaign(event: Event): void
-renderCampaigns(containerId: string, limit?: number): void
-renderPipeline(containerId: string): void
-renderWorkflows(containerId: string, limit?: number): void
-renderGenomeGrid(): void
-renderActivityFeed(): void
-```
-
----
-
 ## LICENSE
 
 ### ValidKernel OneShot Command™ License Agreement
 
 **Effective Date:** January 16, 2026
 
----
-
 #### GRANT OF LICENSE
 
 ##### Personal and Educational Use (FREE)
 
-Valid Kernel grants you a non-exclusive, worldwide, royalty-free license to use, copy, and modify MARKTOS Genesis 001 for:
-
-- Personal projects
-- Educational purposes
-- Academic research
-- Non-profit organizations
-- Learning and experimentation
-
-**No attribution required for personal use.**
+Valid Kernel grants you a non-exclusive, worldwide, royalty-free license to use, copy, and modify MARKTOS Genesis 001 for personal projects, educational purposes, and non-profit organizations.
 
 ##### Commercial Use (PAID LICENSE REQUIRED)
 
-Commercial use requires a paid license available at:
-
-**https://ValidKernel.com**
-
-Commercial use includes but is not limited to:
-
-- Use in products or services sold to customers
-- Use by for-profit organizations
-- Use in client work
-- Integration into commercial software
-- SaaS or hosted service offerings
-
----
+Commercial use requires a paid license available at: **https://ValidKernel.com**
 
 #### TRADEMARKS
 
@@ -853,41 +645,9 @@ The following are trademarks of Valid Kernel:
 - **ValidKernel OneShot Command™**
 - **MARKTOS™**
 - **LDS.json™**
+- **VTI™ (Verifiable Trust Infrastructure)**
 
 Use of these trademarks requires explicit written permission from Valid Kernel.
-
----
-
-#### INTELLECTUAL PROPERTY
-
-The following remain the sole and exclusive property of Valid Kernel:
-
-1. **Kernel Architecture** - Trust hierarchy, invariant system
-2. **25-Layer Genome** - Layer structure and naming
-3. **Command Protocol** - L0-L2 trust model
-4. **LDS.json Specification** - File format and schema
-5. **Source Code** - All code in this repository
-6. **Documentation** - All written materials
-
----
-
-#### WARRANTY DISCLAIMER
-
-THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
-
----
-
-#### LIMITATION OF LIABILITY
-
-IN NO EVENT SHALL VALID KERNEL BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.
-
----
-
-#### CONTACT
-
-**Commercial Licensing:** https://ValidKernel.com
-**Support:** support@validkernel.com
-**GitHub:** @jenkintownelectricity
 
 ---
 
@@ -905,7 +665,7 @@ IN NO EVENT SHALL VALID KERNEL BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABIL
 ---
 
 **Document ID:** VK-MARKTOS-SPEC-2026-001
-**Version:** 1.0.0
-**Last Updated:** January 16, 2026
+**Version:** 2.0.0
+**Last Updated:** January 17, 2026
 **Author:** Valid Kernel
 **Status:** AUTHORIZED FOR PUBLIC DISTRIBUTION
