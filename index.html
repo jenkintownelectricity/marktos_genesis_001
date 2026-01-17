@@ -103,7 +103,7 @@
                     </div>
                     <div>
                         <div class="mono font-bold text-lg">MARKTOS</div>
-                        <div class="text-xs text-gray-400">v1.2 | VTI™ Enabled</div>
+                        <div class="text-xs text-gray-400">v2.0 | VTI™ Enterprise</div>
                     </div>
                 </div>
             </div>
@@ -620,12 +620,146 @@
 
     <script>
         // ═══════════════════════════════════════════════════════════════
-        // MARKTOS KERNEL v1.2 - ValidKernel VTI™ (Verifiable Trust Infrastructure)
+        // MARKTOS KERNEL v2.0 - ValidKernel VTI™ Enterprise Edition
+        // Full 25-Layer Marketing Genome with Role-Based Access Control
         // ═══════════════════════════════════════════════════════════════
 
-        const MARKTOS_VERSION = '1.2.0';
-        const STORAGE_KEY = 'marktos_data_v1';
+        const MARKTOS_VERSION = '2.0.0';
+        const STORAGE_KEY = 'marktos_data_v2';
         const AUDIT_KEY = 'marktos_audit_v1';
+        const CONFIG_KEY = 'marktos_config_v1';
+
+        // ═══════════════════════════════════════════════════════════════
+        // v2.0 GOVERNANCE - ROLE & FEATURE ACCESS CONTROL
+        // ═══════════════════════════════════════════════════════════════
+
+        const JOB_ROLES = {
+            marketing_director: { label: 'Marketing Director', trustClass: 0, color: 'text-purple-400' },
+            campaign_manager: { label: 'Campaign Manager', trustClass: 2, color: 'text-blue-400' },
+            content_marketer: { label: 'Content Marketer', trustClass: 3, color: 'text-cyan-400' },
+            sales_rep: { label: 'Sales Rep', trustClass: 2, color: 'text-green-400' },
+            data_analyst: { label: 'Data Analyst', trustClass: 4, color: 'text-yellow-400' },
+            compliance_officer: { label: 'Compliance Officer', trustClass: 1, color: 'text-red-400' },
+            viewer: { label: 'Viewer', trustClass: 5, color: 'text-gray-400' }
+        };
+
+        const LAYER_ACCESS = {
+            dashboard: { minTrust: 5, roles: ['*'] },
+            kernel: { minTrust: 1, roles: ['marketing_director', 'compliance_officer'] },
+            identity: { minTrust: 2, roles: ['marketing_director', 'campaign_manager', 'sales_rep'] },
+            segmentation: { minTrust: 2, roles: ['marketing_director', 'campaign_manager', 'data_analyst'] },
+            data: { minTrust: 1, roles: ['marketing_director', 'data_analyst'] },
+            channels: { minTrust: 2, roles: ['marketing_director', 'campaign_manager', 'content_marketer'] },
+            content: { minTrust: 3, roles: ['marketing_director', 'campaign_manager', 'content_marketer'] },
+            personalization: { minTrust: 3, roles: ['marketing_director', 'campaign_manager', 'content_marketer'] },
+            campaigns: { minTrust: 2, roles: ['marketing_director', 'campaign_manager'] },
+            automation: { minTrust: 2, roles: ['marketing_director', 'campaign_manager'] },
+            leads: { minTrust: 2, roles: ['marketing_director', 'campaign_manager', 'sales_rep'] },
+            scoring: { minTrust: 2, roles: ['marketing_director', 'campaign_manager', 'sales_rep'] },
+            testing: { minTrust: 2, roles: ['marketing_director', 'campaign_manager'] },
+            analytics: { minTrust: 4, roles: ['marketing_director', 'campaign_manager', 'data_analyst'] },
+            compliance: { minTrust: 1, roles: ['marketing_director', 'compliance_officer'] },
+            integrations: { minTrust: 1, roles: ['marketing_director', 'data_analyst'] },
+            deliverability: { minTrust: 2, roles: ['marketing_director', 'campaign_manager'] },
+            audience: { minTrust: 2, roles: ['marketing_director', 'campaign_manager', 'data_analyst'] },
+            revenue: { minTrust: 1, roles: ['marketing_director', 'sales_rep'] },
+            journeys: { minTrust: 2, roles: ['marketing_director', 'campaign_manager'] },
+            abm: { minTrust: 2, roles: ['marketing_director', 'sales_rep'] },
+            experiments: { minTrust: 1, roles: ['marketing_director', 'data_analyst'] },
+            realtime: { minTrust: 3, roles: ['marketing_director', 'campaign_manager'] },
+            privacy: { minTrust: 1, roles: ['marketing_director', 'compliance_officer'] },
+            governance: { minTrust: 0, roles: ['marketing_director'] }
+        };
+
+        // Current user config
+        let currentConfig = {
+            jobRole: 'marketing_director',
+            trustClass: 0,
+            enabledLayers: Object.keys(LAYER_ACCESS),
+            theme: 'dark'
+        };
+
+        function loadConfig() {
+            try {
+                const stored = localStorage.getItem(CONFIG_KEY);
+                if (stored) {
+                    Object.assign(currentConfig, JSON.parse(stored));
+                }
+            } catch (e) {
+                console.warn('[MARKTOS] Config load failed:', e);
+            }
+            applyAccessControl();
+        }
+
+        function saveConfig() {
+            try {
+                localStorage.setItem(CONFIG_KEY, JSON.stringify(currentConfig));
+                logAudit('CONFIG_CHANGE', { jobRole: currentConfig.jobRole, trustClass: currentConfig.trustClass }, 'IV.04');
+            } catch (e) {
+                console.warn('[MARKTOS] Config save failed:', e);
+            }
+        }
+
+        function canAccessLayer(layerId) {
+            const layer = LAYER_ACCESS[layerId];
+            if (!layer) return true;
+
+            // Trust class 0 = super admin, always has access
+            if (currentConfig.trustClass === 0) return true;
+
+            // Check trust class (lower number = more access)
+            if (currentConfig.trustClass > layer.minTrust) return false;
+
+            // Check role
+            if (layer.roles.includes('*')) return true;
+            if (layer.roles.includes(currentConfig.jobRole)) return true;
+
+            // Check if layer is explicitly enabled
+            if (currentConfig.enabledLayers.includes(layerId)) return true;
+
+            return false;
+        }
+
+        function applyAccessControl() {
+            document.querySelectorAll('[data-layer]').forEach(el => {
+                const layerId = el.dataset.layer;
+                if (canAccessLayer(layerId)) {
+                    el.classList.remove('hidden', 'opacity-50', 'pointer-events-none');
+                } else {
+                    el.classList.add('opacity-50', 'pointer-events-none');
+                }
+            });
+            updateRoleDisplay();
+        }
+
+        function updateRoleDisplay() {
+            const roleEl = document.getElementById('current-role-display');
+            if (roleEl) {
+                const role = JOB_ROLES[currentConfig.jobRole];
+                roleEl.innerHTML = `<span class="${role.color}">${role.label}</span> <span class="text-gray-500">(TC${currentConfig.trustClass})</span>`;
+            }
+        }
+
+        function setJobRole(roleId) {
+            if (JOB_ROLES[roleId]) {
+                currentConfig.jobRole = roleId;
+                currentConfig.trustClass = JOB_ROLES[roleId].trustClass;
+                saveConfig();
+                applyAccessControl();
+                showToast(`Role changed to ${JOB_ROLES[roleId].label}`, 'success');
+            }
+        }
+
+        function toggleLayerAccess(layerId) {
+            const idx = currentConfig.enabledLayers.indexOf(layerId);
+            if (idx > -1) {
+                currentConfig.enabledLayers.splice(idx, 1);
+            } else {
+                currentConfig.enabledLayers.push(layerId);
+            }
+            saveConfig();
+            applyAccessControl();
+        }
 
         // ═══════════════════════════════════════════════════════════════
         // VTI™ - VERIFIABLE TRUST INFRASTRUCTURE
@@ -1073,7 +1207,7 @@
             renderActivityFeed();
         }
 
-        // DATA STORE
+        // DATA STORE - v2.0 Extended
         const data = {
             campaigns: [
                 { id: 1, name: 'Q1 Welcome Series', type: 'automation', status: 'active', sent: 45000, opens: 18000, clicks: 4500 },
@@ -1084,12 +1218,12 @@
                 { id: 6, name: 'Renewal Reminder', type: 'automation', status: 'draft', sent: 0, opens: 0, clicks: 0 }
             ],
             leads: [
-                { id: 1, name: 'Sarah Chen', company: 'TechCorp', value: 25000, stage: 'qualified', score: 85 },
-                { id: 2, name: 'Mike Wilson', company: 'StartupXYZ', value: 15000, stage: 'new', score: 45 },
-                { id: 3, name: 'Emily Davis', company: 'Enterprise Inc', value: 75000, stage: 'proposal', score: 92 },
-                { id: 4, name: 'James Park', company: 'GrowthCo', value: 35000, stage: 'contacted', score: 68 },
-                { id: 5, name: 'Lisa Wang', company: 'Digital Agency', value: 18000, stage: 'qualified', score: 78 },
-                { id: 6, name: 'David Kim', company: 'SaaS Corp', value: 120000, stage: 'negotiation', score: 95 }
+                { id: 1, name: 'Sarah Chen', company: 'TechCorp', email: 'sarah@techcorp.com', phone: '+1-555-0101', value: 25000, stage: 'qualified', score: 85, tags: ['enterprise', 'hot'] },
+                { id: 2, name: 'Mike Wilson', company: 'StartupXYZ', email: 'mike@startupxyz.com', phone: '+1-555-0102', value: 15000, stage: 'new', score: 45, tags: ['smb'] },
+                { id: 3, name: 'Emily Davis', company: 'Enterprise Inc', email: 'emily@enterprise.com', phone: '+1-555-0103', value: 75000, stage: 'proposal', score: 92, tags: ['enterprise', 'hot'] },
+                { id: 4, name: 'James Park', company: 'GrowthCo', email: 'james@growthco.com', phone: '+1-555-0104', value: 35000, stage: 'contacted', score: 68, tags: ['midmarket'] },
+                { id: 5, name: 'Lisa Wang', company: 'Digital Agency', email: 'lisa@digitalagency.com', phone: '+1-555-0105', value: 18000, stage: 'qualified', score: 78, tags: ['agency'] },
+                { id: 6, name: 'David Kim', company: 'SaaS Corp', email: 'david@saascorp.com', phone: '+1-555-0106', value: 120000, stage: 'negotiation', score: 95, tags: ['enterprise', 'hot'] }
             ],
             workflows: [
                 { id: 1, name: 'Welcome Series', trigger: 'signup', steps: 5, active: true },
@@ -1099,6 +1233,55 @@
                 { id: 5, name: 'Post-Purchase', trigger: 'purchase', steps: 6, active: false },
                 { id: 6, name: 'Lead Nurture', trigger: 'form_submit', steps: 12, active: true }
             ],
+            // v2.0 - Segments
+            segments: [
+                { id: 1, name: 'VIP Customers', type: 'dynamic', conditions: [{ field: 'score', op: 'gte', value: 80 }], count: 3, color: 'purple' },
+                { id: 2, name: 'New Leads', type: 'dynamic', conditions: [{ field: 'stage', op: 'eq', value: 'new' }], count: 1, color: 'blue' },
+                { id: 3, name: 'At Risk', type: 'dynamic', conditions: [{ field: 'score', op: 'lt', value: 50 }], count: 1, color: 'red' },
+                { id: 4, name: 'Enterprise', type: 'dynamic', conditions: [{ field: 'value', op: 'gte', value: 50000 }], count: 2, color: 'green' },
+                { id: 5, name: 'Newsletter Subscribers', type: 'static', conditions: [], count: 145, color: 'cyan' }
+            ],
+            // v2.0 - Scoring Rules
+            scoringRules: [
+                { id: 1, name: 'Email Open', action: 'email_open', points: 5, decay: 30, active: true },
+                { id: 2, name: 'Email Click', action: 'email_click', points: 10, decay: 30, active: true },
+                { id: 3, name: 'Page Visit', action: 'page_visit', points: 3, decay: 14, active: true },
+                { id: 4, name: 'Pricing Page', action: 'pricing_view', points: 25, decay: 7, active: true },
+                { id: 5, name: 'Demo Request', action: 'demo_request', points: 50, decay: 0, active: true },
+                { id: 6, name: 'Form Submit', action: 'form_submit', points: 20, decay: 30, active: true }
+            ],
+            // v2.0 - Journeys
+            journeys: [
+                { id: 1, name: 'Customer Onboarding', status: 'active', steps: 8, enrolled: 234, completed: 189, conversionRate: 81 },
+                { id: 2, name: 'Trial to Paid', status: 'active', steps: 5, enrolled: 567, completed: 198, conversionRate: 35 },
+                { id: 3, name: 'Renewal Journey', status: 'active', steps: 4, enrolled: 145, completed: 132, conversionRate: 91 },
+                { id: 4, name: 'Win-Back', status: 'paused', steps: 6, enrolled: 89, completed: 23, conversionRate: 26 }
+            ],
+            // v2.0 - Content Templates
+            templates: [
+                { id: 1, name: 'Welcome Email', type: 'email', category: 'onboarding', usedCount: 45 },
+                { id: 2, name: 'Newsletter Header', type: 'block', category: 'newsletter', usedCount: 156 },
+                { id: 3, name: 'CTA Button', type: 'block', category: 'conversion', usedCount: 234 },
+                { id: 4, name: 'Product Announcement', type: 'email', category: 'promotion', usedCount: 12 }
+            ],
+            // v2.0 - A/B Tests
+            tests: [
+                { id: 1, name: 'Subject Line Test', type: 'subject', status: 'running', variants: 2, winner: null, uplift: 0 },
+                { id: 2, name: 'CTA Color Test', type: 'content', status: 'completed', variants: 3, winner: 'B', uplift: 23 },
+                { id: 3, name: 'Send Time Test', type: 'timing', status: 'completed', variants: 4, winner: 'C', uplift: 15 }
+            ],
+            // v2.0 - Revenue Tracking
+            revenue: {
+                mtd: 145000,
+                lastMonth: 128000,
+                ytd: 1450000,
+                pipeline: 387000,
+                deals: [
+                    { id: 1, name: 'TechCorp Expansion', value: 75000, stage: 'negotiation', probability: 80 },
+                    { id: 2, name: 'Enterprise Inc Renewal', value: 120000, stage: 'proposal', probability: 90 },
+                    { id: 3, name: 'SaaS Corp Upsell', value: 45000, stage: 'qualified', probability: 60 }
+                ]
+            },
             layers: Array.from({length: 25}, (_, i) => ({
                 id: i,
                 name: `Layer ${i}`,
@@ -1558,6 +1741,128 @@ Supported formats:
                 `;
             }
 
+            // ═══════════════════════════════════════════════════════════════
+            // v2.0 GOVERNANCE MODAL - Role & Access Control
+            // ═══════════════════════════════════════════════════════════════
+
+            if (type === 'governance') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">⚙️ GOVERNANCE</h2>
+                    <p class="text-gray-400 text-sm mb-6">Role-based access control and feature toggles</p>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-3 text-purple-400">CURRENT ROLE</div>
+                        <select id="role-selector" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500" onchange="setJobRole(this.value)">
+                            ${Object.entries(JOB_ROLES).map(([id, role]) => `
+                                <option value="${id}" ${currentConfig.jobRole === id ? 'selected' : ''}>${role.label} (Trust Class ${role.trustClass})</option>
+                            `).join('')}
+                        </select>
+                    </div>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-3 text-cyan-400">TRUST CLASS</div>
+                        <div class="text-4xl font-bold mono text-center text-cyan-400">${currentConfig.trustClass}</div>
+                        <div class="text-xs text-gray-400 text-center mt-2">Lower = More Access (0-5)</div>
+                    </div>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4 max-h-48 overflow-y-auto">
+                        <div class="text-sm font-bold mb-3 text-green-400">LAYER ACCESS</div>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            ${Object.entries(LAYER_ACCESS).map(([id, config]) => `
+                                <div class="flex items-center gap-2">
+                                    <span class="${canAccessLayer(id) ? 'text-green-400' : 'text-red-400'}">${canAccessLayer(id) ? '✓' : '✗'}</span>
+                                    <span class="${canAccessLayer(id) ? 'text-white' : 'text-gray-500'}">${id}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Close</button>
+                `;
+            }
+
+            // v2.0 - New Segment Modal
+            if (type === 'new-segment') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-6">🎯 CREATE SEGMENT</h2>
+                    <form onsubmit="createSegment(event)">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs text-gray-400 uppercase mb-2">Segment Name</label>
+                                <input type="text" id="segment-name" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="e.g., High-Value Leads" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 uppercase mb-2">Type</label>
+                                <select id="segment-type" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500">
+                                    <option value="dynamic">Dynamic (auto-update)</option>
+                                    <option value="static">Static (manual)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 uppercase mb-2">Condition</label>
+                                <div class="flex gap-2">
+                                    <select id="segment-field" class="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="score">Lead Score</option>
+                                        <option value="value">Deal Value</option>
+                                        <option value="stage">Pipeline Stage</option>
+                                    </select>
+                                    <select id="segment-op" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="gte">≥</option>
+                                        <option value="lte">≤</option>
+                                        <option value="eq">=</option>
+                                    </select>
+                                    <input type="text" id="segment-value" class="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm" placeholder="Value">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 mt-8">
+                            <button type="button" onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                            <button type="submit" class="flex-1 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition font-medium">Create Segment</button>
+                        </div>
+                    </form>
+                `;
+            }
+
+            // v2.0 - New Scoring Rule Modal
+            if (type === 'new-scoring-rule') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-6">📈 ADD SCORING RULE</h2>
+                    <form onsubmit="createScoringRule(event)">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs text-gray-400 uppercase mb-2">Rule Name</label>
+                                <input type="text" id="rule-name" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500" placeholder="e.g., Pricing Page Visit" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 uppercase mb-2">Trigger Action</label>
+                                <select id="rule-action" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500">
+                                    <option value="email_open">Email Open</option>
+                                    <option value="email_click">Email Click</option>
+                                    <option value="page_visit">Page Visit</option>
+                                    <option value="form_submit">Form Submit</option>
+                                    <option value="demo_request">Demo Request</option>
+                                    <option value="pricing_view">Pricing Page View</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 uppercase mb-2">Points</label>
+                                    <input type="number" id="rule-points" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500" value="10" min="1" max="100">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 uppercase mb-2">Decay (days)</label>
+                                    <input type="number" id="rule-decay" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500" value="30" min="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 mt-8">
+                            <button type="button" onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                            <button type="submit" class="flex-1 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition font-medium">Add Rule</button>
+                        </div>
+                    </form>
+                `;
+            }
+
             overlay.classList.remove('hidden');
         }
 
@@ -1585,6 +1890,192 @@ Supported formats:
             closeModal();
             renderCampaigns('campaign-list', 4);
             showToast(`Campaign "${name}" created`);
+        }
+
+        // v2.0 - Create Segment
+        function createSegment(e) {
+            e.preventDefault();
+            const name = document.getElementById('segment-name').value;
+            const type = document.getElementById('segment-type').value;
+            const field = document.getElementById('segment-field').value;
+            const op = document.getElementById('segment-op').value;
+            const value = document.getElementById('segment-value').value;
+
+            data.segments.unshift({
+                id: Date.now(),
+                name,
+                type,
+                conditions: [{ field, op, value }],
+                count: 0,
+                color: ['purple', 'blue', 'green', 'cyan', 'red'][Math.floor(Math.random() * 5)]
+            });
+
+            saveData(true);
+            logAudit('SEGMENT_CREATE', { name, type, conditions: `${field} ${op} ${value}` }, 'IV.04');
+            closeModal();
+            showToast(`Segment "${name}" created`);
+            if (document.getElementById('content-segmentation')?.classList.contains('hidden') === false) {
+                renderSegments();
+            }
+        }
+
+        // v2.0 - Create Scoring Rule
+        function createScoringRule(e) {
+            e.preventDefault();
+            const name = document.getElementById('rule-name').value;
+            const action = document.getElementById('rule-action').value;
+            const points = parseInt(document.getElementById('rule-points').value);
+            const decay = parseInt(document.getElementById('rule-decay').value);
+
+            data.scoringRules.push({
+                id: Date.now(),
+                name,
+                action,
+                points,
+                decay,
+                active: true
+            });
+
+            saveData(true);
+            logAudit('SCORING_RULE_CREATE', { name, action, points }, 'IV.04');
+            closeModal();
+            showToast(`Scoring rule "${name}" added (+${points} points)`);
+            if (document.getElementById('content-scoring')?.classList.contains('hidden') === false) {
+                renderScoringRules();
+            }
+        }
+
+        // v2.0 - Render Segments
+        function renderSegments() {
+            const container = document.getElementById('segments-grid');
+            if (!container) return;
+
+            const colorClasses = {
+                purple: 'border-purple-500/50 bg-purple-500/10',
+                blue: 'border-blue-500/50 bg-blue-500/10',
+                green: 'border-green-500/50 bg-green-500/10',
+                cyan: 'border-cyan-500/50 bg-cyan-500/10',
+                red: 'border-red-500/50 bg-red-500/10'
+            };
+
+            container.innerHTML = data.segments.map(s => `
+                <div class="glass-dark rounded-lg p-4 border-l-4 ${colorClasses[s.color] || 'border-white/20'}">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-medium">${s.name}</span>
+                        <span class="text-xs px-2 py-1 rounded ${s.type === 'dynamic' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-gray-500/20 text-gray-400'}">${s.type}</span>
+                    </div>
+                    <div class="text-2xl font-bold mono mb-2">${s.count}</div>
+                    <div class="text-xs text-gray-400">${s.conditions.length > 0 ? s.conditions.map(c => `${c.field} ${c.op} ${c.value}`).join(', ') : 'Manual list'}</div>
+                </div>
+            `).join('');
+        }
+
+        // v2.0 - Render Scoring Rules
+        function renderScoringRules() {
+            const container = document.getElementById('scoring-rules');
+            if (!container) return;
+
+            container.innerHTML = data.scoringRules.map(r => `
+                <div class="glass-dark rounded-lg p-4 flex items-center justify-between">
+                    <div>
+                        <div class="font-medium">${r.name}</div>
+                        <div class="text-xs text-gray-400">${r.action} • Decay: ${r.decay > 0 ? r.decay + ' days' : 'Never'}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xl font-bold mono ${r.points >= 20 ? 'text-green-400' : r.points >= 10 ? 'text-cyan-400' : 'text-gray-400'}">+${r.points}</div>
+                        <div class="text-xs ${r.active ? 'text-green-400' : 'text-gray-500'}">${r.active ? 'Active' : 'Paused'}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // v2.0 - Render Journeys
+        function renderJourneys() {
+            const container = document.getElementById('journeys-grid');
+            if (!container) return;
+
+            container.innerHTML = data.journeys.map(j => `
+                <div class="glass-dark rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs px-2 py-1 rounded ${j.status === 'active' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}">${j.status}</span>
+                        <span class="text-xs text-gray-400 mono">${j.steps} steps</span>
+                    </div>
+                    <div class="font-medium mb-3">${j.name}</div>
+                    <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                        <div><div class="text-gray-400">Enrolled</div><div class="mono text-white">${j.enrolled}</div></div>
+                        <div><div class="text-gray-400">Completed</div><div class="mono text-white">${j.completed}</div></div>
+                        <div><div class="text-gray-400">Conversion</div><div class="mono ${j.conversionRate >= 50 ? 'text-green-400' : 'text-yellow-400'}">${j.conversionRate}%</div></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // v2.0 - Render Revenue
+        function renderRevenue() {
+            const container = document.getElementById('revenue-stats');
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="glass rounded-xl p-6 text-center">
+                        <div class="text-xs text-gray-400 uppercase mb-2">MTD Revenue</div>
+                        <div class="text-3xl font-bold mono text-green-400">$${(data.revenue.mtd / 1000).toFixed(0)}K</div>
+                        <div class="text-xs text-green-400 mt-1">+${((data.revenue.mtd / data.revenue.lastMonth - 1) * 100).toFixed(0)}% vs last</div>
+                    </div>
+                    <div class="glass rounded-xl p-6 text-center">
+                        <div class="text-xs text-gray-400 uppercase mb-2">YTD Revenue</div>
+                        <div class="text-3xl font-bold mono text-purple-400">$${(data.revenue.ytd / 1000).toFixed(0)}K</div>
+                    </div>
+                    <div class="glass rounded-xl p-6 text-center">
+                        <div class="text-xs text-gray-400 uppercase mb-2">Pipeline</div>
+                        <div class="text-3xl font-bold mono text-cyan-400">$${(data.revenue.pipeline / 1000).toFixed(0)}K</div>
+                    </div>
+                    <div class="glass rounded-xl p-6 text-center">
+                        <div class="text-xs text-gray-400 uppercase mb-2">Deals</div>
+                        <div class="text-3xl font-bold mono text-white">${data.revenue.deals.length}</div>
+                    </div>
+                </div>
+                <div class="glass-dark rounded-lg p-4">
+                    <h3 class="text-sm font-bold mb-4 text-purple-400">TOP DEALS</h3>
+                    ${data.revenue.deals.map(d => `
+                        <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+                            <div>
+                                <div class="font-medium">${d.name}</div>
+                                <div class="text-xs text-gray-400">${d.stage}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold mono">$${(d.value / 1000).toFixed(0)}K</div>
+                                <div class="text-xs text-green-400">${d.probability}% probability</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // v2.0 - Render Identity (Contacts)
+        function renderIdentity() {
+            const container = document.getElementById('identity-contacts');
+            if (!container) return;
+
+            container.innerHTML = data.leads.map(l => `
+                <div class="glass-dark rounded-lg p-4">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center font-bold">${l.name.charAt(0)}</div>
+                        <div>
+                            <div class="font-medium">${l.name}</div>
+                            <div class="text-xs text-gray-400">${l.company}</div>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-400 space-y-1">
+                        <div>📧 ${l.email || 'No email'}</div>
+                        <div>📞 ${l.phone || 'No phone'}</div>
+                    </div>
+                    <div class="flex gap-2 mt-3">
+                        ${(l.tags || []).map(t => `<span class="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-400">${t}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
         }
 
         // ═══════════════════════════════════════════════════════════════
