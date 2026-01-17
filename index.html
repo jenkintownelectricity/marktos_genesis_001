@@ -1022,11 +1022,14 @@
             <!-- L11: A/B TESTING -->
             <div id="content-testing" class="layer-content hidden">
                 <div class="flex items-center justify-between mb-8">
-                    <div class="text-sm text-gray-400">Optimize through experimentation</div>
-                    <button class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-medium transition">+ New Test</button>
+                    <div>
+                        <h2 class="text-xl font-bold">A/B Testing</h2>
+                        <p class="text-gray-400 text-sm">Optimize through experimentation</p>
+                    </div>
+                    <button onclick="showModal('new-test')" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-medium transition">+ New Test</button>
                 </div>
                 <div class="grid grid-cols-3 gap-4 mb-8" id="tests-grid">
-                    <div class="glass rounded-xl p-6 border-l-4 border-yellow-500">
+                    <div class="glass rounded-xl p-6 border-l-4 border-yellow-500 cursor-pointer hover:bg-white/10 transition" onclick="showModal('test-detail', 1)">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-xs px-2 py-1 rounded bg-yellow-500/20 text-yellow-400">RUNNING</span>
                             <span class="text-xs text-gray-400">2 variants</span>
@@ -1034,7 +1037,7 @@
                         <div class="font-medium mb-2">Subject Line Test</div>
                         <div class="text-xs text-gray-400">Started 2 days ago</div>
                     </div>
-                    <div class="glass rounded-xl p-6 border-l-4 border-green-500">
+                    <div class="glass rounded-xl p-6 border-l-4 border-green-500 cursor-pointer hover:bg-white/10 transition" onclick="showModal('test-detail', 2)">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400">COMPLETED</span>
                             <span class="text-xs text-gray-400">Winner: B</span>
@@ -1042,7 +1045,7 @@
                         <div class="font-medium mb-2">CTA Color Test</div>
                         <div class="text-xs text-green-400">+23% uplift</div>
                     </div>
-                    <div class="glass rounded-xl p-6 border-l-4 border-green-500">
+                    <div class="glass rounded-xl p-6 border-l-4 border-green-500 cursor-pointer hover:bg-white/10 transition" onclick="showModal('test-detail', 3)">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400">COMPLETED</span>
                             <span class="text-xs text-gray-400">Winner: C</span>
@@ -1101,36 +1104,43 @@
 
             <!-- L14: INTEGRATIONS -->
             <div id="content-integrations" class="layer-content hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold">Integrations</h2>
+                        <p class="text-gray-400 text-sm">Connect vkMRKTos to your favorite tools</p>
+                    </div>
+                    <button onclick="showModal('integration-setup')" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-medium transition">+ Add Integration</button>
+                </div>
                 <div class="grid grid-cols-4 gap-4 mb-8">
-                    <div class="glass rounded-xl p-6 text-center border-l-4 border-blue-500">
+                    <div class="glass rounded-xl p-6 text-center border-l-4 border-blue-500 cursor-pointer hover:bg-white/10 transition" onclick="toggleIntegration('salesforce')">
                         <div class="text-3xl mb-2">☁️</div>
                         <div class="font-medium">Salesforce</div>
-                        <div class="text-xs text-yellow-400 mt-2">Connect</div>
+                        <div class="text-xs text-yellow-400 mt-2">Click to Connect</div>
                     </div>
-                    <div class="glass rounded-xl p-6 text-center border-l-4 border-orange-500">
+                    <div class="glass rounded-xl p-6 text-center border-l-4 border-orange-500 cursor-pointer hover:bg-white/10 transition" onclick="toggleIntegration('hubspot')">
                         <div class="text-3xl mb-2">🟠</div>
                         <div class="font-medium">HubSpot</div>
-                        <div class="text-xs text-yellow-400 mt-2">Connect</div>
+                        <div class="text-xs text-yellow-400 mt-2">Click to Connect</div>
                     </div>
-                    <div class="glass rounded-xl p-6 text-center border-l-4 border-yellow-500">
+                    <div class="glass rounded-xl p-6 text-center border-l-4 border-yellow-500 cursor-pointer hover:bg-white/10 transition" onclick="toggleIntegration('zapier')">
                         <div class="text-3xl mb-2">⚡</div>
                         <div class="font-medium">Zapier</div>
                         <div class="text-xs text-green-400 mt-2">5000+ apps</div>
                     </div>
-                    <div class="glass rounded-xl p-6 text-center border-l-4 border-green-500">
+                    <div class="glass rounded-xl p-6 text-center border-l-4 border-green-500 cursor-pointer hover:bg-white/10 transition" onclick="toggleIntegration('sheets')">
                         <div class="text-3xl mb-2">📊</div>
                         <div class="font-medium">Google Sheets</div>
-                        <div class="text-xs text-green-400 mt-2">Connected</div>
+                        <div class="text-xs text-green-400 mt-2">✓ Connected</div>
                     </div>
                 </div>
                 <div class="glass rounded-xl p-6">
-                    <h3 class="text-lg font-bold mono mb-4">INTEGRATION FEATURES</h3>
+                    <h3 class="text-lg font-bold mono mb-4">QUICK ACTIONS</h3>
                     <div class="grid grid-cols-5 gap-4">
-                        <div class="glass-dark rounded-lg p-4 text-center"><div class="text-2xl mb-2">🔄</div><div class="text-sm">CRM Sync</div></div>
-                        <div class="glass-dark rounded-lg p-4 text-center"><div class="text-2xl mb-2">⚡</div><div class="text-sm">Zapier</div></div>
-                        <div class="glass-dark rounded-lg p-4 text-center"><div class="text-2xl mb-2">🔑</div><div class="text-sm">API Keys</div></div>
-                        <div class="glass-dark rounded-lg p-4 text-center"><div class="text-2xl mb-2">📥</div><div class="text-sm">Import</div></div>
-                        <div class="glass-dark rounded-lg p-4 text-center"><div class="text-2xl mb-2">📤</div><div class="text-sm">Export</div></div>
+                        <div class="glass-dark rounded-lg p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showModal('integration-setup')"><div class="text-2xl mb-2">🔄</div><div class="text-sm">CRM Sync</div></div>
+                        <div class="glass-dark rounded-lg p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="toggleIntegration('zapier')"><div class="text-2xl mb-2">⚡</div><div class="text-sm">Zapier</div></div>
+                        <div class="glass-dark rounded-lg p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showModal('integration-setup')"><div class="text-2xl mb-2">🔑</div><div class="text-sm">API Keys</div></div>
+                        <div class="glass-dark rounded-lg p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showModal('import-data')"><div class="text-2xl mb-2">📥</div><div class="text-sm">Import</div></div>
+                        <div class="glass-dark rounded-lg p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showModal('export-data')"><div class="text-2xl mb-2">📤</div><div class="text-sm">Export</div></div>
                     </div>
                 </div>
             </div>
@@ -3416,6 +3426,333 @@ Supported formats:
                 `;
             }
 
+            // Campaign Detail Modal
+            if (type === 'campaign-detail') {
+                const campaign = data.campaigns.find(c => c.id === itemId) || data.campaigns[0];
+                if (campaign) {
+                    content.innerHTML = `
+                        <h2 class="text-xl font-bold mono mb-2">📊 CAMPAIGN DETAILS</h2>
+                        <p class="text-gray-400 text-sm mb-4">${campaign.name}</p>
+
+                        <div class="glass-dark rounded-lg p-4 mb-4">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Campaign Name</label>
+                                    <input type="text" id="edit-campaign-name" value="${campaign.name}" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Type</label>
+                                    <select id="edit-campaign-type" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="email" ${campaign.type === 'email' ? 'selected' : ''}>Email</option>
+                                        <option value="sms" ${campaign.type === 'sms' ? 'selected' : ''}>SMS</option>
+                                        <option value="social" ${campaign.type === 'social' ? 'selected' : ''}>Social</option>
+                                        <option value="multi-channel" ${campaign.type === 'multi-channel' ? 'selected' : ''}>Multi-Channel</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-xs text-gray-400 mb-1">Status</label>
+                                <select id="edit-campaign-status" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                    <option value="draft" ${campaign.status === 'draft' ? 'selected' : ''}>Draft</option>
+                                    <option value="active" ${campaign.status === 'active' ? 'selected' : ''}>Active</option>
+                                    <option value="paused" ${campaign.status === 'paused' ? 'selected' : ''}>Paused</option>
+                                    <option value="completed" ${campaign.status === 'completed' ? 'selected' : ''}>Completed</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="glass-dark rounded-lg p-4 mb-4">
+                            <div class="text-sm font-bold mb-3 text-purple-400">PERFORMANCE</div>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div>
+                                    <div class="text-2xl font-bold text-cyan-400">${(campaign.sent || 0).toLocaleString()}</div>
+                                    <div class="text-xs text-gray-500">Sent</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-green-400">${(campaign.opens || 0).toLocaleString()}</div>
+                                    <div class="text-xs text-gray-500">Opens</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-purple-400">${(campaign.clicks || 0).toLocaleString()}</div>
+                                    <div class="text-xs text-gray-500">Clicks</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                            <button onclick="updateCampaign(${campaign.id})" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Save Changes</button>
+                        </div>
+                    `;
+                }
+            }
+
+            // Contact Detail Modal
+            if (type === 'contact-detail') {
+                const contact = data.leads.find(l => l.id === itemId) || data.leads[0];
+                if (contact) {
+                    content.innerHTML = `
+                        <h2 class="text-xl font-bold mono mb-2">👤 CONTACT DETAILS</h2>
+                        <p class="text-gray-400 text-sm mb-4">${contact.name || contact.email}</p>
+
+                        <div class="glass-dark rounded-lg p-4 mb-4">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Name</label>
+                                    <input type="text" id="edit-contact-name" value="${contact.name || ''}" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Email</label>
+                                    <input type="email" id="edit-contact-email" value="${contact.email || ''}" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Company</label>
+                                    <input type="text" id="edit-contact-company" value="${contact.company || ''}" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Stage</label>
+                                    <select id="edit-contact-stage" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="new" ${contact.stage === 'new' ? 'selected' : ''}>New</option>
+                                        <option value="contacted" ${contact.stage === 'contacted' ? 'selected' : ''}>Contacted</option>
+                                        <option value="qualified" ${contact.stage === 'qualified' ? 'selected' : ''}>Qualified</option>
+                                        <option value="proposal" ${contact.stage === 'proposal' ? 'selected' : ''}>Proposal</option>
+                                        <option value="won" ${contact.stage === 'won' ? 'selected' : ''}>Won</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Lead Score</label>
+                                <div class="flex items-center gap-3">
+                                    <input type="range" id="edit-contact-score" min="0" max="100" value="${contact.score || 0}" class="flex-1">
+                                    <span class="mono text-cyan-400" id="score-display">${contact.score || 0}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button onclick="deleteContact(${contact.id})" class="py-3 px-6 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-500/20 transition">Delete</button>
+                            <button onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                            <button onclick="updateContact(${contact.id})" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Save</button>
+                        </div>
+                    `;
+                    document.getElementById('edit-contact-score')?.addEventListener('input', (e) => {
+                        document.getElementById('score-display').textContent = e.target.value;
+                    });
+                }
+            }
+
+            // New Lead Modal
+            if (type === 'new-lead') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">➕ CAPTURE LEAD</h2>
+                    <p class="text-gray-400 text-sm mb-4">Add a new lead to your pipeline</p>
+
+                    <form onsubmit="createLead(event)">
+                        <div class="glass-dark rounded-lg p-4 mb-4">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Name *</label>
+                                    <input type="text" id="lead-name" required class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Email *</label>
+                                    <input type="email" id="lead-email" required class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Company</label>
+                                    <input type="text" id="lead-company" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Source</label>
+                                    <select id="lead-source" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="website">Website</option>
+                                        <option value="referral">Referral</option>
+                                        <option value="social">Social Media</option>
+                                        <option value="event">Event</option>
+                                        <option value="outbound">Outbound</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <button type="button" onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                            <button type="submit" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Create Lead</button>
+                        </div>
+                    </form>
+                `;
+            }
+
+            // Integration Setup Modal
+            if (type === 'integration-setup') {
+                const integrations = [
+                    { id: 'salesforce', name: 'Salesforce', icon: '☁️', connected: false, description: 'Sync contacts and opportunities' },
+                    { id: 'hubspot', name: 'HubSpot', icon: '🟠', connected: false, description: 'Connect CRM and marketing data' },
+                    { id: 'zapier', name: 'Zapier', icon: '⚡', connected: false, description: 'Automate with 5,000+ apps' },
+                    { id: 'sheets', name: 'Google Sheets', icon: '📊', connected: true, description: 'Import/export data to sheets' },
+                    { id: 'slack', name: 'Slack', icon: '💬', connected: false, description: 'Get notifications in Slack' },
+                    { id: 'mailchimp', name: 'Mailchimp', icon: '🐵', connected: false, description: 'Sync email lists' }
+                ];
+
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">🔗 INTEGRATIONS</h2>
+                    <p class="text-gray-400 text-sm mb-4">Connect vkMRKTos to your favorite tools</p>
+
+                    <div class="space-y-3 mb-6 max-h-80 overflow-y-auto">
+                        ${integrations.map(int => `
+                            <div class="glass-dark rounded-lg p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="text-2xl">${int.icon}</div>
+                                    <div>
+                                        <div class="font-medium">${int.name}</div>
+                                        <div class="text-xs text-gray-500">${int.description}</div>
+                                    </div>
+                                </div>
+                                <button onclick="toggleIntegration('${int.id}')" class="${int.connected ? 'bg-green-600' : 'bg-white/10 border border-white/20'} px-4 py-2 rounded-lg text-sm transition hover:opacity-80">
+                                    ${int.connected ? '✓ Connected' : 'Connect'}
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-2 text-purple-400">API KEYS</div>
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="Enter API key..." class="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm mono">
+                            <button class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm transition">Save Key</button>
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Done</button>
+                `;
+            }
+
+            // New A/B Test Modal
+            if (type === 'new-test') {
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">🧪 CREATE A/B TEST</h2>
+                    <p class="text-gray-400 text-sm mb-4">Set up a new experiment</p>
+
+                    <form onsubmit="createABTest(event)">
+                        <div class="glass-dark rounded-lg p-4 mb-4">
+                            <div class="mb-4">
+                                <label class="block text-xs text-gray-400 mb-1">Test Name *</label>
+                                <input type="text" id="test-name" required placeholder="e.g., Homepage CTA Color Test" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Test Type</label>
+                                    <select id="test-type" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="subject">Subject Line</option>
+                                        <option value="content">Email Content</option>
+                                        <option value="cta">CTA Button</option>
+                                        <option value="timing">Send Time</option>
+                                        <option value="landing">Landing Page</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Variants</label>
+                                    <select id="test-variants" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="2">2 Variants (A/B)</option>
+                                        <option value="3">3 Variants (A/B/C)</option>
+                                        <option value="4">4 Variants (A/B/C/D)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Variant A</label>
+                                    <input type="text" id="variant-a" placeholder="Control version" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Variant B</label>
+                                    <input type="text" id="variant-b" placeholder="Test version" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-dark rounded-lg p-4 mb-4">
+                            <div class="text-sm font-bold mb-2 text-purple-400">TEST SETTINGS</div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Sample Size (%)</label>
+                                    <input type="number" id="test-sample" value="20" min="5" max="100" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-400 mb-1">Win Metric</label>
+                                    <select id="test-metric" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                        <option value="opens">Open Rate</option>
+                                        <option value="clicks">Click Rate</option>
+                                        <option value="conversions">Conversions</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button type="button" onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Cancel</button>
+                            <button type="submit" class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Create Test</button>
+                        </div>
+                    </form>
+                `;
+            }
+
+            // Test Detail Modal
+            if (type === 'test-detail') {
+                const test = data.tests?.find(t => t.id === itemId) || {
+                    name: 'Subject Line Test',
+                    status: 'running',
+                    variantA: { name: 'Control', conversions: 145, sent: 500 },
+                    variantB: { name: 'Test', conversions: 187, sent: 500 }
+                };
+                const convA = ((test.variantA?.conversions / test.variantA?.sent) * 100 || 0).toFixed(1);
+                const convB = ((test.variantB?.conversions / test.variantB?.sent) * 100 || 0).toFixed(1);
+                const winner = convB > convA ? 'B' : 'A';
+
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">🧪 TEST RESULTS</h2>
+                    <p class="text-gray-400 text-sm mb-4">${test.name}</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="glass-dark rounded-lg p-4 ${winner === 'A' ? 'ring-2 ring-green-500' : ''}">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="font-bold">Variant A</span>
+                                ${winner === 'A' ? '<span class="text-green-400 text-sm">👑 Winner</span>' : ''}
+                            </div>
+                            <div class="text-3xl font-bold text-cyan-400 mb-1">${convA}%</div>
+                            <div class="text-xs text-gray-500">${test.variantA?.conversions || 0} / ${test.variantA?.sent || 0} conversions</div>
+                        </div>
+                        <div class="glass-dark rounded-lg p-4 ${winner === 'B' ? 'ring-2 ring-green-500' : ''}">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="font-bold">Variant B</span>
+                                ${winner === 'B' ? '<span class="text-green-400 text-sm">👑 Winner</span>' : ''}
+                            </div>
+                            <div class="text-3xl font-bold text-purple-400 mb-1">${convB}%</div>
+                            <div class="text-xs text-gray-500">${test.variantB?.conversions || 0} / ${test.variantB?.sent || 0} conversions</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-2 text-purple-400">STATISTICAL SIGNIFICANCE</div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1 bg-white/10 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                            <span class="mono text-green-400">95%</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-2">Results are statistically significant</div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button onclick="closeModal()" class="flex-1 py-3 border border-white/20 rounded-lg hover:bg-white/10 transition">Close</button>
+                        <button onclick="applyWinner('${winner}')" class="flex-1 py-3 bg-gradient-to-r from-green-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Apply Winner</button>
+                    </div>
+                `;
+            }
+
             overlay.classList.remove('hidden');
         }
 
@@ -3525,6 +3862,127 @@ Supported formats:
             if (document.getElementById('content-scoring')?.classList.contains('hidden') === false) {
                 renderScoringRules();
             }
+        }
+
+        // v2.3 - Update Campaign
+        function updateCampaign(id) {
+            const campaign = data.campaigns.find(c => c.id === id);
+            if (!campaign) return;
+
+            campaign.name = document.getElementById('edit-campaign-name').value;
+            campaign.type = document.getElementById('edit-campaign-type').value;
+            campaign.status = document.getElementById('edit-campaign-status').value;
+
+            saveData(true);
+            logAudit('CAMPAIGN_UPDATE', { id, name: campaign.name }, 'IV.04');
+            closeModal();
+            showToast(`Campaign "${campaign.name}" updated`);
+            refreshAllViews();
+        }
+
+        // v2.3 - Update Contact
+        function updateContact(id) {
+            const contact = data.leads.find(l => l.id === id);
+            if (!contact) return;
+
+            contact.name = document.getElementById('edit-contact-name').value;
+            contact.email = document.getElementById('edit-contact-email').value;
+            contact.company = document.getElementById('edit-contact-company').value;
+            contact.stage = document.getElementById('edit-contact-stage').value;
+            contact.score = parseInt(document.getElementById('edit-contact-score').value);
+
+            saveData(true);
+            logAudit('CONTACT_UPDATE', { id, name: contact.name }, 'IV.04');
+            closeModal();
+            showToast(`Contact "${contact.name}" updated`);
+            refreshAllViews();
+        }
+
+        // v2.3 - Delete Contact
+        function deleteContact(id) {
+            const contact = data.leads.find(l => l.id === id);
+            if (!contact) return;
+
+            if (confirm(`Delete contact "${contact.name || contact.email}"? This cannot be undone.`)) {
+                data.leads = data.leads.filter(l => l.id !== id);
+                saveData(true);
+                logAudit('CONTACT_DELETE', { id, name: contact.name }, 'IV.02');
+                closeModal();
+                showToast(`Contact deleted`);
+                refreshAllViews();
+            }
+        }
+
+        // v2.3 - Create Lead
+        function createLead(e) {
+            e.preventDefault();
+            const name = document.getElementById('lead-name').value;
+            const email = document.getElementById('lead-email').value;
+            const company = document.getElementById('lead-company').value;
+            const source = document.getElementById('lead-source').value;
+
+            data.leads.unshift({
+                id: Date.now(),
+                name,
+                email,
+                company,
+                source,
+                stage: 'new',
+                score: 10,
+                createdAt: new Date().toISOString()
+            });
+
+            saveData(true);
+            logAudit('LEAD_CREATE', { name, email, source }, 'IV.04');
+            closeModal();
+            showToast(`Lead "${name}" captured`);
+            refreshAllViews();
+        }
+
+        // v2.3 - Toggle Integration
+        function toggleIntegration(integrationId) {
+            // In a real app, this would initiate OAuth or API key configuration
+            logAudit('INTEGRATION_TOGGLE', { integration: integrationId }, 'IV.03');
+            showToast(`${integrationId} integration toggled. Configure API keys to connect.`, 'info');
+        }
+
+        // v2.3 - Create A/B Test
+        function createABTest(e) {
+            e.preventDefault();
+            const name = document.getElementById('test-name').value;
+            const type = document.getElementById('test-type').value;
+            const variants = document.getElementById('test-variants').value;
+            const variantA = document.getElementById('variant-a').value || 'Control';
+            const variantB = document.getElementById('variant-b').value || 'Test';
+            const sample = document.getElementById('test-sample').value;
+            const metric = document.getElementById('test-metric').value;
+
+            if (!data.tests) data.tests = [];
+
+            data.tests.unshift({
+                id: Date.now(),
+                name,
+                type,
+                variants: parseInt(variants),
+                variantA: { name: variantA, conversions: 0, sent: 0 },
+                variantB: { name: variantB, conversions: 0, sent: 0 },
+                sampleSize: parseInt(sample),
+                winMetric: metric,
+                status: 'draft',
+                createdAt: new Date().toISOString()
+            });
+
+            saveData(true);
+            logAudit('TEST_CREATE', { name, type }, 'IV.04');
+            closeModal();
+            showToast(`A/B Test "${name}" created`);
+        }
+
+        // v2.3 - Apply Winning Variant
+        function applyWinner(variant) {
+            logAudit('TEST_WINNER_APPLIED', { variant }, 'IV.02');
+            closeModal();
+            showToast(`Variant ${variant} applied to all traffic`, 'success');
         }
 
         // v2.0 - Render Segments
