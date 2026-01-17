@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValidKernel City | Trust Infrastructure Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #0a0a1a; color: white; overflow-x: hidden; }
+
+        .city-container {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        .city-grid {
+            transform: rotateX(60deg) rotateZ(-45deg);
+            transform-style: preserve-3d;
+        }
+
+        .building {
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+
+        .building:hover {
+            transform: translateZ(20px);
+        }
+
+        .building-face {
+            position: absolute;
+            backface-visibility: hidden;
+        }
+
+        .building-top {
+            transform: rotateX(90deg) translateZ(var(--height));
+        }
+
+        .building-front {
+            transform: translateZ(calc(var(--depth) / 2));
+        }
+
+        .building-right {
+            transform: rotateY(90deg) translateZ(calc(var(--width) / 2));
+        }
+
+        /* Transaction packet animation */
+        @keyframes packetMove {
+            0% { transform: translate(0, 0); opacity: 1; }
+            50% { transform: translate(var(--tx), var(--ty)); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)); opacity: 0; }
+        }
+
+        .packet {
+            animation: packetMove 3s ease-in-out infinite;
+        }
+
+        /* Gate pulse */
+        @keyframes gatePulse {
+            0%, 100% { box-shadow: 0 0 10px currentColor; }
+            50% { box-shadow: 0 0 30px currentColor, 0 0 60px currentColor; }
+        }
+
+        .gate { animation: gatePulse 2s ease-in-out infinite; }
+
+        /* Permission zones */
+        .zone-l0 { background: linear-gradient(135deg, rgba(234,179,8,0.2), rgba(249,115,22,0.2)); border-color: #eab308; }
+        .zone-l1 { background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(99,102,241,0.2)); border-color: #a855f7; }
+        .zone-l2 { background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(59,130,246,0.2)); border-color: #06b6d4; }
+
+        /* Denied flash */
+        @keyframes denied {
+            0%, 100% { background: rgba(239,68,68,0.1); }
+            50% { background: rgba(239,68,68,0.4); }
+        }
+        .denied-flash { animation: denied 0.5s ease-in-out 3; }
+
+        /* Truth persistence glow */
+        @keyframes truthGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+        .truth-persists { animation: truthGlow 2s ease-in-out infinite; }
+
+        .glass {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Transaction log scroll */
+        .log-scroll {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .log-scroll::-webkit-scrollbar { width: 4px; }
+        .log-scroll::-webkit-scrollbar-thumb { background: rgba(168,85,247,0.5); border-radius: 2px; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center font-bold">VK</div>
+                <div>
+                    <div class="font-bold">ValidKernel City</div>
+                    <div class="text-xs text-gray-400">Trust Infrastructure Visualization</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-xs text-gray-400">
+                    <span class="text-yellow-400">L0</span> Governance |
+                    <span class="text-purple-400">L1</span> Kernel |
+                    <span class="text-cyan-400">L2</span> Proposer
+                </div>
+                <div class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium">
+                    LIVE
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- City Title -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold mb-2">
+                    <span class="text-yellow-400">Valid</span><span class="text-purple-400">Kernel</span> City
+                </h1>
+                <p class="text-gray-400">Where every transaction is verified. Every permission is logged. <span class="text-cyan-400">Boring by design.</span></p>
+            </div>
+
+            <!-- City Grid -->
+            <div class="grid grid-cols-3 gap-8 mb-8">
+
+                <!-- L0 GOVERNANCE ZONE -->
+                <div class="zone-l0 rounded-2xl border-2 p-6 relative">
+                    <div class="absolute -top-3 left-4 px-3 py-1 bg-yellow-500 text-black text-xs font-bold rounded-full">L0 GOVERNANCE</div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <!-- ValidKernel HQ -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('vk-hq')">
+                            <div class="text-3xl mb-2">🏛️</div>
+                            <div class="font-bold text-yellow-400">VK HQ</div>
+                            <div class="text-xs text-gray-500">Command Authority</div>
+                        </div>
+
+                        <!-- Audit Tower -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('audit')">
+                            <div class="text-3xl mb-2">🗼</div>
+                            <div class="font-bold text-yellow-400">Audit Tower</div>
+                            <div class="text-xs text-gray-500">VTI™ Verification</div>
+                        </div>
+                    </div>
+
+                    <!-- L0 Gate -->
+                    <div class="mt-4 p-3 rounded-lg bg-yellow-500/20 border border-yellow-500/50 gate text-yellow-400">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold">GATE: IV.01</span>
+                            <span class="text-xs">Trust Hierarchy Check</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L1 KERNEL ZONE -->
+                <div class="zone-l1 rounded-2xl border-2 p-6 relative">
+                    <div class="absolute -top-3 left-4 px-3 py-1 bg-purple-500 text-white text-xs font-bold rounded-full">L1 KERNEL</div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <!-- RuleBind -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('rulebind')">
+                            <div class="text-3xl mb-2">⚖️</div>
+                            <div class="font-bold text-purple-400">RuleBind</div>
+                            <div class="text-xs text-gray-500">Certified Commands</div>
+                        </div>
+
+                        <!-- StrictRun -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('strictrun')">
+                            <div class="text-3xl mb-2">🔒</div>
+                            <div class="font-bold text-purple-400">StrictRun</div>
+                            <div class="text-xs text-gray-500">Execution Engine</div>
+                        </div>
+                    </div>
+
+                    <!-- L1 Gate -->
+                    <div class="mt-4 p-3 rounded-lg bg-purple-500/20 border border-purple-500/50 gate text-purple-400">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold">GATE: IV.02</span>
+                            <span class="text-xs">Check-Then-Act</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- L2 PROPOSER ZONE -->
+                <div class="zone-l2 rounded-2xl border-2 p-6 relative">
+                    <div class="absolute -top-3 left-4 px-3 py-1 bg-cyan-500 text-black text-xs font-bold rounded-full">L2 PROPOSER</div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <!-- vkMRKTos -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('vkmrktos')">
+                            <div class="text-3xl mb-2">📊</div>
+                            <div class="font-bold text-cyan-400">vkMRKTos</div>
+                            <div class="text-xs text-gray-500">Marketing OS</div>
+                        </div>
+
+                        <!-- vkSPECos -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('vkspecos')">
+                            <div class="text-3xl mb-2">📋</div>
+                            <div class="font-bold text-cyan-400">vkSPECos</div>
+                            <div class="text-xs text-gray-500">Spec OS</div>
+                        </div>
+
+                        <!-- vkTRADEos -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('vktradeos')">
+                            <div class="text-3xl mb-2">💹</div>
+                            <div class="font-bold text-cyan-400">vkTRADEos</div>
+                            <div class="text-xs text-gray-500">Trade OS</div>
+                        </div>
+
+                        <!-- vkVOICEos -->
+                        <div class="glass rounded-xl p-4 text-center cursor-pointer hover:bg-white/10 transition" onclick="showBuilding('vkvoiceos')">
+                            <div class="text-3xl mb-2">🎙️</div>
+                            <div class="font-bold text-cyan-400">vkVOICEos</div>
+                            <div class="text-xs text-gray-500">Voice OS</div>
+                        </div>
+                    </div>
+
+                    <!-- L2 Gate -->
+                    <div class="mt-4 p-3 rounded-lg bg-cyan-500/20 border border-cyan-500/50 gate text-cyan-400">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold">GATE: IV.04</span>
+                            <span class="text-xs">Role-Based Permissions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Demo Panel -->
+            <div class="grid grid-cols-2 gap-8">
+
+                <!-- Transaction Simulator -->
+                <div class="glass rounded-2xl p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        <span class="text-2xl">⚡</span> Transaction Simulator
+                    </h3>
+
+                    <div class="space-y-4">
+                        <!-- Transaction Type -->
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-2">REQUEST TYPE</label>
+                            <select id="txType" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-sm">
+                                <option value="style-change">StrictRun: AI Styling Request</option>
+                                <option value="data-export">vkMRKTos: Export Campaign Data</option>
+                                <option value="user-create">L1: Create New User</option>
+                                <option value="config-change">L0: System Configuration</option>
+                            </select>
+                        </div>
+
+                        <!-- Current Permission Level -->
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-2">YOUR PERMISSION LEVEL</label>
+                            <div class="flex gap-2">
+                                <button onclick="setPermission('L2')" class="flex-1 py-2 rounded-lg border border-cyan-500/50 text-cyan-400 text-sm hover:bg-cyan-500/20 transition perm-btn" data-level="L2">L2 Proposer</button>
+                                <button onclick="setPermission('L1')" class="flex-1 py-2 rounded-lg border border-purple-500/50 text-purple-400 text-sm hover:bg-purple-500/20 transition perm-btn" data-level="L1">L1 Kernel</button>
+                                <button onclick="setPermission('L0')" class="flex-1 py-2 rounded-lg border border-yellow-500/50 text-yellow-400 text-sm hover:bg-yellow-500/20 transition perm-btn" data-level="L0">L0 Governance</button>
+                            </div>
+                        </div>
+
+                        <!-- Execute Button -->
+                        <button onclick="executeTransaction()" class="w-full py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg font-bold hover:opacity-90 transition">
+                            Execute Transaction
+                        </button>
+
+                        <!-- Mid-Transaction Permission Change -->
+                        <div class="p-4 rounded-lg bg-red-500/10 border border-red-500/30">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold text-red-400">MID-TRANSACTION DEMO</span>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="midChange" class="rounded">
+                                    <span class="text-xs text-gray-400">Change permissions mid-flight</span>
+                                </label>
+                            </div>
+                            <p class="text-xs text-gray-500">Watch what happens when permissions change during a transaction. The truth persists even when you can't see it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Transaction Log -->
+                <div class="glass rounded-2xl p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        <span class="text-2xl">📜</span> Live Transaction Log
+                        <span class="ml-auto text-xs text-gray-500 font-normal">VTI™ Audit Trail</span>
+                    </h3>
+
+                    <div class="log-scroll space-y-2" id="txLog">
+                        <div class="p-3 rounded-lg bg-white/5 border-l-2 border-green-500">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-green-400">SYSTEM_INIT</span>
+                                <span class="text-xs text-gray-500">00:00:00</span>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">ValidKernel City initialized. All gates operational.</div>
+                        </div>
+                    </div>
+
+                    <!-- Truth Persistence Indicator -->
+                    <div class="mt-4 p-4 rounded-lg bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30">
+                        <div class="flex items-center gap-3">
+                            <div class="w-3 h-3 rounded-full bg-green-400 truth-persists"></div>
+                            <div>
+                                <div class="text-sm font-bold">Truth Persists</div>
+                                <div class="text-xs text-gray-400">All transactions logged immutably. Hidden ≠ Gone.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Flow Visualization -->
+            <div class="mt-8 glass rounded-2xl p-6" id="flowViz">
+                <h3 class="font-bold text-lg mb-4">Transaction Flow</h3>
+
+                <div class="relative h-32 flex items-center justify-between px-8">
+                    <!-- Source -->
+                    <div class="text-center" id="flowSource">
+                        <div class="w-16 h-16 rounded-xl bg-cyan-500/20 border-2 border-cyan-500 flex items-center justify-center text-2xl mb-2">📊</div>
+                        <div class="text-xs text-cyan-400">Source</div>
+                    </div>
+
+                    <!-- Gate 1 -->
+                    <div class="text-center" id="flowGate1">
+                        <div class="w-12 h-12 rounded-full bg-purple-500/20 border-2 border-purple-500 flex items-center justify-center text-lg gate">🚧</div>
+                        <div class="text-xs text-purple-400 mt-2">IV.02</div>
+                    </div>
+
+                    <!-- Packet -->
+                    <div class="absolute left-24 top-1/2 transform -translate-y-1/2" id="packet">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 flex items-center justify-center text-sm shadow-lg shadow-purple-500/50">📦</div>
+                    </div>
+
+                    <!-- Gate 2 -->
+                    <div class="text-center" id="flowGate2">
+                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 border-2 border-yellow-500 flex items-center justify-center text-lg gate">🚧</div>
+                        <div class="text-xs text-yellow-400 mt-2">IV.01</div>
+                    </div>
+
+                    <!-- Destination -->
+                    <div class="text-center" id="flowDest">
+                        <div class="w-16 h-16 rounded-xl bg-yellow-500/20 border-2 border-yellow-500 flex items-center justify-center text-2xl mb-2">🏛️</div>
+                        <div class="text-xs text-yellow-400">Target</div>
+                    </div>
+
+                    <!-- Flow Line -->
+                    <div class="absolute top-1/2 left-24 right-24 h-0.5 bg-gradient-to-r from-cyan-500 via-purple-500 to-yellow-500 opacity-30 -z-10"></div>
+                </div>
+
+                <!-- Status -->
+                <div class="mt-4 text-center" id="flowStatus">
+                    <span class="text-gray-400 text-sm">Ready to process transaction</span>
+                </div>
+            </div>
+
+            <!-- Boring By Design -->
+            <div class="mt-8 text-center">
+                <div class="inline-block px-6 py-3 rounded-full bg-white/5 border border-white/10">
+                    <span class="text-gray-400">ValidKernel is </span>
+                    <span class="font-bold text-white">Boring by Design</span>
+                    <span class="text-gray-400"> — Predictable. Deterministic. Trustworthy.</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // State
+        let currentPermission = 'L2';
+        let txCount = 0;
+
+        // Permission level requirements
+        const txRequirements = {
+            'style-change': 'L1',      // RuleBind says NO to L2
+            'data-export': 'L2',       // Anyone can export their data
+            'user-create': 'L1',       // Kernel level
+            'config-change': 'L0'      // Governance only
+        };
+
+        const permissionRank = { 'L2': 0, 'L1': 1, 'L0': 2 };
+
+        function setPermission(level) {
+            currentPermission = level;
+            document.querySelectorAll('.perm-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-500/30', 'bg-purple-500/30', 'bg-yellow-500/30');
+                if (btn.dataset.level === level) {
+                    if (level === 'L2') btn.classList.add('bg-cyan-500/30');
+                    if (level === 'L1') btn.classList.add('bg-purple-500/30');
+                    if (level === 'L0') btn.classList.add('bg-yellow-500/30');
+                }
+            });
+            logTransaction('PERMISSION_CHANGE', `Permission level set to ${level}`, level === 'L0' ? 'yellow' : level === 'L1' ? 'purple' : 'cyan');
+        }
+
+        function executeTransaction() {
+            const txType = document.getElementById('txType').value;
+            const required = txRequirements[txType];
+            const midChange = document.getElementById('midChange').checked;
+
+            const txName = document.getElementById('txType').options[document.getElementById('txType').selectedIndex].text;
+
+            logTransaction('TX_INITIATED', `Request: ${txName}`, 'cyan');
+
+            // Animate packet
+            const packet = document.getElementById('packet');
+            packet.style.transition = 'left 1s ease-in-out';
+            packet.style.left = '45%';
+
+            setTimeout(() => {
+                // First gate check
+                logTransaction('GATE_CHECK', `IV.02 Check-Then-Act: Verifying permissions...`, 'purple');
+
+                setTimeout(() => {
+                    // Check permission
+                    const hasPermission = permissionRank[currentPermission] >= permissionRank[required];
+
+                    if (midChange && hasPermission) {
+                        // Simulate permission being revoked mid-transaction
+                        logTransaction('PERMISSION_REVOKED', `⚠️ L0 Command: Permission level reduced to L2`, 'red');
+                        currentPermission = 'L2';
+                        setPermission('L2');
+
+                        setTimeout(() => {
+                            showDenied(txName, required);
+                            showTruthPersists();
+                        }, 500);
+                    } else if (hasPermission) {
+                        // Approved
+                        packet.style.left = '85%';
+                        logTransaction('TX_APPROVED', `✓ RuleBind Certified: ${txName}`, 'green');
+                        document.getElementById('flowStatus').innerHTML = '<span class="text-green-400 font-bold">APPROVED - Transaction Complete</span>';
+
+                        setTimeout(() => {
+                            packet.style.left = '8%';
+                            document.getElementById('flowStatus').innerHTML = '<span class="text-gray-400 text-sm">Ready to process transaction</span>';
+                        }, 2000);
+                    } else {
+                        showDenied(txName, required);
+                    }
+                }, 1000);
+            }, 1000);
+        }
+
+        function showDenied(txName, required) {
+            const packet = document.getElementById('packet');
+            packet.style.left = '8%';
+
+            logTransaction('TX_DENIED', `✗ RuleBind: DENIED - Requires ${required}, you have ${currentPermission}`, 'red');
+            document.getElementById('flowStatus').innerHTML = `<span class="text-red-400 font-bold">DENIED at Gate IV.02 - Requires ${required}</span>`;
+
+            // Flash the gate
+            document.getElementById('flowGate1').classList.add('denied-flash');
+            setTimeout(() => {
+                document.getElementById('flowGate1').classList.remove('denied-flash');
+                document.getElementById('flowStatus').innerHTML = '<span class="text-gray-400 text-sm">Ready to process transaction</span>';
+            }, 2000);
+        }
+
+        function showTruthPersists() {
+            logTransaction('TRUTH_PERSISTS', `📜 Transaction logged immutably. Hidden from view ≠ deleted from record.`, 'purple');
+        }
+
+        function logTransaction(type, message, color) {
+            const log = document.getElementById('txLog');
+            const time = new Date().toLocaleTimeString();
+            txCount++;
+
+            const colors = {
+                green: 'border-green-500 text-green-400',
+                red: 'border-red-500 text-red-400',
+                yellow: 'border-yellow-500 text-yellow-400',
+                purple: 'border-purple-500 text-purple-400',
+                cyan: 'border-cyan-500 text-cyan-400'
+            };
+
+            const entry = document.createElement('div');
+            entry.className = `p-3 rounded-lg bg-white/5 border-l-2 ${colors[color]}`;
+            entry.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <span class="text-sm">${type}</span>
+                    <span class="text-xs text-gray-500">${time}</span>
+                </div>
+                <div class="text-xs text-gray-400 mt-1">${message}</div>
+            `;
+
+            log.insertBefore(entry, log.firstChild.nextSibling);
+
+            // Keep log manageable
+            while (log.children.length > 20) {
+                log.removeChild(log.lastChild);
+            }
+        }
+
+        function showBuilding(id) {
+            const buildings = {
+                'vk-hq': { name: 'ValidKernel HQ', desc: 'L0 Command Authority. All governance decisions originate here.', level: 'L0' },
+                'audit': { name: 'Audit Tower', desc: 'VTI™ Verification Center. Every transaction passes through here.', level: 'L0' },
+                'rulebind': { name: 'RuleBind', desc: 'Certified Command Engine. Enforces IV.02 Check-Then-Act.', level: 'L1' },
+                'strictrun': { name: 'StrictRun', desc: 'Execution Engine. Runs only certified commands.', level: 'L1' },
+                'vkmrktos': { name: 'vkMRKTos', desc: 'Marketing OS. Campaigns, leads, analytics.', level: 'L2' },
+                'vkspecos': { name: 'vkSPECos', desc: 'Spec OS. Documents, specifications, compliance.', level: 'L2' },
+                'vktradeos': { name: 'vkTRADEos', desc: 'Trade OS. Transactions, assets, valuations.', level: 'L2' },
+                'vkvoiceos': { name: 'vkVOICEos', desc: 'Voice OS. Recordings, transcripts, communications.', level: 'L2' }
+            };
+
+            const b = buildings[id];
+            logTransaction('BUILDING_INSPECT', `${b.name} (${b.level}): ${b.desc}`, b.level === 'L0' ? 'yellow' : b.level === 'L1' ? 'purple' : 'cyan');
+        }
+
+        // Initialize
+        setPermission('L2');
+    </script>
+</body>
+</html>
