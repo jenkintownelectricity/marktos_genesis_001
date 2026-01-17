@@ -454,33 +454,72 @@ Implement a visible, interactive L0-L1-L2 Trust Hierarchy UI that demonstrates V
 
 ---
 
+## vkCONSTos.com PLANNING
+
+```
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    vkCONSTos - Construction Operating System                 ║
+║                         ValidKernel VTI™ Verified                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+```
+
+### Product Vision
+
+**Domain:** vkCONSTos.com
+**Industry:** Construction
+**Core Feature:** VTI™ licensing integration from verifiabletrustinfrastructure.com
+
+### Core Modules (Proposed)
+
+| Module | Description | VTI™ Relevance |
+|--------|-------------|----------------|
+| **Project Management** | Track projects, timelines, milestones | Audit-ready project history |
+| **Bid Management** | Create, track, win bids | Verifiable bid documentation |
+| **Spec Compliance** | Manage building specs & codes | Check-Then-Act verification |
+| **Material Tracking** | Inventory & procurement | Supply chain auditability |
+| **Crew Scheduling** | Assign workers, track hours | Role-based crew permissions |
+| **Safety Compliance** | OSHA, safety protocols | Deterministic safety logging |
+| **Client Portal** | Client access, approvals | Trust hierarchy (L0→L1→L2) |
+| **VTI™ Licensing** | License verification feature | Built-in VTI™ certification |
+
+### VTI™ Integration Points
+
+1. **Spec Compliance Module** — Use VTI™ to verify spec adherence
+2. **Safety Logging** — Four Invariants for safety records
+3. **Bid Verification** — Trust score for bid accuracy
+4. **Material Chain-of-Custody** — Auditable material sourcing
+5. **License Verification** — VTI™ certified contractors
+
+### Architecture (Same as vkMRKTos)
+
+- Zero-build single HTML file
+- Offline-first PWA
+- Role-based access control
+- L0-L1-L2 Trust Hierarchy
+- ValidKernel audit logging
+- LDS.json data format
+
+### Timeline Notes
+
+*No timeline estimates - user decides scheduling*
+
+**Prerequisites:**
+1. Complete vkMRKTos v2.3 polish (current)
+2. Establish VTI™ licensing service at verifiabletrustinfrastructure.com
+3. Begin vkCONSTos development
+
+---
+
 ## TODO LOG - NEXT SESSION
 
-### Priority 1: Add Click Functionality to Cards
+### Priority 1: Add Click Functionality to Cards (COMPLETED ✓)
 
-The following layers have cards/buttons that display but don't have click handlers:
+- [x] **Campaigns** - Campaign detail/edit modal ✓
+- [x] **A/B Testing** - Test cards open detail modal ✓
+- [x] **Integrations** - Clickable integration cards ✓
+- [x] **Contacts** - Contact detail modal ✓
 
-- [ ] **L7: CAMPAIGNS - Orchestration Organs**
-  - Campaign cards should open campaign detail/edit modal
-  - "Create Campaign" should work (may already work)
-
-- [ ] **L11: A/B TESTING - Optimization Immune System**
-  - Test cards should open test detail modal
-  - "+ New Test" should open create test modal
-
-- [ ] **L13: COMPLIANCE - Regulatory System**
-  - GDPR, CAN-SPAM cards should open config modals
-  - Audit Trail already works
-
-- [ ] **L14: INTEGRATIONS - Connective Tissue**
-  - Salesforce, HubSpot, Zapier, Google Sheets should open connection modals
-  - API Keys should open key management
-
-- [ ] **L15: DELIVERABILITY - Lymphatic System**
-  - Cards should open detailed views for each metric
-  - Add SPF/DKIM setup wizard
-
-### Priority 2: Visual Builders
+### Priority 2: Visual Builders (FUTURE)
 
 - [ ] **L8: AUTOMATION - Open Canvas Builder**
   - Implement drag-drop workflow canvas
@@ -492,16 +531,10 @@ The following layers have cards/buttons that display but don't have click handle
   - Add triggers, waits, branches
   - Journey preview and testing
 
-### Priority 3: New Features
+### Priority 3: Completed Features ✓
 
-- [ ] **User Profile Info**
-  - Add user avatar/name display in header
-  - Profile settings modal
-  - User preferences storage
-
-- [ ] **Bell Button (Notifications)**
-  - Add notification bell icon in header
-  - Notification dropdown/panel
+- [x] **User Profile Info** - Profile modal with trust status ✓
+- [x] **Bell Button (Notifications)** - Notification modal ✓
   - Real-time notification system
   - Notification settings
 
