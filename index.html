@@ -83,6 +83,96 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
         ::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.5); border-radius: 4px; }
+
+        /* View Mode Styles */
+        .view-btn { color: rgba(255,255,255,0.5); }
+        .view-btn:hover { color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.1); }
+        .view-btn.active { color: white; background: rgba(124, 58, 237, 0.5); }
+
+        /* Collapsible Nav Groups */
+        .nav-section.collapsed { display: none; }
+
+        /* View Mode Layouts */
+        .view-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .view-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .view-table { display: table; width: 100%; border-collapse: collapse; }
+
+        /* Card View Item */
+        .item-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .item-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(124, 58, 237, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* List View Item */
+        .item-list {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .item-list:hover { background: rgba(255,255,255,0.05); }
+
+        /* Table View */
+        .table-header {
+            display: grid;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px 8px 0 0;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+        }
+        .table-row {
+            display: grid;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+        .table-row:hover { background: rgba(255,255,255,0.03); }
+        .table-row:last-child { border-bottom: none; border-radius: 0 0 8px 8px; }
+
+        /* Sortable columns */
+        .sortable { cursor: pointer; user-select: none; }
+        .sortable:hover { color: rgba(255,255,255,0.8); }
+        .sort-asc::after { content: ' ↑'; }
+        .sort-desc::after { content: ' ↓'; }
+
+        /* Clean status badges */
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+        .status-active { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+        .status-draft { background: rgba(156, 163, 175, 0.2); color: #d1d5db; }
+        .status-paused { background: rgba(251, 191, 36, 0.2); color: #fcd34d; }
+        .status-completed { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(255,255,255,0.4);
+        }
     </style>
 </head>
 <body class="gradient-bg text-white min-h-screen">
@@ -103,7 +193,7 @@
                     </div>
                     <div>
                         <div class="mono font-bold text-lg">MARKTOS</div>
-                        <div class="text-xs text-gray-400">v2.1 | VTI™ Enterprise</div>
+                        <div class="text-xs text-gray-400">v2.2 | Enterprise</div>
                     </div>
                 </div>
             </div>
@@ -119,182 +209,191 @@
             </div>
 
             <!-- NAVIGATION -->
-            <nav class="flex-1 p-4 space-y-6 overflow-y-auto">
+            <nav class="flex-1 p-4 space-y-4 overflow-y-auto">
 
-                <!-- L0 COMMAND CENTER -->
+                <!-- DASHBOARD -->
                 <div>
                     <div class="nav-item active flex items-center gap-3 p-3 rounded-lg cursor-pointer" onclick="showLayer('dashboard')">
                         <span>📊</span>
-                        <span class="text-sm font-medium">Command Center</span>
-                    </div>
-                    <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-yellow-300 mt-1 border border-yellow-500/30" onclick="showModal('command-center')">
-                        <span>⚡</span>
-                        <span>L0 Authorization</span>
-                        <span id="sidebar-cmd-count" class="ml-auto text-xs mono bg-yellow-500/20 px-2 py-0.5 rounded">0</span>
+                        <span class="text-sm font-medium">Dashboard</span>
                     </div>
                 </div>
 
-                <!-- LAYER 0-4: FOUNDATION -->
+                <!-- CONTACTS & AUDIENCES -->
                 <div>
-                    <div class="flex items-center gap-2 mb-2 px-3">
-                        <span class="layer-badge layer-0-4 mono">L0-4</span>
-                        <span class="text-xs text-gray-400 uppercase tracking-wider">Foundation</span>
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('contacts')">
+                        <span class="text-purple-400">👥</span>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider font-medium">Contacts & Audiences</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="contacts-chevron">▼</span>
                     </div>
-                    <div class="nav-section space-y-1">
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('kernel')">
-                            <span>🧬</span><span>Kernel Monitor</span>
-                        </div>
+                    <div class="nav-section space-y-1" id="nav-contacts">
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('identity')">
-                            <span>👤</span><span>Identity</span>
+                            <span>👤</span><span>All Contacts</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('segmentation')">
-                            <span>🎯</span><span>Segmentation</span>
+                            <span>🎯</span><span>Segments</span>
                         </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('data')">
-                            <span>💾</span><span>Data Architecture</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('channels')">
-                            <span>📡</span><span>Channels</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LAYER 5-8: CONTENT & AUTOMATION -->
-                <div>
-                    <div class="flex items-center gap-2 mb-2 px-3">
-                        <span class="layer-badge layer-5-8 mono">L5-8</span>
-                        <span class="text-xs text-gray-400 uppercase tracking-wider">Content</span>
-                    </div>
-                    <div class="nav-section space-y-1">
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('content')">
-                            <span>📝</span><span>Content Engine</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('personalization')">
-                            <span>✨</span><span>Personalization</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('campaigns')">
-                            <span>🚀</span><span>Campaigns</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('automation')">
-                            <span>⚡</span><span>Automation</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LAYER 9-12: LEAD MANAGEMENT -->
-                <div>
-                    <div class="flex items-center gap-2 mb-2 px-3">
-                        <span class="layer-badge layer-9-12 mono">L9-12</span>
-                        <span class="text-xs text-gray-400 uppercase tracking-wider">Leads</span>
-                    </div>
-                    <div class="nav-section space-y-1">
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('leads')">
                             <span>🧲</span><span>Lead Capture</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('scoring')">
                             <span>📈</span><span>Lead Scoring</span>
                         </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('testing')">
-                            <span>🧪</span><span>A/B Testing</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('analytics')">
-                            <span>📊</span><span>Analytics</span>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('audience')">
+                            <span>🧠</span><span>Audience Insights</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- LAYER 13-16: COMPLIANCE & DELIVERY -->
+                <!-- CAMPAIGNS & CONTENT -->
                 <div>
-                    <div class="flex items-center gap-2 mb-2 px-3">
-                        <span class="layer-badge layer-13-16 mono">L13-16</span>
-                        <span class="text-xs text-gray-400 uppercase tracking-wider">Compliance</span>
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('campaigns')">
+                        <span class="text-blue-400">🚀</span>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider font-medium">Campaigns & Content</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="campaigns-chevron">▼</span>
                     </div>
-                    <div class="nav-section space-y-1">
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('compliance')">
-                            <span>🔒</span><span>Compliance</span>
+                    <div class="nav-section space-y-1" id="nav-campaigns">
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('campaigns')">
+                            <span>🚀</span><span>All Campaigns</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('content')">
+                            <span>📝</span><span>Email Templates</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('personalization')">
+                            <span>✨</span><span>Personalization</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('testing')">
+                            <span>🧪</span><span>A/B Testing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AUTOMATION & JOURNEYS -->
+                <div>
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('automation')">
+                        <span class="text-cyan-400">⚡</span>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider font-medium">Automation</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="automation-chevron">▼</span>
+                    </div>
+                    <div class="nav-section space-y-1" id="nav-automation">
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('automation')">
+                            <span>⚡</span><span>Workflows</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('journeys')">
+                            <span>🗺️</span><span>Customer Journeys</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('realtime')">
+                            <span>⚡</span><span>Real-Time Triggers</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANALYTICS & REPORTS -->
+                <div>
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('analytics')">
+                        <span class="text-green-400">📊</span>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider font-medium">Analytics</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="analytics-chevron">▼</span>
+                    </div>
+                    <div class="nav-section space-y-1" id="nav-analytics">
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('analytics')">
+                            <span>📊</span><span>Reports</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('revenue')">
+                            <span>💰</span><span>Revenue</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('experiments')">
+                            <span>🔬</span><span>Experiments</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTEGRATIONS -->
+                <div>
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('integrations')">
+                        <span class="text-orange-400">🔗</span>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider font-medium">Integrations</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="integrations-chevron">▼</span>
+                    </div>
+                    <div class="nav-section space-y-1" id="nav-integrations">
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('channels')">
+                            <span>📡</span><span>Channels</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('integrations')">
-                            <span>🔗</span><span>Integrations</span>
+                            <span>🔗</span><span>Connectors</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('deliverability')">
                             <span>📬</span><span>Deliverability</span>
                         </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('audience')">
-                            <span>🧠</span><span>Audience Intel</span>
-                        </div>
                     </div>
                 </div>
 
-                <!-- LAYER 17-20: REVENUE & STRATEGY -->
+                <!-- COMPLIANCE & PRIVACY -->
                 <div>
-                    <div class="flex items-center gap-2 mb-2 px-3">
-                        <span class="layer-badge layer-17-20 mono">L17-20</span>
-                        <span class="text-xs text-gray-400 uppercase tracking-wider">Revenue</span>
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('compliance')">
+                        <span class="text-red-400">🔒</span>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider font-medium">Compliance</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="compliance-chevron">▼</span>
                     </div>
-                    <div class="nav-section space-y-1">
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('revenue')">
-                            <span>💰</span><span>Revenue Intel</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('journeys')">
-                            <span>🗺️</span><span>Journeys</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('abm')">
-                            <span>🏢</span><span>ABM</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- LAYER 21-25: PLATFORM -->
-                <div>
-                    <div class="flex items-center gap-2 mb-2 px-3">
-                        <span class="layer-badge layer-21-25 mono">L21-25</span>
-                        <span class="text-xs text-gray-400 uppercase tracking-wider">Platform</span>
-                    </div>
-                    <div class="nav-section space-y-1">
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('experiments')">
-                            <span>🔬</span><span>Experiments</span>
-                        </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('realtime')">
-                            <span>⚡</span><span>Real-Time</span>
+                    <div class="nav-section space-y-1" id="nav-compliance">
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('compliance')">
+                            <span>🔒</span><span>Compliance Center</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('privacy')">
                             <span>🛡️</span><span>Privacy</span>
                         </div>
-                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('governance')">
-                            <span>⚙️</span><span>Governance</span>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('abm')">
+                            <span>🏢</span><span>Account-Based</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- DATA TOOLS - v1.1 -->
-                <div class="mt-4 pt-4 border-t border-white/10">
-                    <div class="flex items-center gap-2 mb-3 px-3">
-                        <span class="text-xs text-cyan-400 uppercase tracking-wider font-bold">Data Tools</span>
+                <!-- TOOLS -->
+                <div class="pt-4 border-t border-white/10">
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('tools')">
+                        <span class="text-cyan-400">🛠️</span>
+                        <span class="text-xs text-gray-300 uppercase tracking-wider font-medium">Tools</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="tools-chevron">▼</span>
                     </div>
-                    <div class="space-y-1">
+                    <div class="nav-section space-y-1" id="nav-tools">
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('export-data')">
-                            <span>📤</span><span>Export LDS.json</span>
+                            <span>📤</span><span>Export Data</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('import-data')">
-                            <span>📥</span><span>Import LDS.json</span>
+                            <span>📥</span><span>Import Data</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('chat-parser')">
                             <span>💬</span><span>Chat Parser</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('share-link')">
-                            <span>🔗</span><span>Share via Link</span>
+                            <span>🔗</span><span>Share Link</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- VTI - VERIFIABLE TRUST INFRASTRUCTURE v1.2 -->
-                <div class="mt-4 pt-4 border-t border-white/10">
-                    <div class="flex items-center gap-2 mb-3 px-3">
-                        <span class="text-xs text-green-400 uppercase tracking-wider font-bold">VTI™</span>
+                <!-- ADMIN (SUPER_ADMIN ONLY) -->
+                <div class="pt-4 border-t border-white/10" id="admin-section">
+                    <div class="flex items-center gap-2 mb-2 px-3 cursor-pointer" onclick="toggleNavGroup('admin')">
+                        <span class="text-yellow-400">⚙️</span>
+                        <span class="text-xs text-yellow-300 uppercase tracking-wider font-medium">Admin</span>
+                        <span class="ml-auto text-gray-500 text-xs" id="admin-chevron">▼</span>
                     </div>
-                    <div class="space-y-1">
+                    <div class="nav-section space-y-1" id="nav-admin">
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-yellow-300" onclick="showModal('command-center')">
+                            <span>⚡</span><span>Command Center</span>
+                            <span id="sidebar-cmd-count" class="ml-auto text-xs mono bg-yellow-500/20 px-2 py-0.5 rounded">0</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('governance')">
+                            <span>⚙️</span><span>Governance</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('kernel')">
+                            <span>🧬</span><span>System Monitor</span>
+                        </div>
+                        <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showLayer('data')">
+                            <span>💾</span><span>Data Schema</span>
+                        </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('trust-score')">
-                            <span>🛡️</span><span>Trust Score</span>
+                            <span>🛡️</span><span>VTI™ Trust</span>
                             <span class="ml-auto text-xs mono text-green-400" id="sidebar-trust-score">--</span>
                         </div>
                         <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-gray-300" onclick="showModal('audit-log')">
@@ -320,41 +419,69 @@
         <!-- MAIN CONTENT -->
         <main class="flex-1 ml-64 p-8">
 
-            <!-- HEADER -->
-            <header class="flex items-center justify-between mb-8">
+            <!-- HEADER - Clean & Minimal -->
+            <header class="flex items-center justify-between mb-6">
                 <div>
-                    <h1 class="text-3xl font-bold mono" id="page-title">COMMAND CENTER</h1>
-                    <p class="text-gray-400 mt-1" id="page-subtitle">Marketing Genome Dashboard</p>
+                    <h1 class="text-2xl font-semibold" id="page-title">Dashboard</h1>
+                    <p class="text-gray-500 text-sm mt-0.5" id="page-subtitle">Overview of your marketing performance</p>
                 </div>
-                <div class="flex items-center gap-4">
-                    <!-- L0 Command Center Button -->
-                    <button onclick="showModal('command-center')" class="glass rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition flex items-center gap-2 relative">
-                        <span class="text-yellow-400">⚡</span>
-                        <span class="text-yellow-300 mono text-xs">L0 COMMANDS</span>
-                        <span id="command-count" class="ml-1 text-xs text-gray-400 mono">0</span>
-                    </button>
-                    <!-- Proposal Queue Button -->
-                    <button onclick="showModal('proposal-queue')" class="glass rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition flex items-center gap-2 relative">
-                        <span class="text-cyan-400">📋</span>
-                        <span class="text-cyan-300 mono text-xs">PROPOSALS</span>
-                        <span id="proposal-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-xs flex items-center justify-center font-bold" style="display:none;">0</span>
-                    </button>
-                    <!-- Role Display -->
-                    <div class="glass rounded-lg px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition" onclick="showModal('governance')">
-                        <span class="text-gray-400">Role:</span>
-                        <span id="current-role-display" class="text-yellow-300 mono ml-2">SUPER_ADMIN</span>
+                <div class="flex items-center gap-3">
+                    <!-- View Mode Toggle -->
+                    <div class="glass rounded-lg p-1 flex gap-1" id="view-mode-toggle">
+                        <button onclick="setViewMode('cards')" class="view-btn px-3 py-1.5 rounded text-xs transition active" data-mode="cards" title="Cards View">
+                            <span>▦</span>
+                        </button>
+                        <button onclick="setViewMode('list')" class="view-btn px-3 py-1.5 rounded text-xs transition" data-mode="list" title="List View">
+                            <span>☰</span>
+                        </button>
+                        <button onclick="setViewMode('table')" class="view-btn px-3 py-1.5 rounded text-xs transition" data-mode="table" title="Table View">
+                            <span>▤</span>
+                        </button>
                     </div>
+                    <!-- Search -->
+                    <div class="glass rounded-lg px-3 py-2 flex items-center gap-2">
+                        <span class="text-gray-500">🔍</span>
+                        <input type="text" placeholder="Search..." class="bg-transparent border-none outline-none text-sm w-32 placeholder-gray-500" id="global-search" onkeyup="handleSearch(this.value)">
+                    </div>
+                    <!-- Quick Actions -->
+                    <button onclick="showModal('new-campaign')" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+                        + New
+                    </button>
                     <!-- Notifications -->
-                    <button onclick="showModal('notifications')" class="glass rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition relative">
+                    <button onclick="showModal('notifications')" class="glass rounded-lg p-2 hover:bg-white/10 transition relative">
                         <span class="text-gray-400">🔔</span>
                         <span id="notification-badge" class="absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full text-xs flex items-center justify-center" style="display:none;">0</span>
                     </button>
                     <!-- User Avatar -->
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-purple-500 flex items-center justify-center cursor-pointer hover:ring-2 ring-yellow-400 transition" onclick="showModal('user-profile')">
-                        <span class="text-sm font-bold">L0</span>
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center cursor-pointer hover:ring-2 ring-purple-400 transition" onclick="showModal('user-profile')">
+                        <span class="text-xs font-bold" id="user-avatar-text">SA</span>
                     </div>
                 </div>
             </header>
+
+            <!-- Toolbar for filtering/sorting (shown on relevant pages) -->
+            <div id="content-toolbar" class="flex items-center justify-between mb-4 hidden">
+                <div class="flex items-center gap-2">
+                    <select class="glass rounded-lg px-3 py-2 text-sm bg-transparent border-none outline-none" id="filter-status" onchange="applyFilters()">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="draft">Draft</option>
+                        <option value="paused">Paused</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <select class="glass rounded-lg px-3 py-2 text-sm bg-transparent border-none outline-none" id="filter-type" onchange="applyFilters()">
+                        <option value="">All Types</option>
+                        <option value="broadcast">Broadcast</option>
+                        <option value="automation">Automation</option>
+                        <option value="triggered">Triggered</option>
+                    </select>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-gray-400">
+                    <span id="results-count">0 items</span>
+                    <span>|</span>
+                    <button onclick="showModal('column-settings')" class="hover:text-white transition">⚙️ Columns</button>
+                </div>
+            </div>
 
             <!-- DASHBOARD CONTENT -->
             <div id="content-dashboard" class="layer-content">
@@ -1278,7 +1405,7 @@
         // Full 25-Layer Marketing Genome with Role-Based Access Control
         // ═══════════════════════════════════════════════════════════════
 
-        const MARKTOS_VERSION = '2.1.0';
+        const MARKTOS_VERSION = '2.2.0';
         const STORAGE_KEY = 'marktos_data_v2';
         const AUDIT_KEY = 'marktos_audit_v1';
         const CONFIG_KEY = 'marktos_config_v1';
@@ -1417,6 +1544,292 @@
             }
             saveConfig();
             applyAccessControl();
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // USER INTERFACE - View Modes, Navigation, Filtering
+        // ═══════════════════════════════════════════════════════════════
+
+        let currentViewMode = 'cards';
+        let currentSearchQuery = '';
+        let currentFilters = { status: '', type: '' };
+        let collapsedNavGroups = new Set();
+
+        // Toggle navigation group collapse
+        function toggleNavGroup(groupId) {
+            const section = document.getElementById(`nav-${groupId}`);
+            const chevron = document.getElementById(`${groupId}-chevron`);
+
+            if (collapsedNavGroups.has(groupId)) {
+                collapsedNavGroups.delete(groupId);
+                section?.classList.remove('collapsed');
+                if (chevron) chevron.textContent = '▼';
+            } else {
+                collapsedNavGroups.add(groupId);
+                section?.classList.add('collapsed');
+                if (chevron) chevron.textContent = '▶';
+            }
+        }
+
+        // Set view mode (cards, list, table)
+        function setViewMode(mode) {
+            currentViewMode = mode;
+
+            // Update button states
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+
+            // Re-render current content with new view mode
+            refreshCurrentView();
+        }
+
+        // Handle global search
+        function handleSearch(query) {
+            currentSearchQuery = query.toLowerCase();
+            refreshCurrentView();
+        }
+
+        // Apply filters
+        function applyFilters() {
+            currentFilters.status = document.getElementById('filter-status')?.value || '';
+            currentFilters.type = document.getElementById('filter-type')?.value || '';
+            refreshCurrentView();
+        }
+
+        // Refresh current view based on active layer
+        function refreshCurrentView() {
+            const activeLayer = document.querySelector('.layer-content:not(.hidden)')?.id?.replace('content-', '');
+            if (activeLayer) {
+                renderLayerContent(activeLayer);
+            }
+        }
+
+        // Generic render function for different view modes
+        function renderItems(containerId, items, config) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            // Filter items
+            let filtered = items.filter(item => {
+                if (currentSearchQuery && !JSON.stringify(item).toLowerCase().includes(currentSearchQuery)) {
+                    return false;
+                }
+                if (currentFilters.status && item.status !== currentFilters.status) {
+                    return false;
+                }
+                if (currentFilters.type && item.type !== currentFilters.type) {
+                    return false;
+                }
+                return true;
+            });
+
+            // Update results count
+            const countEl = document.getElementById('results-count');
+            if (countEl) countEl.textContent = `${filtered.length} items`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="text-4xl mb-4">📭</div>
+                        <div class="text-lg mb-2">No items found</div>
+                        <div class="text-sm">Try adjusting your filters or search</div>
+                    </div>
+                `;
+                return;
+            }
+
+            switch (currentViewMode) {
+                case 'cards':
+                    container.innerHTML = `<div class="view-cards">${filtered.map(item => config.renderCard(item)).join('')}</div>`;
+                    break;
+                case 'list':
+                    container.innerHTML = `<div class="view-list">${filtered.map(item => config.renderList(item)).join('')}</div>`;
+                    break;
+                case 'table':
+                    container.innerHTML = `
+                        <div class="glass rounded-lg overflow-hidden">
+                            <div class="table-header" style="grid-template-columns: ${config.columns.map(c => c.width || '1fr').join(' ')}">
+                                ${config.columns.map(col => `<div class="sortable" onclick="sortBy('${col.key}')">${col.label}</div>`).join('')}
+                            </div>
+                            <div>
+                                ${filtered.map(item => config.renderRow(item, config.columns)).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        // Render layer-specific content
+        function renderLayerContent(layerId) {
+            switch(layerId) {
+                case 'campaigns':
+                    renderCampaignsView();
+                    break;
+                case 'identity':
+                    renderContactsView();
+                    break;
+                case 'segmentation':
+                    renderSegmentsView();
+                    break;
+                default:
+                    // Keep existing render for other layers
+                    break;
+            }
+        }
+
+        // Campaigns View with multiple modes
+        function renderCampaignsView() {
+            const config = {
+                columns: [
+                    { key: 'name', label: 'Name', width: '2fr' },
+                    { key: 'type', label: 'Type', width: '1fr' },
+                    { key: 'status', label: 'Status', width: '100px' },
+                    { key: 'sent', label: 'Sent', width: '80px' },
+                    { key: 'opens', label: 'Opens', width: '80px' },
+                    { key: 'clicks', label: 'Clicks', width: '80px' }
+                ],
+                renderCard: (c) => `
+                    <div class="item-card" onclick="showModal('campaign-detail', ${c.id})">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-medium">${c.name}</span>
+                            <span class="status-badge status-${c.status}">${c.status}</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mb-3">${c.type}</div>
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            <div><div class="text-lg font-bold">${c.sent?.toLocaleString() || 0}</div><div class="text-xs text-gray-500">Sent</div></div>
+                            <div><div class="text-lg font-bold">${c.opens?.toLocaleString() || 0}</div><div class="text-xs text-gray-500">Opens</div></div>
+                            <div><div class="text-lg font-bold">${c.clicks?.toLocaleString() || 0}</div><div class="text-xs text-gray-500">Clicks</div></div>
+                        </div>
+                    </div>
+                `,
+                renderList: (c) => `
+                    <div class="item-list" onclick="showModal('campaign-detail', ${c.id})">
+                        <div class="flex-1">
+                            <div class="font-medium">${c.name}</div>
+                            <div class="text-xs text-gray-500">${c.type}</div>
+                        </div>
+                        <span class="status-badge status-${c.status}">${c.status}</span>
+                        <div class="text-right text-sm">
+                            <span class="text-gray-400">${c.sent?.toLocaleString() || 0} sent</span>
+                        </div>
+                    </div>
+                `,
+                renderRow: (c, cols) => `
+                    <div class="table-row" style="grid-template-columns: ${cols.map(col => col.width || '1fr').join(' ')}" onclick="showModal('campaign-detail', ${c.id})">
+                        <div class="font-medium">${c.name}</div>
+                        <div class="text-gray-400">${c.type}</div>
+                        <div><span class="status-badge status-${c.status}">${c.status}</span></div>
+                        <div>${c.sent?.toLocaleString() || 0}</div>
+                        <div>${c.opens?.toLocaleString() || 0}</div>
+                        <div>${c.clicks?.toLocaleString() || 0}</div>
+                    </div>
+                `
+            };
+
+            document.getElementById('content-toolbar')?.classList.remove('hidden');
+            renderItems('campaigns-container', data.campaigns, config);
+        }
+
+        // Contacts View with multiple modes
+        function renderContactsView() {
+            const config = {
+                columns: [
+                    { key: 'name', label: 'Name', width: '2fr' },
+                    { key: 'email', label: 'Email', width: '2fr' },
+                    { key: 'company', label: 'Company', width: '1.5fr' },
+                    { key: 'score', label: 'Score', width: '80px' }
+                ],
+                renderCard: (l) => `
+                    <div class="item-card" onclick="showModal('contact-detail', ${l.id})">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center font-bold">${l.name?.charAt(0) || '?'}</div>
+                            <div>
+                                <div class="font-medium">${l.name}</div>
+                                <div class="text-xs text-gray-500">${l.company || 'No company'}</div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-400">${l.email || 'No email'}</div>
+                        <div class="flex gap-2 mt-3 flex-wrap">
+                            ${(l.tags || []).slice(0, 3).map(t => `<span class="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                `,
+                renderList: (l) => `
+                    <div class="item-list" onclick="showModal('contact-detail', ${l.id})">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center text-sm font-bold">${l.name?.charAt(0) || '?'}</div>
+                        <div class="flex-1">
+                            <div class="font-medium">${l.name}</div>
+                            <div class="text-xs text-gray-500">${l.email || 'No email'}</div>
+                        </div>
+                        <div class="text-sm text-gray-400">${l.company || '-'}</div>
+                        <div class="text-sm font-medium text-purple-400">${l.score || 0}</div>
+                    </div>
+                `,
+                renderRow: (l, cols) => `
+                    <div class="table-row" style="grid-template-columns: ${cols.map(col => col.width || '1fr').join(' ')}" onclick="showModal('contact-detail', ${l.id})">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center text-xs font-bold">${l.name?.charAt(0) || '?'}</div>
+                            <span class="font-medium">${l.name}</span>
+                        </div>
+                        <div class="text-gray-400">${l.email || '-'}</div>
+                        <div class="text-gray-400">${l.company || '-'}</div>
+                        <div class="text-purple-400 font-medium">${l.score || 0}</div>
+                    </div>
+                `
+            };
+
+            document.getElementById('content-toolbar')?.classList.remove('hidden');
+            renderItems('contacts-container', data.leads, config);
+        }
+
+        // Segments View
+        function renderSegmentsView() {
+            const config = {
+                columns: [
+                    { key: 'name', label: 'Name', width: '2fr' },
+                    { key: 'type', label: 'Type', width: '1fr' },
+                    { key: 'count', label: 'Contacts', width: '100px' },
+                    { key: 'conditions', label: 'Conditions', width: '2fr' }
+                ],
+                renderCard: (s) => `
+                    <div class="item-card" onclick="showModal('segment-detail', ${s.id})">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium">${s.name}</span>
+                            <span class="text-xs px-2 py-1 rounded ${s.type === 'dynamic' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-gray-500/20 text-gray-400'}">${s.type}</span>
+                        </div>
+                        <div class="text-2xl font-bold mb-2">${s.count?.toLocaleString() || 0}</div>
+                        <div class="text-xs text-gray-500">contacts</div>
+                    </div>
+                `,
+                renderList: (s) => `
+                    <div class="item-list" onclick="showModal('segment-detail', ${s.id})">
+                        <div class="flex-1 font-medium">${s.name}</div>
+                        <span class="text-xs px-2 py-1 rounded ${s.type === 'dynamic' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-gray-500/20 text-gray-400'}">${s.type}</span>
+                        <div class="text-sm">${s.count?.toLocaleString() || 0} contacts</div>
+                    </div>
+                `,
+                renderRow: (s, cols) => `
+                    <div class="table-row" style="grid-template-columns: ${cols.map(col => col.width || '1fr').join(' ')}" onclick="showModal('segment-detail', ${s.id})">
+                        <div class="font-medium">${s.name}</div>
+                        <div><span class="text-xs px-2 py-1 rounded ${s.type === 'dynamic' ? 'bg-cyan-500/20 text-cyan-400' : 'bg-gray-500/20 text-gray-400'}">${s.type}</span></div>
+                        <div>${s.count?.toLocaleString() || 0}</div>
+                        <div class="text-xs text-gray-400">${s.conditions?.map(c => `${c.field} ${c.op} ${c.value}`).join(', ') || 'Manual'}</div>
+                    </div>
+                `
+            };
+
+            document.getElementById('content-toolbar')?.classList.remove('hidden');
+            renderItems('segments-container', data.segments, config);
+        }
+
+        // Show/hide admin section based on role
+        function updateAdminVisibility() {
+            const adminSection = document.getElementById('admin-section');
+            if (adminSection) {
+                adminSection.style.display = currentConfig.trustClass <= 0 ? 'block' : 'none';
+            }
         }
 
         // ═══════════════════════════════════════════════════════════════
@@ -2357,32 +2770,33 @@
         // NAVIGATION
         // ═══════════════════════════════════════════════════════════════
 
+        // Clean, user-friendly page configuration
         const layerConfig = {
-            dashboard: { title: 'COMMAND CENTER', subtitle: 'Marketing Genome Dashboard' },
-            kernel: { title: 'L0: KERNEL MONITOR', subtitle: 'ValidKernel Trust Infrastructure' },
-            identity: { title: 'L1: IDENTITY', subtitle: 'Contact Genome Management', icon: '👤' },
-            segmentation: { title: 'L2: SEGMENTATION', subtitle: 'Audience Gene Splicing', icon: '🎯' },
-            data: { title: 'L3: DATA ARCHITECTURE', subtitle: 'Unified Profile Proteins', icon: '💾' },
-            channels: { title: 'L4: CHANNELS', subtitle: 'Communication Cells', icon: '📡' },
-            content: { title: 'L5: CONTENT ENGINE', subtitle: 'Template RNA', icon: '📝' },
-            personalization: { title: 'L6: PERSONALIZATION', subtitle: 'Dynamic Enzymes', icon: '✨' },
-            campaigns: { title: 'L7: CAMPAIGNS', subtitle: 'Orchestration Organs' },
-            automation: { title: 'L8: AUTOMATION', subtitle: 'Workflow Nervous System' },
-            leads: { title: 'L9: LEAD MANAGEMENT', subtitle: 'Circulatory System' },
-            scoring: { title: 'L10: LEAD SCORING', subtitle: 'Propensity Scoring Engine', icon: '📈' },
-            testing: { title: 'L11: A/B TESTING', subtitle: 'Optimization Immune System', icon: '🧪' },
-            analytics: { title: 'L12: ANALYTICS', subtitle: 'Intelligence Brain' },
-            compliance: { title: 'L13: COMPLIANCE', subtitle: 'Regulatory System', icon: '🔒' },
-            integrations: { title: 'L14: INTEGRATIONS', subtitle: 'Connective Tissue', icon: '🔗' },
-            deliverability: { title: 'L15: DELIVERABILITY', subtitle: 'Lymphatic System', icon: '📬' },
-            audience: { title: 'L16: AUDIENCE INTEL', subtitle: 'Cognitive System', icon: '🧠' },
-            revenue: { title: 'L17: REVENUE INTEL', subtitle: 'Metabolic System', icon: '💰' },
-            journeys: { title: 'L19: JOURNEYS', subtitle: 'Choreographic System', icon: '🗺️' },
-            abm: { title: 'L20: ABM', subtitle: 'Strategic System', icon: '🏢' },
-            experiments: { title: 'L21: EXPERIMENTS', subtitle: 'Laboratory System', icon: '🔬' },
-            realtime: { title: 'L22: REAL-TIME', subtitle: 'Reactive System', icon: '⚡' },
-            privacy: { title: 'L23: PRIVACY', subtitle: 'Ethical System', icon: '🛡️' },
-            governance: { title: 'L24: GOVERNANCE', subtitle: 'Administrative System', icon: '⚙️' }
+            dashboard: { title: 'Dashboard', subtitle: 'Overview of your marketing performance' },
+            kernel: { title: 'System Monitor', subtitle: 'ValidKernel trust infrastructure status', icon: '🧬' },
+            identity: { title: 'All Contacts', subtitle: 'Manage your contact database', icon: '👤' },
+            segmentation: { title: 'Segments', subtitle: 'Build and manage audience segments', icon: '🎯' },
+            data: { title: 'Data Schema', subtitle: 'Configure data profiles and fields', icon: '💾' },
+            channels: { title: 'Channels', subtitle: 'Email, SMS, and social configuration', icon: '📡' },
+            content: { title: 'Email Templates', subtitle: 'Design and manage email content', icon: '📝' },
+            personalization: { title: 'Personalization', subtitle: 'Dynamic content and merge tags', icon: '✨' },
+            campaigns: { title: 'All Campaigns', subtitle: 'Create and manage marketing campaigns' },
+            automation: { title: 'Workflows', subtitle: 'Build automated marketing sequences' },
+            leads: { title: 'Lead Capture', subtitle: 'Forms, landing pages, and lead sources' },
+            scoring: { title: 'Lead Scoring', subtitle: 'Define scoring rules and thresholds', icon: '📈' },
+            testing: { title: 'A/B Testing', subtitle: 'Optimize with split tests', icon: '🧪' },
+            analytics: { title: 'Reports', subtitle: 'Analyze performance and trends' },
+            compliance: { title: 'Compliance Center', subtitle: 'GDPR, CAN-SPAM, and consent management', icon: '🔒' },
+            integrations: { title: 'Connectors', subtitle: 'Connect to external platforms', icon: '🔗' },
+            deliverability: { title: 'Deliverability', subtitle: 'Email health and reputation', icon: '📬' },
+            audience: { title: 'Audience Insights', subtitle: 'Understand your audience behavior', icon: '🧠' },
+            revenue: { title: 'Revenue', subtitle: 'Track pipeline and revenue attribution', icon: '💰' },
+            journeys: { title: 'Customer Journeys', subtitle: 'Design multi-touch experiences', icon: '🗺️' },
+            abm: { title: 'Account-Based Marketing', subtitle: 'Target accounts and stakeholders', icon: '🏢' },
+            experiments: { title: 'Experiments', subtitle: 'Run controlled experiments', icon: '🔬' },
+            realtime: { title: 'Real-Time Triggers', subtitle: 'Event-driven automation', icon: '⚡' },
+            privacy: { title: 'Privacy', subtitle: 'Consent and data rights management', icon: '🛡️' },
+            governance: { title: 'Governance', subtitle: 'Users, roles, and permissions', icon: '⚙️' }
         };
 
         function showLayer(layerId) {
