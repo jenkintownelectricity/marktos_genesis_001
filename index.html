@@ -103,7 +103,7 @@
                     </div>
                     <div>
                         <div class="mono font-bold text-lg">MARKTOS</div>
-                        <div class="text-xs text-gray-400">v2.0 | VTI™ Enterprise</div>
+                        <div class="text-xs text-gray-400">v2.1 | VTI™ Enterprise</div>
                     </div>
                 </div>
             </div>
@@ -111,21 +111,26 @@
             <!-- KERNEL STATUS -->
             <div class="p-4 mx-4 mt-4 glass rounded-lg">
                 <div class="flex items-center gap-2 mb-2">
-                    <div class="w-2 h-2 rounded-full bg-green-400 pulse"></div>
-                    <span class="mono text-xs text-green-400">KERNEL ACTIVE</span>
+                    <div class="w-2 h-2 rounded-full bg-yellow-400 pulse"></div>
+                    <span class="mono text-xs text-yellow-400">L0 AUTHORITY ACTIVE</span>
                 </div>
-                <div class="text-xs text-gray-400">Trust Level: L0_GOVERNANCE</div>
-                <div class="text-xs text-gray-400">Session: VALID</div>
+                <div class="text-xs text-gray-400" id="trust-level-display">Trust Level: <span class="text-yellow-300">L0_SUPER_ADMIN</span></div>
+                <div class="text-xs text-gray-400">Session: <span class="text-green-400">VALID</span></div>
             </div>
 
             <!-- NAVIGATION -->
             <nav class="flex-1 p-4 space-y-6 overflow-y-auto">
 
-                <!-- COMMAND CENTER -->
+                <!-- L0 COMMAND CENTER -->
                 <div>
                     <div class="nav-item active flex items-center gap-3 p-3 rounded-lg cursor-pointer" onclick="showLayer('dashboard')">
                         <span>📊</span>
                         <span class="text-sm font-medium">Command Center</span>
+                    </div>
+                    <div class="nav-item flex items-center gap-3 p-2 rounded cursor-pointer text-sm text-yellow-300 mt-1 border border-yellow-500/30" onclick="showModal('command-center')">
+                        <span>⚡</span>
+                        <span>L0 Authorization</span>
+                        <span id="sidebar-cmd-count" class="ml-auto text-xs mono bg-yellow-500/20 px-2 py-0.5 rounded">0</span>
                     </div>
                 </div>
 
@@ -322,14 +327,32 @@
                     <p class="text-gray-400 mt-1" id="page-subtitle">Marketing Genome Dashboard</p>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="glass rounded-lg px-4 py-2 text-sm">
-                        <span class="text-gray-400">Role:</span>
-                        <span class="text-purple-400 mono ml-2">SUPER_ADMIN</span>
-                    </div>
-                    <button class="glass rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition">
-                        <span class="text-gray-400">🔔</span>
+                    <!-- L0 Command Center Button -->
+                    <button onclick="showModal('command-center')" class="glass rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition flex items-center gap-2 relative">
+                        <span class="text-yellow-400">⚡</span>
+                        <span class="text-yellow-300 mono text-xs">L0 COMMANDS</span>
+                        <span id="command-count" class="ml-1 text-xs text-gray-400 mono">0</span>
                     </button>
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-cyan-400"></div>
+                    <!-- Proposal Queue Button -->
+                    <button onclick="showModal('proposal-queue')" class="glass rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition flex items-center gap-2 relative">
+                        <span class="text-cyan-400">📋</span>
+                        <span class="text-cyan-300 mono text-xs">PROPOSALS</span>
+                        <span id="proposal-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-xs flex items-center justify-center font-bold" style="display:none;">0</span>
+                    </button>
+                    <!-- Role Display -->
+                    <div class="glass rounded-lg px-4 py-2 text-sm cursor-pointer hover:bg-white/10 transition" onclick="showModal('governance')">
+                        <span class="text-gray-400">Role:</span>
+                        <span id="current-role-display" class="text-yellow-300 mono ml-2">SUPER_ADMIN</span>
+                    </div>
+                    <!-- Notifications -->
+                    <button onclick="showModal('notifications')" class="glass rounded-lg px-4 py-2 text-sm hover:bg-white/10 transition relative">
+                        <span class="text-gray-400">🔔</span>
+                        <span id="notification-badge" class="absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full text-xs flex items-center justify-center" style="display:none;">0</span>
+                    </button>
+                    <!-- User Avatar -->
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-purple-500 flex items-center justify-center cursor-pointer hover:ring-2 ring-yellow-400 transition" onclick="showModal('user-profile')">
+                        <span class="text-sm font-bold">L0</span>
+                    </div>
                 </div>
             </header>
 
@@ -1255,7 +1278,7 @@
         // Full 25-Layer Marketing Genome with Role-Based Access Control
         // ═══════════════════════════════════════════════════════════════
 
-        const MARKTOS_VERSION = '2.0.0';
+        const MARKTOS_VERSION = '2.1.0';
         const STORAGE_KEY = 'marktos_data_v2';
         const AUDIT_KEY = 'marktos_audit_v1';
         const CONFIG_KEY = 'marktos_config_v1';
@@ -1265,13 +1288,14 @@
         // ═══════════════════════════════════════════════════════════════
 
         const JOB_ROLES = {
-            marketing_director: { label: 'Marketing Director', trustClass: 0, color: 'text-purple-400' },
-            campaign_manager: { label: 'Campaign Manager', trustClass: 2, color: 'text-blue-400' },
-            content_marketer: { label: 'Content Marketer', trustClass: 3, color: 'text-cyan-400' },
-            sales_rep: { label: 'Sales Rep', trustClass: 2, color: 'text-green-400' },
-            data_analyst: { label: 'Data Analyst', trustClass: 4, color: 'text-yellow-400' },
-            compliance_officer: { label: 'Compliance Officer', trustClass: 1, color: 'text-red-400' },
-            viewer: { label: 'Viewer', trustClass: 5, color: 'text-gray-400' }
+            super_admin: { label: 'SUPER_ADMIN', trustClass: -1, color: 'text-yellow-300', level: 'L0', description: 'L0 Authoritative Command Authority' },
+            marketing_director: { label: 'Marketing Director', trustClass: 0, color: 'text-purple-400', level: 'L1', description: 'L1 Kernel Trusted Executor' },
+            campaign_manager: { label: 'Campaign Manager', trustClass: 2, color: 'text-blue-400', level: 'L2', description: 'L2 Proposer' },
+            content_marketer: { label: 'Content Marketer', trustClass: 3, color: 'text-cyan-400', level: 'L2', description: 'L2 Proposer' },
+            sales_rep: { label: 'Sales Rep', trustClass: 2, color: 'text-green-400', level: 'L2', description: 'L2 Proposer' },
+            data_analyst: { label: 'Data Analyst', trustClass: 4, color: 'text-yellow-400', level: 'L2', description: 'L2 Proposer' },
+            compliance_officer: { label: 'Compliance Officer', trustClass: 1, color: 'text-red-400', level: 'L1', description: 'L1 Kernel Compliance' },
+            viewer: { label: 'Viewer', trustClass: 5, color: 'text-gray-400', level: 'L2', description: 'L2 Read-Only' }
         };
 
         const LAYER_ACCESS = {
@@ -1335,7 +1359,10 @@
             const layer = LAYER_ACCESS[layerId];
             if (!layer) return true;
 
-            // Trust class 0 = super admin, always has access
+            // Trust class -1 = SUPER_ADMIN (L0), always has access to everything
+            if (currentConfig.trustClass === -1) return true;
+
+            // Trust class 0 = marketing director, always has access
             if (currentConfig.trustClass === 0) return true;
 
             // Check trust class (lower number = more access)
@@ -1563,6 +1590,235 @@
             analyst: { level: 4, permissions: ['report:*', 'analytics:read'], color: 'text-yellow-400' },
             viewer: { level: 5, permissions: ['read:*'], color: 'text-gray-400' }
         };
+
+        // ═══════════════════════════════════════════════════════════════
+        // VALIDKERNEL™ COMMAND AUTHORIZATION SYSTEM
+        // L0 Authoritative Commands | L2 Proposal Queue
+        // ═══════════════════════════════════════════════════════════════
+
+        const COMMAND_LOG_KEY = 'marktos_commands_v1';
+        const PROPOSAL_QUEUE_KEY = 'marktos_proposals_v1';
+
+        // L0 Command Log - Stores all authoritative commands issued by SUPER_ADMIN
+        let commandLog = [];
+
+        // L2 Proposal Queue - Stores pending proposals awaiting L0 approval
+        let proposalQueue = [];
+
+        // Command Types
+        const COMMAND_TYPES = {
+            SYSTEM_CONFIG: { label: 'System Configuration', icon: '⚙️', level: 'L0' },
+            USER_MANAGEMENT: { label: 'User Management', icon: '👥', level: 'L0' },
+            DATA_OPERATION: { label: 'Data Operation', icon: '💾', level: 'L0' },
+            SECURITY_ACTION: { label: 'Security Action', icon: '🔒', level: 'L0' },
+            FEATURE_TOGGLE: { label: 'Feature Toggle', icon: '🎚️', level: 'L0' },
+            APPROVAL: { label: 'Proposal Approval', icon: '✅', level: 'L0' },
+            REJECTION: { label: 'Proposal Rejection', icon: '❌', level: 'L0' }
+        };
+
+        // Proposal Status
+        const PROPOSAL_STATUS = {
+            PENDING: { label: 'Pending', color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
+            APPROVED: { label: 'Approved', color: 'text-green-400', bg: 'bg-green-500/20' },
+            REJECTED: { label: 'Rejected', color: 'text-red-400', bg: 'bg-red-500/20' },
+            IMPLEMENTED: { label: 'Implemented', color: 'text-cyan-400', bg: 'bg-cyan-500/20' }
+        };
+
+        function loadCommandLog() {
+            try {
+                const stored = localStorage.getItem(COMMAND_LOG_KEY);
+                if (stored) {
+                    commandLog = JSON.parse(stored);
+                    console.log('[ValidKernel™] Command log loaded:', commandLog.length, 'entries');
+                }
+            } catch (e) {
+                console.warn('[ValidKernel™] Command log load failed:', e.message);
+            }
+        }
+
+        function saveCommandLog() {
+            try {
+                localStorage.setItem(COMMAND_LOG_KEY, JSON.stringify(commandLog.slice(0, 200)));
+            } catch (e) {
+                console.warn('[ValidKernel™] Command log save failed:', e.message);
+            }
+        }
+
+        function loadProposalQueue() {
+            try {
+                const stored = localStorage.getItem(PROPOSAL_QUEUE_KEY);
+                if (stored) {
+                    proposalQueue = JSON.parse(stored);
+                    console.log('[ValidKernel™] Proposal queue loaded:', proposalQueue.length, 'proposals');
+                }
+            } catch (e) {
+                console.warn('[ValidKernel™] Proposal queue load failed:', e.message);
+            }
+        }
+
+        function saveProposalQueue() {
+            try {
+                localStorage.setItem(PROPOSAL_QUEUE_KEY, JSON.stringify(proposalQueue));
+            } catch (e) {
+                console.warn('[ValidKernel™] Proposal queue save failed:', e.message);
+            }
+        }
+
+        // Issue L0 Authoritative Command (SUPER_ADMIN only)
+        function issueL0Command(type, description, details = {}) {
+            if (currentConfig.trustClass !== -1) {
+                showToast('L0 Commands require SUPER_ADMIN authority', 'error');
+                logAudit('UNAUTHORIZED_L0_ATTEMPT', { type, role: currentConfig.jobRole }, 'IV.01');
+                return null;
+            }
+
+            const command = {
+                id: 'CMD_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+                timestamp: new Date().toISOString(),
+                type: type,
+                typeInfo: COMMAND_TYPES[type] || { label: type, icon: '⚡', level: 'L0' },
+                description: description,
+                details: details,
+                issuer: 'SUPER_ADMIN',
+                trustLevel: 'L0_GOVERNANCE',
+                status: 'EXECUTED',
+                verified: true
+            };
+
+            commandLog.unshift(command);
+            saveCommandLog();
+            logAudit('L0_COMMAND_ISSUED', { commandId: command.id, type, description }, 'IV.01');
+            updateCommandCenterUI();
+            showToast(`L0 Command issued: ${description}`, 'success');
+            console.log('[ValidKernel™] L0 Command:', command);
+            return command;
+        }
+
+        // Submit L2 Proposal (any non-L0 role)
+        function submitL2Proposal(title, description, category, requestedAction) {
+            if (currentConfig.trustClass === -1) {
+                showToast('SUPER_ADMIN should issue commands directly, not proposals', 'info');
+                return null;
+            }
+
+            const proposal = {
+                id: 'PROP_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+                timestamp: new Date().toISOString(),
+                title: title,
+                description: description,
+                category: category,
+                requestedAction: requestedAction,
+                proposer: {
+                    role: currentConfig.jobRole,
+                    roleLabel: JOB_ROLES[currentConfig.jobRole]?.label || currentConfig.jobRole,
+                    trustClass: currentConfig.trustClass
+                },
+                status: 'PENDING',
+                l0Response: null,
+                responseTimestamp: null
+            };
+
+            proposalQueue.unshift(proposal);
+            saveProposalQueue();
+            logAudit('L2_PROPOSAL_SUBMITTED', { proposalId: proposal.id, title, category }, 'IV.01');
+            updateCommandCenterUI();
+            showToast(`Proposal submitted for L0 review: ${title}`, 'info');
+            console.log('[ValidKernel™] L2 Proposal:', proposal);
+            return proposal;
+        }
+
+        // L0 Approve Proposal
+        function approveProposal(proposalId, notes = '') {
+            if (currentConfig.trustClass !== -1) {
+                showToast('Only SUPER_ADMIN can approve proposals', 'error');
+                return false;
+            }
+
+            const proposal = proposalQueue.find(p => p.id === proposalId);
+            if (!proposal) {
+                showToast('Proposal not found', 'error');
+                return false;
+            }
+
+            proposal.status = 'APPROVED';
+            proposal.l0Response = { action: 'APPROVED', notes: notes };
+            proposal.responseTimestamp = new Date().toISOString();
+            saveProposalQueue();
+
+            // Issue corresponding L0 command
+            issueL0Command('APPROVAL', `Approved: ${proposal.title}`, { proposalId, notes });
+            updateCommandCenterUI();
+            return true;
+        }
+
+        // L0 Reject Proposal
+        function rejectProposal(proposalId, reason = '') {
+            if (currentConfig.trustClass !== -1) {
+                showToast('Only SUPER_ADMIN can reject proposals', 'error');
+                return false;
+            }
+
+            const proposal = proposalQueue.find(p => p.id === proposalId);
+            if (!proposal) {
+                showToast('Proposal not found', 'error');
+                return false;
+            }
+
+            proposal.status = 'REJECTED';
+            proposal.l0Response = { action: 'REJECTED', reason: reason };
+            proposal.responseTimestamp = new Date().toISOString();
+            saveProposalQueue();
+
+            // Issue corresponding L0 command
+            issueL0Command('REJECTION', `Rejected: ${proposal.title}`, { proposalId, reason });
+            updateCommandCenterUI();
+            return true;
+        }
+
+        // Get pending proposals count
+        function getPendingProposalsCount() {
+            return proposalQueue.filter(p => p.status === 'PENDING').length;
+        }
+
+        // Update Command Center UI elements
+        function updateCommandCenterUI() {
+            const pendingCount = getPendingProposalsCount();
+            const badge = document.getElementById('proposal-badge');
+            if (badge) {
+                badge.textContent = pendingCount;
+                badge.style.display = pendingCount > 0 ? 'flex' : 'none';
+            }
+
+            // Update command counts in header and sidebar
+            const commandCount = document.getElementById('command-count');
+            if (commandCount) {
+                commandCount.textContent = commandLog.length;
+            }
+
+            const sidebarCmdCount = document.getElementById('sidebar-cmd-count');
+            if (sidebarCmdCount) {
+                sidebarCmdCount.textContent = commandLog.length;
+            }
+
+            // Update sidebar trust level display based on current role
+            const trustLevelEl = document.getElementById('trust-level-display');
+            if (trustLevelEl) {
+                if (currentConfig.trustClass === -1) {
+                    trustLevelEl.innerHTML = 'Trust Level: <span class="text-yellow-300">L0_SUPER_ADMIN</span>';
+                } else if (currentConfig.trustClass <= 1) {
+                    trustLevelEl.innerHTML = 'Trust Level: <span class="text-purple-400">L1_KERNEL</span>';
+                } else {
+                    trustLevelEl.innerHTML = 'Trust Level: <span class="text-cyan-400">L2_PROPOSER</span>';
+                }
+            }
+
+            // Update kernel status indicator based on role
+            const kernelStatus = document.querySelector('.nav-item.border-yellow-500\\/30');
+            if (kernelStatus && currentConfig.trustClass !== -1) {
+                kernelStatus.classList.remove('text-yellow-300', 'border-yellow-500/30');
+                kernelStatus.classList.add('text-gray-400', 'border-gray-500/30');
+            }
+        }
 
         // ═══════════════════════════════════════════════════════════════
         // PERSISTENCE LAYER (localStorage)
@@ -2499,11 +2755,287 @@ Supported formats:
                 `;
             }
 
+            // ═══════════════════════════════════════════════════════════════
+            // VALIDKERNEL™ COMMAND AUTHORIZATION MODALS
+            // ═══════════════════════════════════════════════════════════════
+
+            // L0 Command Center Modal
+            if (type === 'command-center') {
+                const recentCommands = commandLog.slice(0, 15);
+                const isL0 = currentConfig.trustClass === -1;
+
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">⚡ L0 COMMAND CENTER</h2>
+                    <p class="text-gray-400 text-sm mb-4">ValidKernel™ Authoritative Command Log</p>
+
+                    ${isL0 ? `
+                    <!-- Issue New Command (L0 Only) -->
+                    <div class="glass-dark rounded-lg p-4 mb-4 border border-yellow-500/30">
+                        <div class="text-sm font-bold mb-3 text-yellow-400">ISSUE L0 COMMAND</div>
+                        <div class="grid grid-cols-2 gap-3 mb-3">
+                            <select id="cmd-type" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                <option value="SYSTEM_CONFIG">⚙️ System Config</option>
+                                <option value="USER_MANAGEMENT">👥 User Management</option>
+                                <option value="DATA_OPERATION">💾 Data Operation</option>
+                                <option value="SECURITY_ACTION">🔒 Security Action</option>
+                                <option value="FEATURE_TOGGLE">🎚️ Feature Toggle</option>
+                            </select>
+                            <input type="text" id="cmd-description" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm" placeholder="Command description...">
+                        </div>
+                        <button onclick="executeCommandFromModal()" class="w-full py-2 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-lg text-sm font-medium hover:opacity-90 transition">
+                            ⚡ Execute L0 Command
+                        </button>
+                    </div>
+                    ` : `
+                    <div class="glass-dark rounded-lg p-4 mb-4 border border-gray-500/30">
+                        <div class="text-center text-gray-400">
+                            <span class="text-2xl">🔒</span>
+                            <div class="text-sm mt-2">L0 Commands require SUPER_ADMIN authority</div>
+                            <div class="text-xs mt-1">Current: ${JOB_ROLES[currentConfig.jobRole]?.label || currentConfig.jobRole}</div>
+                        </div>
+                    </div>
+                    `}
+
+                    <!-- Trust Hierarchy Visualization -->
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-3 text-purple-400">TRUST HIERARCHY</div>
+                        <div class="flex items-center justify-between text-center">
+                            <div class="flex-1">
+                                <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-2xl mb-2 ${isL0 ? 'ring-4 ring-yellow-400' : ''}">L0</div>
+                                <div class="text-xs text-yellow-400 font-bold">GOVERNANCE</div>
+                                <div class="text-xs text-gray-500">Authoritative</div>
+                            </div>
+                            <div class="text-2xl text-gray-600">→</div>
+                            <div class="flex-1">
+                                <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-2xl mb-2 ${currentConfig.trustClass === 0 || currentConfig.trustClass === 1 ? 'ring-4 ring-purple-400' : ''}">L1</div>
+                                <div class="text-xs text-purple-400 font-bold">KERNEL</div>
+                                <div class="text-xs text-gray-500">Trusted</div>
+                            </div>
+                            <div class="text-2xl text-gray-600">→</div>
+                            <div class="flex-1">
+                                <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-2xl mb-2 ${currentConfig.trustClass >= 2 ? 'ring-4 ring-cyan-400' : ''}">L2</div>
+                                <div class="text-xs text-cyan-400 font-bold">PROPOSER</div>
+                                <div class="text-xs text-gray-500">Untrusted</div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-center text-gray-500 mt-3">Authority flows L0 → L1 → L2, NEVER upward (IV.01)</div>
+                    </div>
+
+                    <!-- Command Log -->
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="text-sm font-bold text-green-400">COMMAND LOG</div>
+                            <div class="text-xs text-gray-500 mono">${commandLog.length} total</div>
+                        </div>
+                        <div class="max-h-48 overflow-y-auto space-y-2">
+                            ${recentCommands.length === 0 ? '<div class="text-center text-gray-500 py-4">No commands issued yet</div>' : recentCommands.map(cmd => `
+                                <div class="glass rounded-lg p-2 border-l-2 border-yellow-500">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm">${cmd.typeInfo?.icon || '⚡'} ${cmd.description}</span>
+                                        <span class="text-xs text-gray-500 mono">${new Date(cmd.timestamp).toLocaleTimeString()}</span>
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1">${cmd.typeInfo?.label || cmd.type} • ${cmd.status}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal()" class="w-full py-3 bg-gradient-to-r from-yellow-600 to-orange-600 rounded-lg hover:opacity-90 transition font-medium">Close</button>
+                `;
+            }
+
+            // L2 Proposal Queue Modal
+            if (type === 'proposal-queue') {
+                const pendingProposals = proposalQueue.filter(p => p.status === 'PENDING');
+                const processedProposals = proposalQueue.filter(p => p.status !== 'PENDING').slice(0, 10);
+                const isL0 = currentConfig.trustClass === -1;
+
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">📋 L2 PROPOSAL QUEUE</h2>
+                    <p class="text-gray-400 text-sm mb-4">Untrusted proposals awaiting L0 authorization</p>
+
+                    ${!isL0 ? `
+                    <!-- Submit Proposal (Non-L0 Only) -->
+                    <div class="glass-dark rounded-lg p-4 mb-4 border border-cyan-500/30">
+                        <div class="text-sm font-bold mb-3 text-cyan-400">SUBMIT PROPOSAL</div>
+                        <div class="space-y-3">
+                            <input type="text" id="prop-title" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm" placeholder="Proposal title...">
+                            <textarea id="prop-description" class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm h-20" placeholder="Describe your proposal..."></textarea>
+                            <div class="grid grid-cols-2 gap-3">
+                                <select id="prop-category" class="bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm">
+                                    <option value="feature">Feature Request</option>
+                                    <option value="config">Configuration Change</option>
+                                    <option value="access">Access Request</option>
+                                    <option value="data">Data Operation</option>
+                                </select>
+                                <button onclick="submitProposalFromModal()" class="py-2 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-sm font-medium hover:opacity-90 transition">
+                                    Submit to L0
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <!-- Pending Proposals -->
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="text-sm font-bold text-yellow-400">PENDING APPROVAL</div>
+                            <div class="text-xs px-2 py-1 rounded bg-yellow-500/20 text-yellow-400">${pendingProposals.length}</div>
+                        </div>
+                        <div class="max-h-48 overflow-y-auto space-y-2">
+                            ${pendingProposals.length === 0 ? '<div class="text-center text-gray-500 py-4">No pending proposals</div>' : pendingProposals.map(prop => `
+                                <div class="glass rounded-lg p-3 border-l-2 border-yellow-500">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-sm font-medium">${prop.title}</span>
+                                        <span class="text-xs text-gray-500 mono">${new Date(prop.timestamp).toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="text-xs text-gray-400 mb-2">${prop.description?.slice(0, 100) || 'No description'}...</div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs px-2 py-1 rounded bg-white/10">${prop.proposer?.roleLabel || 'Unknown'}</span>
+                                        ${isL0 ? `
+                                        <div class="flex gap-2">
+                                            <button onclick="approveProposal('${prop.id}'); showModal('proposal-queue');" class="px-3 py-1 bg-green-600 rounded text-xs hover:bg-green-700 transition">✓ Approve</button>
+                                            <button onclick="rejectProposal('${prop.id}'); showModal('proposal-queue');" class="px-3 py-1 bg-red-600 rounded text-xs hover:bg-red-700 transition">✗ Reject</button>
+                                        </div>
+                                        ` : '<span class="text-xs text-yellow-400">Awaiting L0</span>'}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Processed Proposals -->
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-3 text-gray-400">RECENT DECISIONS</div>
+                        <div class="max-h-32 overflow-y-auto space-y-2">
+                            ${processedProposals.length === 0 ? '<div class="text-center text-gray-500 py-2 text-xs">No processed proposals</div>' : processedProposals.map(prop => `
+                                <div class="flex items-center justify-between text-xs p-2 rounded bg-white/5">
+                                    <span>${prop.title}</span>
+                                    <span class="${prop.status === 'APPROVED' ? 'text-green-400' : 'text-red-400'}">${prop.status}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal()" class="w-full py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg hover:opacity-90 transition font-medium">Close</button>
+                `;
+            }
+
+            // User Profile Modal
+            if (type === 'user-profile') {
+                const role = JOB_ROLES[currentConfig.jobRole] || { label: 'Unknown', trustClass: 5 };
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">👤 USER PROFILE</h2>
+                    <p class="text-gray-400 text-sm mb-6">ValidKernel™ Identity & Trust Status</p>
+
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br ${currentConfig.trustClass === -1 ? 'from-yellow-400 to-orange-500' : 'from-purple-500 to-cyan-400'} flex items-center justify-center text-3xl mb-3">
+                            ${currentConfig.trustClass === -1 ? 'L0' : role.label.charAt(0)}
+                        </div>
+                        <div class="text-xl font-bold ${role.color}">${role.label}</div>
+                        <div class="text-sm text-gray-400">${role.description || 'System User'}</div>
+                    </div>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <div class="text-3xl font-bold mono ${currentConfig.trustClass === -1 ? 'text-yellow-400' : 'text-cyan-400'}">${currentConfig.trustClass}</div>
+                                <div class="text-xs text-gray-400">Trust Class</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold mono text-purple-400">${role.level || 'L2'}</div>
+                                <div class="text-xs text-gray-400">Authority Level</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-3 text-green-400">PERMISSIONS</div>
+                        <div class="flex flex-wrap gap-2">
+                            ${currentConfig.trustClass === -1 ?
+                                '<span class="text-xs px-2 py-1 rounded bg-yellow-500/20 text-yellow-400">ALL PERMISSIONS (L0)</span>' :
+                                Object.entries(LAYER_ACCESS).filter(([id]) => canAccessLayer(id)).slice(0, 8).map(([id]) =>
+                                    `<span class="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-400">${id}</span>`
+                                ).join('')
+                            }
+                        </div>
+                    </div>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-3 text-cyan-400">SESSION INFO</div>
+                        <div class="text-xs space-y-1 text-gray-400">
+                            <div>Session: <span class="text-white mono">ACTIVE</span></div>
+                            <div>Kernel: <span class="text-white mono">ValidKernel v1.0.0</span></div>
+                            <div>VTI™: <span class="text-green-400 mono">ENABLED</span></div>
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Close</button>
+                `;
+            }
+
+            // Notifications Modal
+            if (type === 'notifications') {
+                const recentAudit = auditLog.slice(0, 10);
+                content.innerHTML = `
+                    <h2 class="text-xl font-bold mono mb-2">🔔 NOTIFICATIONS</h2>
+                    <p class="text-gray-400 text-sm mb-4">Recent system activity and alerts</p>
+
+                    <div class="glass-dark rounded-lg p-4 mb-4">
+                        <div class="text-sm font-bold mb-3 text-purple-400">RECENT ACTIVITY</div>
+                        <div class="max-h-64 overflow-y-auto space-y-2">
+                            ${recentAudit.length === 0 ? '<div class="text-center text-gray-500 py-4">No recent activity</div>' : recentAudit.map(entry => `
+                                <div class="flex items-start gap-3 p-2 rounded bg-white/5 hover:bg-white/10 transition">
+                                    <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-sm">
+                                        ${entry.action.includes('COMMAND') ? '⚡' : entry.action.includes('PROPOSAL') ? '📋' : entry.action.includes('CREATE') ? '✨' : '📌'}
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-sm">${entry.action.replace(/_/g, ' ')}</div>
+                                        <div class="text-xs text-gray-500">${new Date(entry.timestamp).toLocaleString()}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <button onclick="closeModal()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg hover:opacity-90 transition font-medium">Close</button>
+                `;
+            }
+
             overlay.classList.remove('hidden');
         }
 
         function closeModal() {
             document.getElementById('modal-overlay').classList.add('hidden');
+        }
+
+        // Helper function to execute L0 command from modal
+        function executeCommandFromModal() {
+            const type = document.getElementById('cmd-type')?.value;
+            const description = document.getElementById('cmd-description')?.value;
+
+            if (!description) {
+                showToast('Please enter a command description', 'error');
+                return;
+            }
+
+            issueL0Command(type, description, { source: 'modal' });
+            showModal('command-center'); // Refresh the modal
+        }
+
+        // Helper function to submit L2 proposal from modal
+        function submitProposalFromModal() {
+            const title = document.getElementById('prop-title')?.value;
+            const description = document.getElementById('prop-description')?.value;
+            const category = document.getElementById('prop-category')?.value;
+
+            if (!title) {
+                showToast('Please enter a proposal title', 'error');
+                return;
+            }
+
+            submitL2Proposal(title, description, category, 'Pending L0 review');
+            showModal('proposal-queue'); // Refresh the modal
         }
 
         function showToast(message, type = 'success') {
@@ -2722,11 +3254,22 @@ Supported formats:
             // Load audit log first (before any other operations)
             loadAuditLog();
 
+            // Load ValidKernel™ Command Authorization System
+            loadCommandLog();
+            loadProposalQueue();
+
             // Load saved data
             loadData();
 
             // Load user config (roles, access control)
             loadConfig();
+
+            // Set default to SUPER_ADMIN if no config exists
+            if (!localStorage.getItem(CONFIG_KEY)) {
+                currentConfig.jobRole = 'super_admin';
+                currentConfig.trustClass = -1;
+                saveConfig();
+            }
 
             // Check for shared data in URL
             loadFromShareLink();
@@ -2741,12 +3284,20 @@ Supported formats:
             // Update trust score display
             updateTrustScore();
 
+            // Update Command Center UI
+            updateCommandCenterUI();
+
+            // Update role display
+            updateRoleDisplay();
+
             // Log session start
-            logAudit('SESSION_START', { version: MARKTOS_VERSION, vti_enabled: true }, 'IV.01');
+            logAudit('SESSION_START', { version: MARKTOS_VERSION, vti_enabled: true, role: currentConfig.jobRole }, 'IV.01');
 
             console.log('[MARKTOS] Kernel v' + MARKTOS_VERSION + ' initialized');
             console.log('[MARKTOS] VTI™ (Verifiable Trust Infrastructure) ENABLED');
-            console.log('[MARKTOS] Trust Level: L0_GOVERNANCE');
+            console.log('[MARKTOS] ValidKernel™ Command Authorization System ACTIVE');
+            console.log('[MARKTOS] Current Role:', JOB_ROLES[currentConfig.jobRole]?.label || currentConfig.jobRole);
+            console.log('[MARKTOS] Trust Class:', currentConfig.trustClass);
             console.log('[MARKTOS] 25-layer genome active');
             console.log('[MARKTOS] Trust Score:', calculateTrustScore());
 
