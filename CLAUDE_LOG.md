@@ -77,9 +77,36 @@
 
 | Domain | Product | Industry | Status |
 |--------|---------|----------|--------|
-| **vkMRKTos.com** | MARKTOS | Marketing | Active (v2.2.0) |
-| **vkCONSTos.com** | Construction OS | Construction | Planned (VTI licensing as feature) |
+| **vkMRKTos.com** | MARKTOS | Marketing | Active (v2.3.0) |
+| **vkTRADEos.com** | Trade OS | Trading/Assets | Planned |
+| **vkVCEos.com** | Venture OS | Venture Capital | Planned |
+| **vkVOICEos.com** | Voice OS | Communications | Planned |
+| **vkSPECos.com** | Spec OS | Specifications/Docs | Planned |
+| **vkCONSTos.com** | Construction OS | Construction | Planned |
 | *vk[INDR]os.com* | *Future products* | *Various* | *Reserved pattern* |
+
+### Data Ecosystem (5 Major Zones)
+
+All zones are **equal** and connected to the central ValidKernel hub:
+
+```
+                    📊 MRKT (Marketing)
+                         │
+        📋 SPEC ─────────┼───────── 💹 TRADE
+        (Specs)          │          (Trading)
+                       [VK]
+                         │
+        🎙️ VOICE ────────┼───────── 💰 VCE
+        (Voice)                     (Venture)
+```
+
+| Zone | Domain | Data Types |
+|------|--------|------------|
+| MRKT | vkMRKTos.com | Campaigns, Leads, Analytics, Content |
+| TRADE | vkTRADEos.com | Transactions, Assets, Valuations, Markets |
+| VCE | vkVCEos.com | Investments, Portfolio, Due Diligence, Deals |
+| VOICE | vkVOICEos.com | Recordings, Transcripts, Communications |
+| SPEC | vkSPECos.com | Documents, Specifications, Compliance |
 
 ### Core Philosophy
 
