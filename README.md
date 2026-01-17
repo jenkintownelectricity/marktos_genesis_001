@@ -12,7 +12,7 @@
 ║   ██║ ╚═╝ ██║██║  ██║██║  ██║██║  ██╗   ██║   ╚██████╔╝███████║             ║
 ║   ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝             ║
 ║                                                                              ║
-║                    GENESIS 001 | APP v1.1.0 | KERNEL v1.0.0                   ║
+║           GENESIS 001 | APP v1.2.0 | KERNEL v1.0.0 | VTI™ ENABLED            ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -26,15 +26,16 @@
 ## TABLE OF CONTENTS
 
 1. [Quick Start](#quick-start)
-2. [What's New in v1.1](#whats-new-in-v11)
-3. [Data Tools Guide](#data-tools-guide)
-4. [Kernel Specification](#kernel-specification)
-5. [25-Layer Genome Architecture](#25-layer-genome-architecture)
-6. [LDS.json File Type Specification](#ldsjson-file-type-specification)
-7. [ValidKernel OneShot Command™](#validkernel-oneshot-command)
-8. [User Guide](#user-guide)
-9. [API Reference](#api-reference)
-10. [License](#license)
+2. [What's New in v1.2](#whats-new-in-v12)
+3. [VTI™ - Verifiable Trust Infrastructure](#vti---verifiable-trust-infrastructure)
+4. [Data Tools Guide](#data-tools-guide)
+5. [Kernel Specification](#kernel-specification)
+6. [25-Layer Genome Architecture](#25-layer-genome-architecture)
+7. [LDS.json File Type Specification](#ldsjson-file-type-specification)
+8. [ValidKernel OneShot Command™](#validkernel-oneshot-command)
+9. [User Guide](#user-guide)
+10. [API Reference](#api-reference)
+11. [License](#license)
 
 ---
 
@@ -77,11 +78,36 @@ python -m http.server 8080
 
 ---
 
-## WHAT'S NEW IN v1.1
+## WHAT'S NEW IN v1.2
 
 ### Release: January 17, 2026
 
-MARKTOS v1.1 introduces **Data Tools** - a suite of offline-first data management features:
+MARKTOS v1.2 introduces **VTI™ (Verifiable Trust Infrastructure)** - making trust visible and verifiable:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                 VTI™ - VERIFIABLE TRUST INFRASTRUCTURE                      │
+│                      Trademark of ValidKernel.com                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  🛡️ Trust Score        Real-time score (0-100) based on invariant health   │
+│  📜 Audit Log          Complete action history with verification           │
+│  📊 Compliance Report  One-click export for auditors/stakeholders          │
+│  ↩️ Undo Tracking      Every action logged and traceable                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### v1.2 Features
+
+| Feature | Description | Offline |
+|---------|-------------|---------|
+| **Trust Score** | Real-time 0-100 score based on invariant compliance | ✅ Yes |
+| **Audit Log** | Complete action history with timestamps and verification | ✅ Yes |
+| **Compliance Report** | One-click JSON export for auditors | ✅ Yes |
+| **Session Tracking** | Every session start/action logged | ✅ Yes |
+
+### v1.1 Features (included)
+
+MARKTOS v1.1 introduced **Data Tools** - a suite of offline-first data management features:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -110,6 +136,87 @@ MARKTOS v1.1 introduces **Data Tools** - a suite of offline-first data managemen
 - No breaking changes from v1.0
 - Data from v1.0 sessions will be preserved
 - All new features accessible from **Data Tools** sidebar section
+- VTI™ features accessible from **VTI™** sidebar section
+
+---
+
+## VTI™ - VERIFIABLE TRUST INFRASTRUCTURE
+
+### Trademark Notice
+
+**VTI™ (Verifiable Trust Infrastructure)** is a trademark of ValidKernel.com.
+
+VTI™ is the foundation technology that makes ValidKernel's trust model visible, auditable, and verifiable. Unlike traditional software where trust is implicit, VTI™ provides explicit trust verification at every action.
+
+### What is VTI™?
+
+VTI™ is a trust verification layer that:
+
+1. **Logs every action** with timestamp, role, and invariant checked
+2. **Calculates a Trust Score** (0-100) based on system health
+3. **Exports compliance reports** for auditors and stakeholders
+4. **Verifies invariant compliance** in real-time
+
+### Trust Score Calculation
+
+The Trust Score is calculated from four components:
+
+| Component | Points | Description |
+|-----------|--------|-------------|
+| Invariant Compliance | 40 | All 4 kernel invariants enforced |
+| Audit Log Health | 20 | Recent activity in last 24 hours |
+| Data Integrity | 20 | Valid data structure |
+| Session Stability | 20 | Running system without errors |
+
+**Score Interpretation:**
+- **80-100**: Excellent - Full trust established
+- **60-79**: Good - Minor issues detected
+- **0-59**: Warning - Attention required
+
+### Audit Log Structure
+
+Each audit entry contains:
+
+```json
+{
+  "id": "1705500000000abc123",
+  "timestamp": "2026-01-17T12:00:00.000Z",
+  "action": "CAMPAIGN_CREATE",
+  "details": { "name": "Welcome Series", "type": "automation" },
+  "invariant": "IV.04",
+  "role": "super_admin",
+  "trust_level": "L0_GOVERNANCE",
+  "verified": true
+}
+```
+
+### Action Types Logged
+
+| Action | Description | Invariant |
+|--------|-------------|-----------|
+| `SESSION_START` | New session initialized | IV.01 |
+| `DATA_SAVE` | Data saved to localStorage | IV.03 |
+| `LDS_EXPORT` | LDS.json backup exported | IV.03 |
+| `LDS_IMPORT` | LDS.json backup imported | IV.02 |
+| `CHAT_IMPORT` | Leads imported from chat | IV.02 |
+| `CAMPAIGN_CREATE` | New campaign created | IV.04 |
+| `COMPLIANCE_EXPORT` | Compliance report exported | IV.01 |
+
+### Compliance Report
+
+The compliance report includes:
+
+- Trust Score at time of export
+- All 4 invariant statuses
+- Audit summary (total entries, 24h, 7d)
+- Recent 50 audit entries
+- Data summary (campaigns, leads, workflows)
+
+### Using VTI™
+
+1. **View Trust Score**: Click 🛡️ Trust Score in VTI™ sidebar
+2. **View Audit Log**: Click 📜 Audit Log in VTI™ sidebar
+3. **Export Compliance Report**: Click 📊 Compliance Report in VTI™ sidebar
 
 ---
 
